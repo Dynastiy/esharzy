@@ -1,0 +1,108 @@
+.login--page-wrapper {
+    /* height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.login--page_content {
+    /* width: 30%; */
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+}
+
+.login--page_content label {
+    margin: 0;
+}
+
+.login--page_content .input--text {
+    background: transparent;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-radius: 10px;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.login--page_content .input--field {
+    background: transparent;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.login--page_content .input--field .input-area {
+    background-color: none;
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.login--page_content button {
+    background-color: var(--primary-color);
+    border: none;
+    width: 100%;
+    padding: 0.6rem;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.auth--container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth--container .options {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    width: 30%;
+    /* padding: 2rem; */
+}
+
+.auth--container .auth--selection {
+    width: 100%;
+    display: flex;
+}
+
+.auth--container .auth--selection span {
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.auth--container .auth--selection span:nth-child(1) a {
+    display: block;
+    padding: 0.8rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+.auth--container .auth--selection span:nth-child(2) a {
+    display: block;
+    padding: 0.8rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+.auth--container .auth--selection span:nth-child(1) .router-link-exact-active {
+    color: var(--primary-color);
+    border-bottom: none;
+}
+
+.auth--container .auth--selection span:nth-child(2) .router-link-exact-active {
+    color: var(--primary-color);
+    border-bottom: none;
+}

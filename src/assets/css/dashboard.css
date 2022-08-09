@@ -1,0 +1,94 @@
+.side--bar {
+    /* width: 100%; */
+    background-color: #fff;
+    border-radius: 8px;
+    padding-bottom: 2rem;
+    /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.side--bar li a {
+    display: block;
+    padding: 1rem;
+    color: var(--tertiary-color);
+}
+
+.side--bar li a:hover {
+    background-color: var(--accent-color-light);
+    color: var(--tertiary-color);
+}
+
+.main--dashboard {
+    /* padding: 2rem; */
+}
+
+.dashboard--area {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    /* box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.1); */
+}
+
+.side--bar li a {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.side--bar li .router-link-exact-active {
+    background-color: var(--accent-color-light);
+    color: var(--tertiary-color);
+    border-right: 3px solid var(--tertiary-color);
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    border-radius: 50%;
+}
+
+.el-tabs__item:hover {
+    color: var(--tertiary-color) !important;
+}
+
+.el-tabs__item.is-active {
+    color: var(--tertiary-color) !important;
+}
+
+.el-tabs__active-bar {
+    background-color: var(--tertiary-color) !important;
+}
+
+.update--user form label {
+    display: block;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.update--user form input,
+.update--user form textarea {
+    width: 100%;
+    display: block;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.single--order_list {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.single--order_list img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: top;
+}
