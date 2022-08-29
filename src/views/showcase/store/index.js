@@ -9,6 +9,7 @@ export default {
         new_products: [],
         trending_products: [],
         top_rated_products: [],
+        discounted_products: [],
         product: {}
     },
     mutations: {
@@ -29,6 +30,9 @@ export default {
         },
         SET_TOP_RATED_PRODUCTS(state, data) {
             state.top_rated_products = data
+        },
+        SET_DISCOUNTED_PRODUCTS(state, data) {
+            state.discounted_products = data
         },
         SET_SINGLE_PRODUCT(state, data) {
             state.product = data
@@ -89,9 +93,20 @@ export default {
                 console.log(error);
             }
         },
+        async discountedProducts({ commit }) {
+            try {
+                const res = await Axios().get(`discounted-products`);
+                commit("SET_DISCOUNTED_PRODUCTS", res.data);
+                console.log(res.data);
+                return res
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async getProductBySlug({ commit }, slug) {
             try {
                 const res = await Axios().get(`show-product/${slug}`);
+                console.log(res.data);
                 commit("SET_SINGLE_PRODUCT", res.data);
                 return res
             } catch (error) {
@@ -107,6 +122,7 @@ export default {
         newProducts: (state) => state.new_products,
         trendingProducts: (state) => state.trending_products,
         topRatedProducts: (state) => state.top_rated_products,
-        getSingleProduct: (state) => state.product
+        getSingleProduct: (state) => state.product,
+        getDiscountedProducts: (state) => state.discounted_products
     },
 };

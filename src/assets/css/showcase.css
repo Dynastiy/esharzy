@@ -1,8 +1,56 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap'); */
 
 .main--header {
-    background-color: var(--tertiary-color);
-    padding: 1rem 0;
+    /* background-color: var(--tertiary-color); */
+    background-color: var(--accent-color-dark);
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--gray-700);
+    border-bottom: 1px solid var(--gray-700);
+}
+
+.app--header_menu li a {
+    color: #fff;
+    font-size: 12px;
+    position: relative;
+}
+
+.app--header_menu li a:after+.app--header_menu li a:hover {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: red;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.app--header_menu li .router-link-exact-active::after {
+    content: "";
+    width: 80%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.top--header_menu li a,
+.top--header_menu li span {
+    color: var(--primary-accent);
+    font-size: 10px;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.top--header_menu li a:hover {
+    color: var(--tertiary-color);
+}
+
+.cart--icon .el-badge__content {
+    border: none;
+    font-size: 10px;
 }
 
 .search--field input {
@@ -52,10 +100,16 @@
 
 .middle {
     opacity: 0;
-    background-color: var(--accent-color-dark);
-    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
     margin-bottom: 15px;
     width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    left: 10%;
+    bottom: 5%;
+    color: #000;
 }
 
 .img-services1:hover .middle {
@@ -63,15 +117,25 @@
     transition: 0.4s;
 }
 
+.middle .icon:hover,
+.middle i:hover {
+    color: var(--tertiary-color) !important;
+}
+
 .img-services1 {
     width: 100%;
-    height: 320px;
-    background-position: top;
-    background-size: cover;
+    height: 250px;
+    background-color: #fff;
     border-radius: 10px;
+    position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
+}
+
+.img-services1 img {
+    width: 100%;
+    height: 100%;
 }
 
 .img-services1:hover:before {
@@ -96,7 +160,13 @@
 .products--list {
     gap: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.growing--vendors {
+    border: 1px solid #efefef;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 
@@ -156,7 +226,7 @@ header .header--content {
 }
 
 .header--content .promo--images {
-    width: 35%;
+    width: 25%;
 }
 
 .header--content .promo--images img {
@@ -169,48 +239,54 @@ header .header--content {
 
 .header--content .promo--images {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     gap: 20px
 }
 
-.select--category li {
-    border: 1px solid var(--accent-color-light);
-    padding: 0.5rem 2rem;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    font-weight: bold;
+.select--category img {
+    width: 50px;
+    height: 50px;
+}
+
+.select--category .category {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 50%;
+}
+
+.select--category .category:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select--category .category:hover+h6 {
+    color: var(--tertiary-color) !important;
 }
 
 .our--positives {
+    border-radius: 8px;
+    /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.03); */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px
+    grid-template-columns: repeat(4, 1fr);
+    /* gap: 20px */
 }
 
-.positive-item-1 {
-    grid-row-start: 1;
-    grid-row-end: 3;
-}
-
-.positive-item-2 {
-    grid-row: 1/3;
-    grid-column: 3/4;
+.separator {
+    background-color: #efefef;
+    height: 50px;
+    width: 1px;
 }
 
 .positive-item {
-    padding: 1rem;
-    text-align: center;
+    padding: 2rem 1rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: var(--accent-color-light);
+    gap: 20px;
+    background-color: #fff;
 }
 
-.positive-item .icon-tabler {
-    background-color: #efefef;
-    padding: 0.2rem;
-    border-radius: 50%;
-    margin-bottom: 0.5rem;
+.our--positives ::-webkit-scrollbar {
+    display: none !important;
+    /* width of the entire scrollbar */
 }
 
 .positive-item p {
@@ -234,7 +310,7 @@ header .header--content {
 /* App Footer  */
 
 .footer {
-    background: var(--tertiary-color);
+    background: var(--accent-color-dark);
     /* height: 400px; */
     width: 100%;
     background-size: cover;

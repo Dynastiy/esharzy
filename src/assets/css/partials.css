@@ -4,10 +4,10 @@
 @import url('./auth.css');
 @import url('./dashboard.css');
 @import url('./showcase.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import url('./vendorPage.css');
 *,
 html {
@@ -20,6 +20,10 @@ html {
     transition: all 0.1s;
     -webkit-transition: all 0.1s;
     -o-transition: all 0.1s;
+}
+
+.font-weight-bold {
+    font-weight: 900 !important;
 }
 
 ::-webkit-scrollbar {
@@ -42,13 +46,14 @@ html {
 }
 
 :root {
-    --primary-font-family: 'Montserrat', sans-serif;
+    --primary-font-family: 'Poppins', sans-serif;
     /* Brand Colors  */
-    --primary-color: #F14242;
+    --primary-color: #95194D;
     --secondary-color: #1cbcd0;
-    --tertiary-color: #95194D;
+    --tertiary-color: #F14242;
+    --primary-accent: #bfbfbf;
     --accent-color-light: #ccc;
-    --accent-color-dark: #333;
+    --accent-color-dark: #333333;
     /* Gray Shades  */
     --gray-100: #F9F8F9;
     --gray-200: #F8F6F5;
@@ -90,12 +95,13 @@ p {
 }
 
 .container-fluid {
-    padding-left: 5rem !important;
-    padding-right: 5rem !important;
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
 }
 
 body {
     background-color: #efefef;
+    color: #666;
 }
 
 .row {

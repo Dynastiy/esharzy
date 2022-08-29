@@ -3,108 +3,124 @@
     <div class="container-fluid">
       <HeroSection />
 
-      <section class="our--positives mt-5">
-        <div class="positive-item-1 positive-item" data-aos="fade-down">
+      <section
+        class="
+          our--positives
+          mt-4
+        "
+        style="width:100%; overflow-x: auto;"
+      >
+        <div class="positive-item" >
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-truck-delivery"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="7" cy="17" r="2"></circle>
+              <circle cx="17" cy="17" r="2"></circle>
+              <path
+                d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"
+              ></path>
+              <line x1="3" y1="9" x2="7" y2="9"></line>
+            </svg>
+          </span>
+
           <div>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-truck-delivery"
-                width="36"
-                height="36"
-                viewBox="0 0 24 24"
-                stroke-width="1"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <circle cx="7" cy="17" r="2"></circle>
-                <circle cx="17" cy="17" r="2"></circle>
-                <path
-                  d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"
-                ></path>
-                <line x1="3" y1="9" x2="7" y2="9"></line>
-              </svg>
-            </span>
-            <p>Superfast and Free Delivery</p>
+            <h6 class="font-weight-bold text-dark">Free Shipping & returns</h6>
+            <p class="small" style="font-size:10px">For all orders over $99</p>
           </div>
         </div>
-        <div class="positive-item" data-aos="fade-left">
+
+        <div class="positive-item">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-shield-check"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M9 12l2 2l4 -4"></path>
+              <path
+                d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
+              ></path>
+            </svg>
+          </span>
           <div>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-shield-check"
-                width="36"
-                height="36"
-                viewBox="0 0 24 24"
-                stroke-width="1"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M9 12l2 2l4 -4"></path>
-                <path
-                  d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
-                ></path>
-              </svg>
-            </span>
-            <p>Non-Contact Shipping</p>
+            <h6 class="font-weight-bold text-dark">Secure Payment</h6>
+            <p class="small" style="font-size: 10px;">We ensure secure payment</p>
           </div>
         </div>
-        <div class="positive-item" data-aos="fade-right">
+
+
+        <div class="positive-item" >
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-credit-card"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <line x1="7" y1="15" x2="7.01" y2="15"></line>
+              <line x1="11" y1="15" x2="13" y2="15"></line>
+            </svg>
+          </span>
           <div>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-credit-card"
-                width="36"
-                height="36"
-                viewBox="0 0 24 24"
-                stroke-width="1"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <rect x="3" y="5" width="18" height="14" rx="3"></rect>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-                <line x1="7" y1="15" x2="7.01" y2="15"></line>
-                <line x1="11" y1="15" x2="13" y2="15"></line>
-              </svg>
-            </span>
-            <p>Money-Back Guaranteed</p>
+            <h6 class="font-weight-bold text-dark">Money back guarantee</h6>
+            <p class="small" style="font-size:10px">Money back within 30 days</p>
           </div>
         </div>
-        <div class="positive-item-2 positive-item" data-aos="fade-down">
+
+
+        <div class="positive-item" >
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-device-mobile-message"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M11 3h10v8h-3l-4 2v-2h-3z"></path>
+              <path
+                d="M15 16v4a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1h2"
+              ></path>
+              <path d="M10 18v.01"></path>
+            </svg>
+          </span>
           <div>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-shield-lock"
-                width="36"
-                height="36"
-                viewBox="0 0 24 24"
-                stroke-width="1"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path
-                  d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
-                ></path>
-                <circle cx="12" cy="11" r="1"></circle>
-                <line x1="12" y1="12" x2="12" y2="14.5"></line>
-              </svg>
-            </span>
-            <p>Super Secure payment system</p>
+            <h6 class="font-weight-bold text-dark">Customer Support</h6>
+            <p class="small" style="font-size:10px">Call or email us 24/7</p>
           </div>
         </div>
       </section>
@@ -114,354 +130,124 @@
         <div class="my-5">
           <div class="mb-5">
             <!-- Select Cetegories  -->
-            <ul
-              class="m-0 d-lg-flex justify-content-center select--category"
-              style="gap: 20px"
-            >
-              <li role="button">All Categories</li>
-              <li
+            <div class="d-lg-flex select--category" style="gap: 30px">
+              <div
                 role="button"
-                class="text-capitalize"
+                class="text-capitalize text-center"
                 v-for="category in allCategories.categories"
                 :key="category.id"
               >
-                {{ category.category_name }}
-              </li>
-            </ul>
+                <div class="category">
+                  <img :src="config.imgUrl + category.icon_image" alt="" />
+                </div>
+                <h6 class="text-dark font-weight-bold mt-2">
+                  {{ category.category_name }}
+                </h6>
+              </div>
+            </div>
           </div>
           <section>
-            <!-- All Products -->
-            <div class="products--list">
+            <!-- Deals of the Day -->
+            <h4 class="text-dark font-weight-bold mb-3">Deals of the day</h4>
+            <div class="products--list mt-2">
               <div
-                v-for="item in allProducts.data"
+                v-for="item in discountedProducts.data"
                 :key="item.id"
-                class="bg-white shadow-lg"
+                class=""
                 data-aos="fade-down"
-                @click="viewProduct(item)"
-                role="button"
               >
-                <img
-                  class="product--image"
-                  :src="config.imgUrl + item.app_icon"
-                  alt=""
-                />
-                <div class="mt-2 p-3">
-                  <div>
-                    <div>
-                      <h6 class="font-weight-bold text-dark text-capitalize">
-                        {{ item.name }}
-                      </h6>
-                      <div>
-                        <div
-                          v-if="item.discount"
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <small
-                            class="text-muted"
-                            style="
-                              text-decoration-line: line-through !important;
-                            "
-                          >
-                            NGN{{ item.price.toLocaleString() }}
-                          </small>
-                          <small class="text-muted">
-                            NGN {{ item.discount.price }}
-                          </small>
-                          <span
-                            class="
-                              text-white
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              rounded-75
-                              font-weight-bold
-                              small
-                              p-1
-                            "
-                            style="
-                              border-radius: 3px;
-                              background-color: var(--tertiary-color);
-                            "
-                          >
-                            -{{ item.discount.percentage }}%
-                          </span>
-                        </div>
-                        <small v-else class="text-muted">
-                          NGN{{ item.price.toLocaleString() }}
-                        </small>
+                <div role="button">
+                  <div class="img-services1">
+                    <img :src="config.imgUrl + item.app_icon" alt="" />
+                    <div class="middle text-center">
+                      <div class="d-flex align-items-center justify-content-around px-1 py-2">
+                        <i @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
+                        <svg @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                        </svg>
+                        <i @click="viewProduct(item)" class="el-icon-search text-dark" style=""></i>
                       </div>
                     </div>
-                    <div></div>
                   </div>
-                  <div class="d-flex align-items-center" style="gap: 5px">
-                    <star-rating
-                      v-model="rating"
-                      inactive-color="#000"
-                      active-color="#ffd700"
-                      v-bind:star-size="12"
-                      :show-rating="false"
-                    ></star-rating>
-                    <small class="text-muted" style="font-size: 11px"
-                      >(10 Reviews)</small
+                  <div class="text-center mt-2">
+                    <h6 class="font-weight-bold text-dark text-capitalize" style="font-size:13px">
+                      {{ item.name }}
+                    </h6>
+                    <div
+                      class="d-flex align-items-center m-0 justify-content-center"
+                      style="gap: 10px"
                     >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Newest Products  -->
-            <div class="mt-5">
-              <h4 class="font-weight-bold text-dark">NEWEST PRODUCTS</h4>
-              <hr />
-              <div class="products--list mt-2">
-                <div
-                  v-for="item in newProducts.data"
-                  :key="item.id"
-                  class="shadow-lg"
-                  data-aos="fade-down"
-                >
-                  <div
-                    class="img-services1"
-                    @click="viewProduct(item)"
-                    role="button"
-                    :style="{
-                      'background-image': `url(${config.imgUrl}${item.app_icon})`,
-                    }"
-                  >
-                    <div class="middle px-3 py-3">
-                      <div>
-                        <h6 class="font-weight-bold text-white text-capitalize">
-                          {{ item.name }}
-                        </h6>
-                        <div>
-                        <div
-                          v-if="item.discount"
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <small
-                            class="text-muted"
-                            style="
-                              text-decoration-line: line-through !important;
-                            "
-                          >
-                            NGN{{ item.price.toLocaleString() }}
-                          </small>
-                          <small class="text-muted">
-                            NGN {{ item.discount.price }}
-                          </small>
-                          <span
-                            class="
-                              text-white
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              rounded-75
-                              font-weight-bold
-                              small
-                              p-1
-                            "
-                            style="
-                              border-radius: 3px;
-                              background-color: var(--tertiary-color);
-                            "
-                          >
-                            -{{ item.discount.percentage }}%
-                          </span>
-                        </div>
-                        <small v-else class="text-muted">
-                          NGN{{ item.price.toLocaleString() }}
-                        </small>
-                      </div>
-                        <div
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <star-rating
-                            v-model="rating"
-                            inactive-color="#000"
-                            active-color="#ffd700"
-                            v-bind:star-size="10"
-                            :show-rating="false"
-                          ></star-rating>
-                          <small class="text-white" style="font-size: 10px"
-                            >(10 Reviews)</small
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Trending Products -->
-            <div class="mt-5">
-              <h4 class="font-weight-bold text-dark">TRENDING PRODUCTS</h4>
-              <hr />
-              <div class="products--list mt-2">
-                <div
-                  v-for="item in trendingProducts.data"
-                  :key="item.id"
-                  class="bg-white shadow-lg"
-                  data-aos="fade-down"
-                  @click="viewProduct(item)"
-                  role="button"
-                >
-                  <img
-                    class="product--image"
-                    :src="config.imgUrl + item.app_icon"
-                    alt=""
-                  />
-                  <div class="mt-2 p-3">
-                    <div>
-                      <div>
-                        <h6 class="font-weight-bold text-dark text-capitalize">
-                          {{ item.name }}
-                        </h6>
-                        <div>
-                        <div
-                          v-if="item.discount"
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <small
-                            class="text-muted"
-                            style="
-                              text-decoration-line: line-through !important;
-                            "
-                          >
-                            NGN{{ item.price.toLocaleString() }}
-                          </small>
-                          <small class="text-muted">
-                            NGN {{ item.discount.price }}
-                          </small>
-                          <span
-                            class="
-                              text-white
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              rounded-75
-                              font-weight-bold
-                              small
-                              p-1
-                            "
-                            style="
-                              border-radius: 3px;
-                              background-color: var(--tertiary-color);
-                            "
-                          >
-                            -{{ item.discount.percentage }}%
-                          </span>
-                        </div>
-                        <small v-else class="text-muted">
-                          NGN{{ item.price.toLocaleString() }}
-                        </small>
-                      </div>
-                      </div>
-                      <div></div>
-                    </div>
-                    <div class="d-flex align-items-center" style="gap: 5px">
                       <star-rating
                         v-model="rating"
-                        inactive-color="#000"
-                        active-color="#ffd700"
-                        v-bind:star-size="12"
+                        inactive-color="#aaa"
+                        active-color="#333"
+                        v-bind:star-size="11"
                         :show-rating="false"
                       ></star-rating>
-                      <small class="text-muted" style="font-size: 11px"
+                      <small class="" style="font-size: 10px"
                         >(10 Reviews)</small
                       >
                     </div>
+                    <div class="text-center">
+                      <div
+                        v-if="item.discount"
+                        class="d-flex align-items-center justify-content-center"
+                        style="gap: 15px"
+                      >
+                        <span class="text-dark small">
+                          NGN {{ item.discount.price }}
+                        </span>
+                        <span
+                          class="text-muted small"
+                          style="text-decoration-line: line-through !important"
+                        >
+                          NGN{{ item.price.toLocaleString() }}
+                        </span>
+                      </div>
+                      <small v-else class="text-muted small">
+                        NGN{{ item.price.toLocaleString() }}
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </section>
 
-            <!-- Top rated Products  -->
-            <div class="mt-5">
-              <h4 class="font-weight-bold text-dark">TOP RATED PRODUCTS</h4>
-              <hr />
 
-              <div class="products--list mt-2">
-                <div
-                  v-for="item in topRatedProducts.data"
-                  :key="item.id"
-                  class="shadow-lg"
-                  data-aos="fade-down"
-                >
-                  <div
-                    class="img-services1"
-                    @click="viewProduct(item)"
-                    role="button"
-                    :style="{
-                      'background-image': `url(${config.imgUrl}${item.app_icon})`,
-                    }"
-                  >
-                    <div class="middle px-3 py-3">
-                      <div>
-                        <h6 class="font-weight-bold text-white text-capitalize">
-                          {{ item.name }}
-                        </h6>
-                        <div>
-                        <div
-                          v-if="item.discount"
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <small
-                            class="text-muted"
-                            style="
-                              text-decoration-line: line-through !important;
-                            "
-                          >
-                            NGN{{ item.price.toLocaleString() }}
-                          </small>
-                          <small class="text-muted">
-                            NGN {{ item.discount.price }}
-                          </small>
-                          <span
-                            class="
-                              text-white
-                              d-flex
-                              align-items-center
-                              justify-content-center
-                              rounded-75
-                              font-weight-bold
-                              small
-                              p-1
-                            "
-                            style="
-                              border-radius: 3px;
-                              background-color: var(--tertiary-color);
-                            "
-                          >
-                            -{{ item.discount.percentage }}%
-                          </span>
-                        </div>
-                        <small v-else class="text-muted">
-                          NGN{{ item.price.toLocaleString() }}
-                        </small>
-                      </div>
-                        <div
-                          class="d-flex align-items-center"
-                          style="gap: 10px"
-                        >
-                          <star-rating
-                            v-model="rating"
-                            inactive-color="#000"
-                            active-color="#ffd700"
-                            v-bind:star-size="10"
-                            :show-rating="false"
-                          ></star-rating>
-                          <small class="text-white" style="font-size: 10px"
-                            >(10 Reviews)</small
-                          >
-                        </div>
+          <section class="mt-4 d-lg-flex " style="gap:20px;">
+
+            <div class="w-100 growing bg-white p-4 rounded-lg">
+              <h4 class="font-weight-bold text-dark mb-1">Growing Vendors</h4>
+              <p class="text-secondary small">
+                More than 2000 vendors are joined with our market,
+                having lots of buyers and customers.
+              </p>
+            </div>
+
+            <div class=" w-100 bg-white p-4 rounded-lg">
+              <h4 class="font-weight-bold text-dark mb-1">Most Friendly Products</h4>
+              <p class="text-secondary small">
+                Source from 3 million products offered by vendors, and
+                leave the facility within 15 days.
+              </p>
+              <div class="d-lg-flex mt-3" style="gap:20px">
+                <div class="w-100 growing--vendors">
+                  <h6 class="mb-">Best Selling Products</h6>
+                  <div class="d-flex" style="gap:20px">
+                    <div class="p-3 w-100" :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.data" :key="topRated.id">
+                      <div class="best--selling_name">
+                        {{ topRated.name }}
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="w-100 growing--vendors">
+                  <h6>Weekly Deals</h6>
+                  <div class="d-flex">
+
                   </div>
                 </div>
               </div>
@@ -481,7 +267,8 @@ export default {
   data() {
     return {
       config,
-      rating: 5,
+      rating: 3,
+      num: 1
     };
   },
   methods: {
@@ -492,12 +279,31 @@ export default {
       });
       this.$store.dispatch("showcase/getProductBySlug", item.slug);
     },
+    addToCart(item){
+      let payload = {
+        product_id: item.id,
+        quantity: this.num
+      }
+      localStorage.setItem("cart_details", JSON.stringify(payload))
+      console.log(payload);
+      this.$store.dispatch("auth/addToCart", payload)
+    },
+    addToWishlist(item){
+      let payload = {
+        product_id: item.id
+      }
+      localStorage.setItem("cart_details", JSON.stringify(payload))
+      console.log(payload);
+      this.$store.dispatch("user/addToWishlist", payload)
+      this.$store.dispatch("showcase/discountedProducts");
+    }
   },
   beforeMount() {
     this.$store.dispatch("showcase/getProducts");
     this.$store.dispatch("showcase/getNewProducts");
     this.$store.dispatch("showcase/trendingProducts");
     this.$store.dispatch("showcase/topRatedProducts");
+    this.$store.dispatch("showcase/discountedProducts");
   },
   computed: {
     allCategories() {
@@ -514,6 +320,10 @@ export default {
     },
     topRatedProducts() {
       return this.$store.getters["showcase/topRatedProducts"].trending_products;
+    },
+    discountedProducts() {
+      return this.$store.getters["showcase/getDiscountedProducts"]
+        .discounted_products;
     },
   },
   components: { HeroSection, StarRating },

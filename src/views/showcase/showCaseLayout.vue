@@ -1,22 +1,24 @@
 <template>
+  <div>
     <div>
-        <div>
-            <TopHeader/>
-            <MainHeader/>
-            <AppHeader/>
-            <router-view :key="$route.fullPath"/>
-            <AppFooter/>
-        </div>
+      <AppHeader />
+      <router-view :key="$route.fullPath" />
+      <AppFooter />
     </div>
+  </div>
 </template>
 
 
 <script>
-import TopHeader from './components/topHeader.vue';
-import MainHeader from './components/mainHeader.vue';
-import AppHeader from './components/appHeader.vue';
-import AppFooter from './components/appFooter.vue';
+import AppHeader from "../../components/static/appHeader.vue";
+import AppFooter from "../../components/static/appFooter.vue";
 export default {
-    components: { TopHeader, MainHeader, AppHeader, AppFooter }
-}
+  components: { AppHeader, AppFooter },
+  data() {
+    return {};
+  },
+  created() {
+    
+  },
+};
 </script>

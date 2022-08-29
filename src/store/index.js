@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import showcase from '@/views/showcase/store/index'
 import auth from '@/views/auth/store/index'
 import vendor from '@/views/vendor/store/index'
+import user from '@/views/user/store/index'
 
 
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     modules: {
         showcase,
         auth,
-        vendor
+        vendor,
+        user
     }
 })

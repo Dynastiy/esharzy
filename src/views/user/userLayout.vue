@@ -1,9 +1,10 @@
 <template>
     <div>
         <div>
-            <TopHeader/>
-            <MainHeader/>
             <AppHeader/>
+            <!-- <div>
+                My Account
+            </div> -->
            
             <div class="main--dashboard d-lg-flex container-fluid my-5" style="gap:30px">
                  <div class="user--side_drawer" style="width:35%">
@@ -13,17 +14,20 @@
                     <router-view/>
                 </div>
             </div>
+
+            <AppFooter/>
         </div>
     </div>
 </template>
 
 
 <script>
-import TopHeader from './components/headers/topHeader.vue';
-import MainHeader from './components/headers/mainHeader.vue';
-import AppHeader from './components/headers/appHeader.vue';
+import AppHeader from '../../components/static/appHeader.vue';
+import AppFooter from '../../components/static/appFooter.vue';
 import SideDrawer from './components/sideDrawer.vue';
 export default {
-    components: { TopHeader, MainHeader, AppHeader, SideDrawer }
+    components: { AppHeader, AppFooter, SideDrawer }
 }
 </script>
+
+

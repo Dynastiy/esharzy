@@ -71,7 +71,7 @@ export default {
             window.location.href = '/'
         },
         // User Login
-        userLogin({ commit }, payload) {
+        userLogin({ commit, dispatch }, payload) {
             commit('SET_LOADING')
             request().post('/auth/signin', payload)
                 .then((res) => {
@@ -87,14 +87,30 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "13px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     // console.log(res);
+                    // Check User Role before Redirecting to Login Page
                     let user_role = res.data.user.role
                     if (user_role == "buyer") {
                         router.push('/buyer')
                     } else if (user_role == "vendor") {
                         router.push('/vendor')
+                    }
+
+                    // Check redirect URL
+                    let url = window.location.search
+                    console.log(url);
+                    const params = new URLSearchParams(url);
+                    const q = params.get("return_url");
+                    console.log(q);
+
+                    if (q == "/cart") {
+                        let data = JSON.parse(localStorage.getItem("cart_details"))
+                        dispatch("addToCart", data);
+                        router.push(q)
                     }
                 })
                 .catch((err) => {
@@ -247,35 +263,50 @@ export default {
 
         },
 
-        // Add Item to Cart
-        addToCart({ dispatch, commit }, payload) {
-            commit('SET_LOADING')
-            request().post('/add-to-cart', payload)
-                .then((res) => {
-                    Toastify({
-                        text: `Item Added to Cart!`,
-                        className: "info",
-                        style: {
-                            background: "green",
-                        }
-                    }).showToast();
-                    console.log(res);
+
+        // Add to cart With Login Check
+        addToCart({ commit, dispatch }, payload) {
+            // To check if User is logged in 
+            let token;
+            token = localStorage.getItem('token')
+            if (!token) {
+                router.push({
+                    path: "/login",
+                    query: { return_url: "/cart" }
                 })
-                .catch((err) => {
-                    console.log(err);
-                    commit('SET_ERRORS', err.response.data.errors)
-                    Toastify({
-                        text: `Error!`,
-                        className: "info",
-                        style: {
-                            background: "red",
-                        }
-                    }).showToast();
-                })
-                .finally(() => {
-                    commit('END_LOADING')
-                    dispatch('setUser')
-                })
+                let url = window.location.search
+                console.log(url);
+            } else {
+                commit('SET_LOADING')
+                request().post('/add-to-cart', payload)
+                    .then((res) => {
+                        Toastify({
+                            text: `Item Added to Cart!`,
+                            className: "info",
+                            style: {
+                                background: "green",
+                                fontSize: "13px",
+                                borderRadius: "5px"
+                            }
+                        }).showToast();
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        commit('SET_ERRORS', err.response.data.errors)
+                        Toastify({
+                            text: `Error!`,
+                            className: "info",
+                            style: {
+                                background: "red",
+                            }
+                        }).showToast();
+                    })
+                    .finally(() => {
+                        commit('END_LOADING')
+                        dispatch('setUser')
+                    })
+            }
         },
 
         // Remove Item from Cart
@@ -339,7 +370,6 @@ export default {
                     dispatch('setUser')
                 })
         },
-
 
     }
 };

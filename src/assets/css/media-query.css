@@ -51,18 +51,15 @@
             margin: 0 !important;
         }
         .products--list {
-            grid-template-columns: auto;
+            grid-template-columns: 1fr 1fr;
         }
         .our--positives {
-            grid-template-columns: auto;
+            /* grid-template-columns: auto; */
         }
-        .positive-item-1 {
-            grid-row-start: unset;
-            grid-row-end: unset;
-        }
-        .positive-item-2 {
-            grid-row: unset;
-            grid-column: unset;
+        .positive-item {
+            flex-direction: column;
+            justify-content: center;
+            width: 100vw;
         }
         header {
             margin-top: 1.5rem;
@@ -95,5 +92,14 @@
         .check--out_box {
             width: 100% !important;
             margin-top: 20px;
+        }
+        .growing {
+            margin-bottom: 20px;
+        }
+        .web-menu {
+            display: none;
+        }
+        .mobile-menu {
+            display: block !important;
         }
     }

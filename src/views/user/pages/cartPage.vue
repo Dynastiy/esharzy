@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div>
             <div
-              class="shadow-lg bg-white p-3 text-center"
+              class="bg-white p-5 text-center"
               v-if="cart.length == 0"
             >
               <svg
