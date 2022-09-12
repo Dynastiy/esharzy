@@ -53,9 +53,6 @@
         .products--list {
             grid-template-columns: 1fr 1fr;
         }
-        .our--positives {
-            /* grid-template-columns: auto; */
-        }
         .positive-item {
             flex-direction: column;
             justify-content: center;
@@ -73,8 +70,6 @@
             position: relative;
         }
         header .shop--now {
-            /* left: 80%;
-            top: 80%; */
             display: none;
         }
         .search--field {
@@ -110,5 +105,11 @@
         }
         .shop--products .products--list {
             grid-template-columns: repeat(2, 1fr);
+        }
+        .shop--products .search {
+            width: 100%;
+        }
+        .left--side {
+            display: none;
         }
     }

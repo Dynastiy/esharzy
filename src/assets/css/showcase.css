@@ -462,3 +462,28 @@ header .header--content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+
+.shop--products .search {
+    display: flex;
+    width: 40%;
+}
+
+.shop--products .search button {
+    border-radius: 0 !important;
+    font-size: 15px !important;
+}
+
+.shop--products input {
+    background: none;
+    border: 1px solid var(--gray-400);
+    outline: none;
+    width: 100%;
+    display: block;
+    padding: 0.5rem 0.5rem;
+    font-size: 14px;
+    color: var(--accent-color-dark);
+}
+
+.shop--products input::placeholder {
+    color: var(--gray-500);
+}

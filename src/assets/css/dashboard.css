@@ -18,10 +18,6 @@
     color: var(--tertiary-color);
 }
 
-.main--dashboard {
-    /* padding: 2rem; */
-}
-
 .dashboard--area {
     background-color: #fff;
     padding: 2rem;
