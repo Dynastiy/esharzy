@@ -102,4 +102,13 @@
         .mobile-menu {
             display: block !important;
         }
+        .store--listing {
+            grid-template-columns: auto;
+        }
+        .view--store {
+            grid-template-columns: auto;
+        }
+        .shop--products .products--list {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }

@@ -14,11 +14,12 @@
             style="background-color: var(--tertiary-color)"
           >
             <div class="mb-1">
-              <h6 class="text-white mb-3">Available for payout</h6>
+              <!-- {{ user }} -->
+              <h6 class="text-white mb-3 small" style="font-weight:300">Available for payout</h6>
             </div>
-            <h2 class="text-white">NGN 300, 000</h2>
+            <h2 class="text-white"> NGN {{ user.account.balance }} </h2>
             <div>
-                <p class="text-white w-75 small mt-1">This is the amount you currently have in earnings, available for your next payout.</p>
+                <p class="text-white w-75 mt-1" style="font-size:11px">This is the amount you currently have in earnings, available for your next payout.</p>
             </div>
           </div>
 
@@ -26,9 +27,13 @@
           <div class="analytics--card bg-white p-3 w-100">
             <h5 class="font-weight-bold text-dark">Payout Account</h5>
             <div class="mt-3">
-              <h6>Set Payout Account</h6>
+              <p style="font-size:12px">Set Payout Account</p>
               <div class="mt-3">
-                <button>Configure</button>
+                <button @click="add_account = !add_account">Configure</button>
+              </div>
+
+              <div>
+
               </div>
             </div>
           </div>
@@ -65,5 +70,25 @@
           </section>
       </div>
     </div>
+
+    <!-- Add Payout Account -->
+    <AddPayoutAccount @close="add_account = !add_account" v-show="add_account"/>
   </div>
 </template>
+
+<script>
+import AddPayoutAccount from './modals/addPayoutAccount.vue';
+export default {
+  data(){
+    return {
+      add_account: false
+    }
+  },
+    components: { AddPayoutAccount },
+    computed:{
+      user(){
+        return this.$store.getters['auth/getUser']
+      }
+    }
+}
+</script>

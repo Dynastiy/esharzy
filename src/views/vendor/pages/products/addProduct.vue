@@ -2,7 +2,7 @@
   <div>
     <div class="bg-white create-product p-4 rounded-lg shadow-sm">
       <div class="mt-4">
-        <h4 class="mb-4 text-dark">Product Overview</h4>
+        <h4 class="mb-4 text-dark">Add Product</h4>
         <hr>
         <div class="add-item-content">
           <form action="" @submit.prevent="addProduct">

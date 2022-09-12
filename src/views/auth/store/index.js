@@ -87,7 +87,7 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
-                            fontSize: "13px",
+                            fontSize: "12px",
                             borderRadius: "5px"
                         }
                     }).showToast();
@@ -121,6 +121,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -138,6 +140,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     return res
@@ -150,6 +154,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -167,6 +173,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     return res
@@ -179,6 +187,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -211,6 +221,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     router.push('/vendor')
@@ -224,6 +236,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -241,6 +255,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     return res
@@ -253,6 +269,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -299,6 +317,8 @@ export default {
                             className: "info",
                             style: {
                                 background: "red",
+                                fontSize: "12px",
+                                borderRadius: "5px"
                             }
                         }).showToast();
                     })
@@ -319,6 +339,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     console.log(res);
@@ -331,6 +353,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })
@@ -350,6 +374,8 @@ export default {
                         className: "info",
                         style: {
                             background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                     console.log(res);
@@ -362,6 +388,8 @@ export default {
                         className: "info",
                         style: {
                             background: "red",
+                            fontSize: "12px",
+                            borderRadius: "5px"
                         }
                     }).showToast();
                 })

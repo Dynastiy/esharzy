@@ -4,8 +4,8 @@
       <div>
         <div>
           <h4 class="text-dark font-weight-bold">Dashboard</h4>
-          <p class="small">
-            Welcome to your Vendor dashboard. <span class="text-capitalize" style="color:var(--tertiary-color); font-size: 15px;"> {{ getUser.first_name }} </span> ! Here's everything at a
+          <p class="" style="font-size:12px">
+            Welcome to your Vendor dashboard. <span class="text-capitalize" style="color:var(--tertiary-color); font-size: 12px;"> {{ getUser.first_name }} </span> ! Here's everything at a
             glance
           </p>
         </div>
@@ -18,7 +18,7 @@
               <h6 class="text-white">Balance Available</h6>
               <small class="text-white">View Earnings</small>
             </div>
-            <h2 class="text-white">NGN 300, 000</h2>
+            <h2 class="text-white"> NGN{{ getUser.account.balance }} </h2>
           </div>
 
           <!-- Analtics  -->

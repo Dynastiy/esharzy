@@ -35,7 +35,7 @@
                    <span class="text-danger" style="font-size:10px; margin-right: 5px;"> {{ actions }} </span>
                   </div>
                 </div>
-                <span class="text-secondary small">Min. 8 Characters</span>
+                <span class="text-secondary" style="font-size:0.7rem !important">Min. 8 Characters</span>
                 <small class="text-danger" v-show="errMessages.password" v-for="err in errMessages.password" :key="err"> *{{ err }} </small>
               </div>
               <div

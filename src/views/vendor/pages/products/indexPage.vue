@@ -10,11 +10,12 @@
             </p>
           </div>
           <div>
+            <router-link to="/add-product" class="text-white">
             <button>
-              <router-link to="/add-product" class="text-white">
                 Add product
-              </router-link>
             </button>
+            </router-link>
+            
           </div>
         </div>
         <!-- List Products-->

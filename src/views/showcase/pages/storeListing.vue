@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <div>
+      <div>
+        <div class="search--area bg-white my-4 p-3">
+          <input type="text" placeholder="Search Vendors" />
+          <button>APPLY</button>
+        </div>
+        <div class="store--listing">
+          <div class="store" v-for="store in stores" :key="store.id">
+            <div class="cover--area p-3" style="height: 200px" :style=" {'background-image': store.user.cover_photo == null ? `@/assets/img/no-cover.png` : `url(${config.imgUrl}${store.user.cover_photo})`}">
+                <!-- {{ store }} -->
+              <h5 class="text-capitalize mb-3 text-white" style="font-weight:500" role="button" @click="goToStore(store)"> {{ store.name }} </h5>
+              <h6 style="font-weight:400; color:var(--gray-400)" class=" my-2" >
+                <i class="el-icon-phone-outline"></i> {{ store.user.phone_no }}
+              </h6>
+              <h6 class="text-white" style="font-weight:400">{{ store.user.country }}</h6>
+              <div class="vendor--img">
+                <img class="rounded-circle" height="70px" width="70px" style="object-position: top; object-fit:cover" :src='store.user.photo !== null ? config.imgUrl + store.user.photo : "/no-user.png"' alt="Vendor Image Here">
+              </div>
+            </div>
+            <hr class="m-0" />
+
+            <div class="p-3 ">
+              <span @click="goToStore(store)" role="button">
+                <span
+                  >VISIT STORE
+                  <i class="el-icon-right"></i>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import config from "@/config/api";
+    export default {
+        data(){
+            return {
+                config
+            }
+        },
+        methods:{
+            goToStore(store) {
+                this.$router.push(`/store-listing/${store.slug}`)
+                this.$store.dispatch('showcase/getStoreBySlug', store.slug)
+            }
+        },
+        
+  beforeMount() {
+    this.$store.dispatch("showcase/getStores");
+  },
+  computed: {
+    stores() {
+      return this.$store.getters["showcase/getStores"].data;
+    },
+  },
+};
+</script>

@@ -41,10 +41,10 @@
             </div> -->
             <router-link to="/cart">
               <div class="text-white d-flex" style="gap:5px">
-               <span class="bg-white text-dark d-flex align-items-center justify-content-center rounded-75 font-weight-bold small" 
+               <!-- <span class="bg-white text-dark d-flex align-items-center justify-content-center rounded-75 font-weight-bold small" 
               style="width:20px; height:20px; border-radius: 3px;" v-if="getUser.cart"> {{ getUser.cart.length }} </span>
               <span class="bg-white text-dark d-flex align-items-center justify-content-center rounded-75 font-weight-bold small" 
-              style="width:20px; height:20px; border-radius: 3px;" v-else> 0</span>
+              style="width:20px; height:20px; border-radius: 3px;" v-else> 0</span> -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"

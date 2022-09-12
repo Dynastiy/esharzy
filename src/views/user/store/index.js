@@ -11,7 +11,8 @@ import Toastify from 'toastify-js'
 
 const getDefaultState = () => {
     return {
-        wishlist: []
+        wishlist: [],
+        shipping_zones: []
     };
 };
 
@@ -24,6 +25,9 @@ export default {
         allWishlist: state => {
             return state.wishlist;
         },
+        allShippingZones: state => {
+            return state.shipping_zones
+        }
     },
     mutations: {
         SET_TOKEN: (state, token) => {
@@ -31,6 +35,9 @@ export default {
         },
         ADD_WISHLIST_ITEM: (state, data) => {
             state.wishlist = data
+        },
+        SHIPPING_ZONES: (state, data) => {
+            state.shipping_zones = data
         }
     },
     actions: {
@@ -78,5 +85,17 @@ export default {
                     })
             }
         },
+
+        // Get Shipping Zones
+        getShippingZones({ commit }) {
+            request().get('/all-shipping-zones')
+                .then((res) => {
+                    console.log(res.data.shipping_zones.data);
+                    commit("SHIPPING_ZONES", res.data.shipping_zones.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
     }
 };

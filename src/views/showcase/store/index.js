@@ -10,7 +10,9 @@ export default {
         trending_products: [],
         top_rated_products: [],
         discounted_products: [],
-        product: {}
+        product: {},
+        stores: [],
+        store: {}
     },
     mutations: {
         SET_CATEGORIES(state, data) {
@@ -36,6 +38,12 @@ export default {
         },
         SET_SINGLE_PRODUCT(state, data) {
             state.product = data
+        },
+        SET_STORES(state, data) {
+            state.stores = data
+        },
+        SET_STORE(state, data) {
+            state.store = data
         }
     },
     actions: {
@@ -43,6 +51,7 @@ export default {
             try {
                 const res = await Axios().get(`all-categories`);
                 commit("SET_CATEGORIES", res.data);
+                console.log(res.data);
                 return res
             } catch (error) {
                 console.log(error);
@@ -113,6 +122,25 @@ export default {
                 console.log(error);
             }
         },
+        async getStores({ commit }) {
+            try {
+                const res = await Axios().get(`all-shops`);
+                commit("SET_STORES", res.data.shops);
+                return res
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async getStoreBySlug({ commit }, slug) {
+            try {
+                const res = await Axios().get(`show-shop/${slug}`);
+                commit("SET_STORE", res.data.shop);
+                return res
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
     },
     getters: {
@@ -123,6 +151,8 @@ export default {
         trendingProducts: (state) => state.trending_products,
         topRatedProducts: (state) => state.top_rated_products,
         getSingleProduct: (state) => state.product,
-        getDiscountedProducts: (state) => state.discounted_products
+        getDiscountedProducts: (state) => state.discounted_products,
+        getStores: (state) => state.stores,
+        getStore: (state) => state.store
     },
 };

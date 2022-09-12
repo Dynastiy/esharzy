@@ -64,7 +64,10 @@
             <div class="d-flex align-items-center" style="gap: 20px">
               <router-link to="/cart" class="text-center">
                 <div class="text-white cart--icon" style="gap: 5px">
-                  <el-badge :value="getUser.cart.length" class="item">
+                  <!-- <el-badge :value="getUser.cart.length" class="item">
+                    <i class="el-icon-goods" style="font-size: 22px"></i>
+                  </el-badge> -->
+                  <el-badge :value="getUser.cart ?  getUser.cart.length : '0' " class="item">
                     <i class="el-icon-goods" style="font-size: 22px"></i>
                   </el-badge>
                 </div>

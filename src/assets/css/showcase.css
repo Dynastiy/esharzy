@@ -136,6 +136,8 @@
 .img-services1 img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .img-services1:hover:before {
@@ -353,4 +355,110 @@ header .header--content {
 .remove--btn:hover {
     background-color: var(--gray-500);
     color: #fff;
+}
+
+
+/* Store Listing  */
+
+.store--listing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.store--listing .store {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.store .cover--area {
+    position: relative;
+    background: url("@/assets/img/no-cover.png");
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+    border-radius: 10px 10px 0 0;
+    background-position: top;
+    background-size: cover;
+}
+
+.store .vendor--img {
+    position: absolute;
+    right: 15px;
+    bottom: -35px;
+}
+
+.search--area,
+.store {
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.search--area {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.search--area input {
+    width: 100%;
+    padding: 0.5rem 2rem;
+    color: var(--accent-color-dark);
+    border-radius: 5px !important;
+    font-size: 12px !important;
+    border: 1px solid var(--gray-200);
+    outline: none;
+}
+
+.store--listing h5 a:hover {
+    color: var(--tertiary-color) !important;
+}
+
+.view--store {
+    display: grid;
+    grid-template-columns: auto 75%;
+    gap: 40px
+}
+
+.left--side_categories ul li a:hover {
+    color: var(--tertiary-color) !important;
+}
+
+.left--side_categories ul li {
+    margin-bottom: 1rem;
+}
+
+.left--side_categories ul li a {
+    color: var(--accent-color-dark);
+    display: block;
+}
+
+.left--side_categories .sub-category {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.vendor-profile {
+    height: 500px;
+    border-radius: 10px;
+    background: url("@/assets/img/no-cover.png");
+    background-size: cover;
+    background-position: top;
+}
+
+.vendor-profile .left--details {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 30%;
+    border-radius: 10px 0 0 10px;
+}
+
+.border--area {
+    border: 1px solid var(--gray-400);
+    padding: 0.8rem;
+    border-radius: 5px;
+}
+
+.shop--products .products--list {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }

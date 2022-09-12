@@ -94,7 +94,7 @@
               </div>
               <router-link to="/cart" class="text-center">
                 <div class="text-white cart--icon" style="gap: 5px">
-                  <el-badge :value="getUser.cart.length" class="item">
+                  <el-badge :value="getUser.cart ?  getUser.cart.length : '0' " class="item">
                     <i class="el-icon-goods" style="font-size: 22px"></i>
                   </el-badge>
                 </div>
@@ -110,7 +110,7 @@
       </div>
 
       <!-- Third Header -->
-      <div class="" style="background-color: var(--accent-color-dark)">
+      <div style="background-color: var(--accent-color-dark)" class="position-sticky">
         <div class="container-fluid">
           <div class="d-flex align-items-center" style="gap: 30px">
             <!-- All Categories Listing -->
@@ -201,9 +201,9 @@
                 style="gap: 30px"
               >
                 <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/">Wholesale</router-link></li>
-                <li><router-link to="/">Shops</router-link></li>
-                <li><router-link to="/">Vendors</router-link></li>
+                <li><router-link to="/wholesale">Wholesale</router-link></li>
+                <li><router-link to="/shop">Shops</router-link></li>
+                <li><router-link to="/store-listing">Vendor</router-link></li>
               </ul>
             </div>
           </div>

@@ -10,6 +10,7 @@
     display: block;
     padding: 1rem;
     color: var(--tertiary-color);
+    font-size: 0.8rem;
 }
 
 .side--bar li a:hover {
