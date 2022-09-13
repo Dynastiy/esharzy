@@ -130,7 +130,7 @@
         <div class="my-5">
           <div class="mb-5">
             <!-- Select Cetegories  -->
-            <div class="d-lg-flex select--category" style="gap: 30px">
+            <div class="d-lg-flex  select--category" style="gap: 30px">
               <div
                 role="button"
                 class="text-capitalize text-center"
@@ -140,7 +140,7 @@
                 <div class="category">
                   <img :src="config.imgUrl + category.icon_image" alt="" />
                 </div>
-                <h6 class="text-dark font-weight-bold mt-2">
+                <h6 class="text-dark font-weight-bold mt-3">
                   {{ category.category_name }}
                 </h6>
               </div>
@@ -220,7 +220,7 @@
 
             <div class="w-100 growing bg-white p-4 rounded-lg">
               <h4 class="font-weight-bold text-dark mb-1">Growing Vendors</h4>
-              <p class="text-secondary small">
+              <p class="text-secondary" style="font-size:14px; font-weight:500" >
                 More than 2000 vendors are joined with our market,
                 having lots of buyers and customers.
               </p>
@@ -228,7 +228,7 @@
 
             <div class=" w-100 bg-white p-4 rounded-lg">
               <h4 class="font-weight-bold text-dark mb-1">Most Friendly Products</h4>
-              <p class="text-secondary small">
+              <p class="text-secondary" style="font-size:14px; font-weight:500" >
                 Source from 3 million products offered by vendors, and
                 leave the facility within 15 days.
               </p>

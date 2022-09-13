@@ -14,14 +14,15 @@
                 </span>
                
             </router-link>
-            <i :class= 'more ? "el-icon-arrow-up" : "el-icon-arrow-down" ' @click="doSomething" role="button" v-if="category.sub_categories.length > 0" style="font-size:12px"></i>
+            <i :class= 'more ? "el-icon-arrow-up" : "el-icon-arrow-down" ' @click="doSomething(category)" role="button" v-if="category.sub_categories.length > 0" style="font-size:12px"></i>
            </span>
 
            <transition name="fade">
-            <ul v-if="more" class="mt-2 pl-4" style="border-left: 1px solid var(--gray-400)">
+            <ul v-if="more === category.id" class="mt-2 pl-4" style="border-left: 1px solid var(--gray-400)">
                 <li v-for="item in category.sub_categories" :key="item.id"  class="sub-category small text-capitalize"> {{ item.sub_category_name }} </li>
             </ul>
             </transition>
+            <hr>
           </li>
         </ul>
       </div>
@@ -37,9 +38,9 @@ export default {
         }
     },
     methods:{
-        doSomething(){
-            this.more = !this.more
-        }
+        doSomething(category){
+      this.more = this.more === category.id ? null : category.id;
+        },
     },
   computed: {
     allCategories() {

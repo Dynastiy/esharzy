@@ -10,7 +10,7 @@
           <div class="store" v-for="store in stores" :key="store.id">
             <div class="cover--area p-3" style="height: 200px" :style=" {'background-image': store.user.cover_photo == null ? `@/assets/img/no-cover.png` : `url(${config.imgUrl}${store.user.cover_photo})`}">
                 <!-- {{ store }} -->
-              <h5 class="text-capitalize mb-3 text-white" style="font-weight:500" role="button" @click="goToStore(store)"> {{ store.name }} </h5>
+              <h5 class="text-capitalize mb-3 text-white" style="font-weight:600" role="button" @click="goToStore(store)"> {{ store.name }} </h5>
               <h6 style="font-weight:400; color:var(--gray-400)" class=" my-2" >
                 <i class="el-icon-phone-outline"></i> {{ store.user.phone_no }}
               </h6>
@@ -23,7 +23,7 @@
 
             <div class="p-3 ">
               <span @click="goToStore(store)" role="button">
-                <span
+                <span style="font-weight:600"
                   >VISIT STORE
                   <i class="el-icon-right"></i>
                 </span>

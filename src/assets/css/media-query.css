@@ -46,6 +46,7 @@
         .el-drawer__close-btn {
             color: #fff !important;
             font-size: 1.5rem !important;
+            padding: 0;
         }
         .el-drawer__header {
             margin: 0 !important;
@@ -57,6 +58,9 @@
             flex-direction: column;
             justify-content: center;
             width: 100vw;
+        }
+        .our--positives::-webkit-scrollbar {
+            display: none !important;
         }
         header {
             margin-top: 1.5rem;
@@ -111,5 +115,11 @@
         }
         .left--side {
             display: none;
+        }
+        .select--category {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 20px;
+            justify-content: center;
         }
     }

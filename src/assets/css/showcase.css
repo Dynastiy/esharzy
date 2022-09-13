@@ -70,7 +70,14 @@
     width: 500px;
 }
 
-.carousel--container .carousel .carousel-inner .carousel-item img {
+.carousel--container .el-carousel__item img {
+    height: 400px !important;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.carousel--container .el-carousel__item {
     height: 400px !important;
     object-fit: cover;
     object-position: center;
@@ -231,12 +238,42 @@ header .header--content {
     width: 25%;
 }
 
-.header--content .promo--images img {
+.header--content .promo--images .el-carousel__item {
+    width: 100%;
+    /* height: 190px !important; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+}
+
+.header--content .promo--images .el-carousel__container {
+    width: 100%;
+    height: 190px !important;
+}
+
+.header--content .carousel--container .el-carousel__container {
+    height: 400px;
+}
+
+.header--content .carousel--container .el-carousel__item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+}
+
+.header--content .promo--images {
+    height: max-content;
+}
+
+.header--content .promo--images .el-carousel--horizontal {
     width: 100%;
     height: 190px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
 }
 
 .header--content .promo--images {
@@ -254,6 +291,8 @@ header .header--content {
     background-color: #fff;
     padding: 2rem;
     border-radius: 50%;
+    width: 120px;
+    height: 120px;
 }
 
 .select--category .category:hover {
@@ -404,7 +443,7 @@ header .header--content {
     color: var(--accent-color-dark);
     border-radius: 5px !important;
     font-size: 12px !important;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--gray-500);
     outline: none;
 }
 
@@ -486,4 +525,16 @@ header .header--content {
 
 .shop--products input::placeholder {
     color: var(--gray-500);
+}
+
+.discover--btn {
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 3px !important;
+}
+
+.discover--btn:hover {
+    background: #fff;
+    color: var(--tertiary-color) !important;
+    transition: all 0.2s !important;
 }
