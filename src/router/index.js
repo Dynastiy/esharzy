@@ -70,6 +70,19 @@ const routes = [
             },
             {
                 path: '/cart',
+                async beforeEnter(to, from, next) {
+                    var loggedIn
+                    loggedIn = localStorage.getItem("token")
+                    console.log(loggedIn);
+                    if (!loggedIn) {
+                        next({
+                            path: "/login",
+                            query: { redirectFrom: to.fullPath },
+                        });
+                    } else {
+                        next();
+                    }
+                },
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
@@ -196,6 +209,19 @@ const routes = [
     // User Layout
     {
         path: '/buyer',
+        async beforeEnter(to, from, next) {
+            var loggedIn
+            loggedIn = localStorage.getItem("token")
+            console.log(loggedIn);
+            if (!loggedIn) {
+                next({
+                    path: "/login",
+                    query: { redirectFrom: to.fullPath },
+                });
+            } else {
+                next();
+            }
+        },
         name: 'user',
         component: UserView,
         children: [{

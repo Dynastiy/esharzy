@@ -18,11 +18,14 @@
                 style="gap: 20px"
               >
                 <li><router-link to="/">Contact Us</router-link></li>
-                <li><router-link to="/">My Account</router-link></li>
-                <li>
+                <li><router-link to="/buyer">My Account</router-link></li>
+                <li v-if="!isLoggedIn">
                   <router-link to="/login">Sign In </router-link>
                   <span>/</span>
                   <router-link to="register"> Register</router-link>
+                </li>
+                <li v-else>
+                  <a href="javascript:void(0)" @click="logout">Logout</a>
                 </li>
               </ul>
             </div>
@@ -94,7 +97,10 @@
               </div>
               <router-link to="/cart" class="text-center">
                 <div class="text-white cart--icon" style="gap: 5px">
-                  <el-badge :value="getUser.cart ?  getUser.cart.length : '0' " class="item">
+                  <el-badge
+                    :value="getUser.cart ? getUser.cart.length : '0'"
+                    class="item"
+                  >
                     <i class="el-icon-goods" style="font-size: 22px"></i>
                   </el-badge>
                 </div>
@@ -110,7 +116,10 @@
       </div>
 
       <!-- Third Header -->
-      <div style="background-color: var(--accent-color-dark)" class="position-sticky">
+      <div
+        style="background-color: var(--accent-color-dark)"
+        class="position-sticky"
+      >
         <div class="container-fluid">
           <div class="d-flex align-items-center" style="gap: 30px">
             <!-- All Categories Listing -->
@@ -212,31 +221,40 @@
     </div>
 
     <div>
-      <MobileMenu/>
+      <MobileMenu />
     </div>
   </div>
 </template>
 <script>
-import MobileMenu from './mobileMenu.vue';
+import MobileMenu from "./mobileMenu.vue";
 export default {
-    data() {
-        return {};
+  data() {
+    return {};
+  },
+  methods: {
+    logout(){
+      this.$store.dispatch('auth/logout');
     },
-    methods: {},
-    beforeMount() {
-        this.$store.dispatch("showcase/getCategories");
+  },
+  beforeMount() {
+    this.$store.dispatch("showcase/getCategories");
+  },
+  computed: {
+    isLoggedIn() {
+      let token;
+      token = localStorage.getItem("token");
+      return token;
     },
-    computed: {
-        allCategories() {
-            return this.$store.getters["showcase/getCategories"];
-        },
-        getUser() {
-            return this.$store.getters["auth/getUser"];
-        },
-        loggedIn() {
-            return this.$store.getters["auth/isLoggedIn"];
-        },
+    allCategories() {
+      return this.$store.getters["showcase/getCategories"];
     },
-    components: { MobileMenu }
+    getUser() {
+      return this.$store.getters["auth/getUser"];
+    },
+    loggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+  },
+  components: { MobileMenu },
 };
 </script>

@@ -1,5 +1,10 @@
 import Axios from "@/config/https";
 
+import "toastify-js/src/toastify.css"
+import Toastify from 'toastify-js'
+
+// import router from '@/router'
+
 export default {
     namespaced: true,
     state: {
@@ -14,7 +19,8 @@ export default {
         stores: [],
         store: {},
         vendors: [],
-        vendor: {}
+        vendor: {},
+        loading: false
     },
     mutations: {
         SET_CATEGORIES(state, data) {
@@ -52,6 +58,9 @@ export default {
         },
         SET_VENDOR(state, data) {
             state.vendor = data
+        },
+        SET_LOADING(state, data) {
+            state.loading = data
         }
     },
     actions: {
@@ -62,7 +71,7 @@ export default {
                 console.log(res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async getTags({ commit }) {
@@ -71,7 +80,7 @@ export default {
                 commit("SET_TAGS", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async getProducts({ commit }) {
@@ -80,7 +89,7 @@ export default {
                 commit("SET_PRODUCTS", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async getNewProducts({ commit }) {
@@ -89,7 +98,7 @@ export default {
                 commit("SET_NEW_PRODUCTS", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async trendingProducts({ commit }) {
@@ -98,7 +107,7 @@ export default {
                 commit("SET_TRENDING_PRODUCTS", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async topRatedProducts({ commit }) {
@@ -107,7 +116,7 @@ export default {
                 commit("SET_TOP_RATED_PRODUCTS", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async discountedProducts({ commit }) {
@@ -117,7 +126,7 @@ export default {
                 console.log(res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async getProductBySlug({ commit }, slug) {
@@ -127,7 +136,7 @@ export default {
                 commit("SET_SINGLE_PRODUCT", res.data);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
         async getStores({ commit }) {
@@ -136,7 +145,7 @@ export default {
                 commit("SET_STORES", res.data.shops);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
 
@@ -146,7 +155,19 @@ export default {
                 commit("SET_STORE", res.data.shop);
                 return res
             } catch (error) {
+                return error
+            }
+        },
+
+        async getStoreById({ commit }, id) {
+            try {
+                const res = await Axios().get(`find-shop/${id}`);
+                commit("SET_STORE", res.data.shop);
+                console.log(res);
+                return res
+            } catch (error) {
                 console.log(error);
+                return error
             }
         },
 
@@ -156,9 +177,54 @@ export default {
                 commit("SET_VENDORS", res.data.vendors);
                 return res
             } catch (error) {
-                console.log(error);
+                return error
             }
         },
+
+
+        async createReview({ dispatch, commit }, payload) {
+            commit("SET_LOADING", true)
+                // To check if User is logged in 
+            try {
+                const res = await Axios().post('create-review', payload)
+                console.log(res);
+                Toastify({
+                    text: `Review Added!`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "5px"
+                    }
+                }).showToast();
+                dispatch("getProductBySlug", payload.slug)
+            } catch (error) {
+                return error
+            } finally {
+                commit("SET_LOADING", false)
+            }
+        },
+
+        async createRating({ dispatch, commit }, payload) {
+            try {
+                const res = await Axios().post('create-rating', payload)
+                console.log(res);
+                Toastify({
+                    text: `Product Rated!`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "5px"
+                    }
+                }).showToast();
+                dispatch("getProductBySlug", payload.slug)
+            } catch (error) {
+                return error
+            } finally {
+                commit("SET_LOADING", false)
+            }
+        }
 
 
     },
@@ -173,6 +239,7 @@ export default {
         getDiscountedProducts: (state) => state.discounted_products,
         getStores: (state) => state.stores,
         getStore: (state) => state.store,
-        getVendors: (state) => state.vendors
+        getVendors: (state) => state.vendors,
+        isLoading: (state) => state.loading
     },
 };

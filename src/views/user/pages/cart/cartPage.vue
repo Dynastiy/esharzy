@@ -236,7 +236,7 @@ export default {
         quantity: "",
       },
       total: "",
-      cart: [],
+      // cart: [],
       price: "",
       // cartAmount: ""
     };
@@ -275,18 +275,20 @@ export default {
       // this.cartAmount = +this.totalAmount + +this.price
     }
   },
-  mounted() {
-    this.cart = this.$store.getters["auth/getUser"].cart;
-    // this.cartAmount = +this.totalAmount + +this.price 
-  },
-  updated() {
-    this.cart = this.$store.getters["auth/getUser"].cart;
-  },
+  // mounted() {
+  //   this.cart = this.$store.getters["auth/getUser"].cart;
+  // },
+  // updated() {
+  //   this.cart = this.$store.getters["auth/getUser"].cart;
+  // },
   beforeMount() {
     this.$store.dispatch("user/getShippingZones");
   },
   async created() {},
   computed: {
+    cart(){
+      return this.$store.getters["auth/getUser"].cart;
+    },
     totalAmount() {
       let cartItem = this.$store.getters["auth/getUser"].cart;
       let totalPrice = cartItem.reduce((accumulator, item) => {

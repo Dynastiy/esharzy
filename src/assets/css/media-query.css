@@ -123,4 +123,10 @@
             gap: 20px;
             justify-content: center;
         }
+        .ratings--card {
+            width: 100% !important;
+        }
+        .other--details .el-dialog__wrapper .el-dialog {
+            width: 90% !important;
+        }
     }

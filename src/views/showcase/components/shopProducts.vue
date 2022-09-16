@@ -78,11 +78,14 @@
                   style="gap: 10px"
                 >
                   <star-rating
-                    v-model="rating"
-                    inactive-color="#aaa"
-                    active-color="#333"
-                    v-bind:star-size="11"
-                    :show-rating="false"
+                  :increment="0.1"
+                v-model="item.avg_rating"
+                inactive-color="#000"
+                active-color="#ffb20f"
+                v-bind:star-size="12"
+                :show-rating="false"
+                :rounded-corners="true"
+                :read-only="true"
                   ></star-rating>
                   <small class="" style="font-size: 10px">(10 Reviews)</small>
                 </div>
@@ -117,8 +120,13 @@
 
 
 <script>
+
+import StarRating from "vue-star-rating";
 import config from "@/config/api";
 export default {
+  components:{
+    StarRating
+  },
   data() {
     return {
       config,

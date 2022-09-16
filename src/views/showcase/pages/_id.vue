@@ -2,25 +2,37 @@
   <div>
     <div class="">
       <div class="container-fluid py-3">
-        <el-breadcrumb separator="|">
-          <el-breadcrumb-item class="" to="/">Homepage</el-breadcrumb-item>
-          <el-breadcrumb-item class="text-secondary">  {{ product.name }} </el-breadcrumb-item>
-        </el-breadcrumb>
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item
+                ><router-link to="/" style="font-weight:400"
+                  > Home </router-link
+                ></el-breadcrumb-item
+              >
+              <el-breadcrumb-item
+                ><router-link :to="currentRoute.path" style="font-weight:400"
+                  > {{currentRoute.name}} </router-link
+                ></el-breadcrumb-item
+              >
+              <el-breadcrumb-item v-if="currentRoute.params !== {}"
+                  > {{ currentRoute.params.slug }} </el-breadcrumb-item
+              >
+            </el-breadcrumb>
       </div>
       <div class="container-fluid py-4">
         <div
-          class="d-lg-flex bg-white p-4 rounded-lg"
+          class="d-lg-flex"
           style="gap: 50px"
         >
           <div class="w-100">
-            <el-carousel :interval="4000" type="card" height="350px">
+            <!-- <el-carousel :interval="4000" type="card" height="350px">
               <el-carousel-item v-for="item in images" :key="item.id">
                 <img :src="config.imgUrl + item.image" alt="" />
               </el-carousel-item>
-            </el-carousel>
-            <!-- <div class="text-center">
-              <button class="small">Watch Video Description of Product</button>
-            </div> -->
+            </el-carousel> -->
+            <GalleryView class="mb-2"
+                  :starting-image="2"
+                  :images="images"
+                  :auto-slide-interval="1500"/>
           </div>
           <div
             class="
@@ -35,31 +47,61 @@
               <h3 class="font-weight-bold text-dark text-capitalize">
                 {{ product.name }}
               </h3>
+
+              <!-- Listing this product's Categories -->
+              <div class="categories my-3 d-flex align-items-center" style="gap:5px">
+                <h6 class="small">Categories:</h6>
+                <span class="small text-capitalize text-secondary" >
+                  {{ categories}}
+                </span>
+              </div>
+
+              <!-- Listing this product's Tags -->
+              <div class="tags my-3 d-flex align-items-center" style="gap:5px">
+                <h6 class="small">Tags:</h6>
+                <span class="small text-capitalize text-secondary" >
+                  {{ tags }}
+                </span>
+              </div>
+
+              <hr>
+
+              <div>
+                <h1 style="font-weight:600">&#8358; {{ (product.price * num).toLocaleString() }}</h1>
+              </div>
               <div class="d-flex align-items-center" style="gap: 5px">
                 <star-rating
-                  v-model="rating"
+                  :increment="0.1"
+                  v-model="product.avg_ratings"
                   inactive-color="#000"
-                  active-color="#ffd700"
-                  v-bind:star-size="13"
+                  active-color="#ffb20f"
+                  v-bind:star-size="14"
                   :show-rating="false"
                   :rounded-corners="true"
                 ></star-rating>
                 <small class="text-muted" style="font-size: 12px"
-                  >(10 Reviews)</small
+                  >{{ `(${product.reviews.length} reviews)` }}</small
                 >
               </div>
               <!-- description -->
               <div class="mt-3">
                 <span
                   v-html="product.description"
-                  class="text-muted"
-                  style="font-size: 11px"
+                  class="text-muted product_data"
+                  style="font-size: 14px"
                 ></span>
               </div>
 
-              <!-- Increase Quantity  -->
-              <div class="my-3">
-                <h6 class="mb-1 small">Quantity</h6>
+              <hr>
+
+             
+              
+            </div>
+
+            <!-- Bottom Area that contains Quantity Increase and Add to Cart and Add to wishlist -->
+            <div class="d-lg-flex align-items-center " style="gap: 20px">
+               <!-- Increase Quantity  -->
+               <div class="mt-3">
                 <el-input-number
                   v-model="num"
                   :min="1"
@@ -67,38 +109,8 @@
                 ></el-input-number>
               </div>
 
-              <!-- Listing this product's Categories -->
-              <div class="categories mt-3">
-                <h6 class="mb-2 small">Categories</h6>
-                <el-tag
-                  v-for="item in product.categories"
-                  :key="item.id"
-                  size="medium"
-                >
-                  {{ item.category_name }}
-                </el-tag>
-              </div>
-
-              <!-- Listing this product's Tags -->
-              <div class="tags mt-3">
-                <h6 class="mb-2 small">Tags</h6>
-                <el-tag
-                  v-for="item in product.tags"
-                  :key="item.id"
-                  size="medium"
-                >
-                  {{ item.name }}
-                </el-tag>
-              </div>
-            </div>
-
-            <!-- Bottom Area that contains Price and Add to Cart and Add to wishlist -->
-            <div class="d-flex align-items-center mt-3" style="gap: 20px">
-              <div>
-                <h4>${{ product.price * num }}</h4>
-              </div>
-              <div class="d-flex align-items-center" style="gap: 20px">
-                <button class="small" @click="addToCart">Add to Cart</button>
+              <div class="d-flex align-items-center mt-3 w-100" style="gap: 20px">
+                <button class="text-uppercase w-100" style="font-size:15px !important; font-weight:600; border-radius:3px !important" @click="addToCart">Add to Cart</button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-tabler icon-tabler-heart"
@@ -121,13 +133,14 @@
           </div>
         </div>
 
+        <!-- Other Details  -->
         <div class="other--details">
           <el-tabs v-model="activeName" >
             <el-tab-pane label="Description" name="first">
-              <div class="d-lg-flex mt-3 " style="gap:30px">
-                <div v-html="product.description" class="w-100 description--content">
+              <div class="d-lg-flex " style="gap:30px">
+                  <div v-html="product.description" class="w-100 description--content mt-4">
                   </div>
-                  <div class="product--video" :style="{ 'background-image': `url(${config.imgUrl}${product.photo_three})` }">
+                  <div class="product--video mt-4" :style="{ 'background-image': `url(${config.imgUrl}${product.photo_three})` }">
                     <div class="play--icon" @click="dialogVisible = true" role="button">
                       <i class="el-icon-video-play"></i>
                     </div>
@@ -135,7 +148,9 @@
               </div>
             </el-tab-pane>
             <el-tab-pane :label='"Customer Reviews" + "("+product.reviews.length+")"' name="second"> <VendorReviews/> </el-tab-pane>
-            <el-tab-pane label="Vendor" name="third">Role</el-tab-pane>
+            <el-tab-pane label="Vendor" name="third">
+              <ShopDetails/>
+            </el-tab-pane>
           </el-tabs>
           <el-dialog
             :visible.sync="dialogVisible"
@@ -144,6 +159,16 @@
             <video style="width:100%" :src=" config.imgUrl + product.video " controls></video>
           </el-dialog>
         </div> 
+
+        <!-- More Products from this Vendor -->
+        <div class="mt-4">
+          <VendorProducts/>
+        </div>
+
+        <!-- related Products  -->
+        <div>
+          <RelatedProducts/>
+        </div>
         
       </div>
      
@@ -156,10 +181,18 @@
 import config from "@/config/api";
 import StarRating from "vue-star-rating";
 import VendorReviews from "../components/vendorReviews.vue";
+import ShopDetails from "../components/shopDetails.vue";
+import VendorProducts from "../components/vendorProducts.vue";
+import RelatedProducts from "../components/relatedProducts.vue";
+import GalleryView from "../components/galleryView.vue";
 export default {
   components: {
     StarRating,
-    VendorReviews
+    VendorReviews,
+    ShopDetails,
+    VendorProducts,
+    RelatedProducts,
+    GalleryView
 },
   data() {
     return {
@@ -183,45 +216,95 @@ export default {
   beforeMount(){
     let slug = this.$route.params.slug
     this.$store.dispatch("showcase/getProductBySlug", slug);
+    this.$store.dispatch("showcase/getStoreById", this.product.shop_id)
   },
   computed: {
     product() {
       return this.$store.getters["showcase/getSingleProduct"].product;
     },
+    categories(){
+      if(this.product.categories.length > 0){
+        var val = this.product.categories;
+      let i 
+      for(i = 0; i < val.length; i++) {
+        var data = val[i].category_name
+        var result = [];
+        result.push(data)
+      }
+      var product_categories = result.join(",")
+      return product_categories
+      }
+      else {
+        return "This product has no category"
+      }
+    },
+
+    tags(){
+      if(this.product.tags.length > 0){
+        var val = this.product.tags;
+      let i 
+      for(i = 0; i < val.length; i++) {
+        var data = val[i].name
+        var result = [];
+        result.push(data)
+      }
+      var product_tags = result.join(",")
+      return product_tags
+      }
+      else {
+        return "This product has no tag"
+      }
+    },
     slugName() {
       return this.$route.params.slug;
+    },
+    currentRoute(){
+      return this.$route
     },
     images() {
       let imagestoArray = [
         {
           id: 1,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product.app_icon,
+            thumb:
             this.$store.getters["showcase/getSingleProduct"].product.app_icon,
         },
         {
           id: 2,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product.photo_one,
+            thumb:
             this.$store.getters["showcase/getSingleProduct"].product.photo_one,
         },
         {
           id: 3,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product.photo_two,
+            thumb:
             this.$store.getters["showcase/getSingleProduct"].product.photo_two,
         },
         {
           id: 4,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product
+              .photo_three,
+              thumb:
             this.$store.getters["showcase/getSingleProduct"].product
               .photo_three,
         },
         {
           id: 5,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product.photo_four,
+            thumb:
             this.$store.getters["showcase/getSingleProduct"].product.photo_four,
         },
         {
           id: 6,
-          image:
+          big:
+            this.$store.getters["showcase/getSingleProduct"].product.photo_five,
+            thumb:
             this.$store.getters["showcase/getSingleProduct"].product.photo_five,
         },
       ];

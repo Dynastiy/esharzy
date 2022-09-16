@@ -171,7 +171,7 @@
                     </div>
                   </div>
                   <div class="text-center mt-2">
-                    <h6 class="font-weight-bold text-dark text-capitalize" style="font-size:13px">
+                    <h6 class="font-weight-bold text-dark text-capitalize" style="font-size:15px">
                       {{ item.name }}
                     </h6>
                     <div
@@ -179,15 +179,17 @@
                       style="gap: 10px"
                     >
                       <star-rating
-                        v-model="rating"
-                        inactive-color="#aaa"
-                        active-color="#333"
-                        v-bind:star-size="11"
-                        :show-rating="false"
-                        :rounded-corners="true"
+                      :increment="0.1"
+                      v-model="item.avg_ratings"
+                      inactive-color="#000"
+                      active-color="#ffb20f"
+                      v-bind:star-size="12"
+                      :show-rating="false"
+                      :rounded-corners="true"
+                      :read-only="true"
                       ></star-rating>
                       <small class="" style="font-size: 10px"
-                        >(10 Reviews)</small
+                        > {{ "("+item.reviews.length + " reviews)" }} </small
                       >
                     </div>
                     <div class="text-center">
@@ -196,17 +198,17 @@
                         class="d-flex align-items-center justify-content-center"
                         style="gap: 15px"
                       >
-                        <span class="text-dark small">
+                        <span class="text-dark" style="font-weight:600">
                           NGN {{ item.discount.price }}
                         </span>
                         <span
-                          class="text-muted small"
-                          style="text-decoration-line: line-through !important"
+                          class="text-muted"
+                          style="text-decoration-line: line-through !important; font-weight:600"
                         >
                           NGN{{ item.price.toLocaleString() }}
                         </span>
                       </div>
-                      <small v-else class="text-muted small">
+                      <small v-else class="text-muted" style="font-weight:600">
                         NGN{{ item.price.toLocaleString() }}
                       </small>
                     </div>

@@ -43,9 +43,6 @@ export default function() {
             if (err.response && err.response.status === 403) {
                 console.log(9090);
                 localStorage.clear();
-                if (window.location.href !== '/login') {
-                    window.location.href = '/login'
-                }
                 return Promise.reject(err);
             }
             if (err.response && err.response.status === 500) {
@@ -60,9 +57,7 @@ export default function() {
                 // if (storeObj.auth) {
 
                 // }
-                if (window.location.href !== '/login') {
-                    window.location.href = '/login'
-                }
+
 
             }
 

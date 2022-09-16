@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const timeStamp = (value) => {
     if (value) {
-        return moment(String(value)).format('DD MMM YYYY hh:mm A')
+        return moment(String(value)).format('MMM DD, YYYY hh:mm')
     }
 }
 

@@ -105,13 +105,18 @@ export default {
                     console.log(url);
                     const params = new URLSearchParams(url);
                     const q = params.get("return_url");
-                    console.log(q);
+                    const d = params.get("redirectFrom")
+                        // console.log(q);
 
                     if (q == "/cart") {
                         let data = JSON.parse(localStorage.getItem("cart_details"))
                         dispatch("addToCart", data);
+                        dispatch("setUser")
                         router.push(q)
+                    } else {
+                        router.push(q || d)
                     }
+
                 })
                 .catch((err) => {
                     // console.log(err);
@@ -285,15 +290,13 @@ export default {
         // Add to cart With Login Check
         addToCart({ commit, dispatch }, payload) {
             // To check if User is logged in 
-            let token;
+            var token;
             token = localStorage.getItem('token')
             if (!token) {
                 router.push({
                     path: "/login",
                     query: { return_url: "/cart" }
                 })
-                let url = window.location.search
-                console.log(url);
             } else {
                 commit('SET_LOADING')
                 request().post('/add-to-cart', payload)

@@ -611,12 +611,10 @@ header .header--content {
     font-weight: 400;
 }
 
-.description--content ol li {
+.description--content ol li,
+.product_data ol li {
     font-weight: 400;
-    list-style-type: url("../img/tick.svg");
-}
-
-.description--content ol li {
+    list-style-type: decimal !important;
     margin-left: 15px;
 }
 
@@ -639,8 +637,27 @@ header .header--content {
     outline: none;
     border: 1px solid var(--gray-400);
     border-radius: 5px;
+    font-size: 0.8rem;
+    color: var(--accent-color-dark);
 }
 
 .review--textarea textarea::placeholder {
     font-size: 0.8rem;
+    color: var(--gray-400);
+}
+
+.shop--details_left {
+    height: 350px;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.shop--details_right img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
 }
