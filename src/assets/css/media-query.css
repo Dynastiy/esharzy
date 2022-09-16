@@ -107,7 +107,8 @@
         .view--store {
             grid-template-columns: auto;
         }
-        .shop--products .products--list {
+        .shop--products .products--list,
+        .shop .products--list {
             grid-template-columns: repeat(2, 1fr);
         }
         .shop--products .search {

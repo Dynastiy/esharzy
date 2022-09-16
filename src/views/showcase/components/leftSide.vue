@@ -22,7 +22,7 @@
                 <li v-for="item in category.sub_categories" :key="item.id"  class="sub-category small text-capitalize"> {{ item.sub_category_name }} </li>
             </ul>
             </transition>
-            <hr>
+            
           </li>
         </ul>
       </div>

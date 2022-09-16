@@ -4,6 +4,7 @@ import HomeView from '../views/showcase/showCaseLayout'
 import UserView from '../views/user/userLayout'
 import VendorView from '../views/vendor/vendorLayout'
 import AuthView from '../views/auth/authLayout'
+import Wholesale from '../views/wholesale/wholesaleLayout'
 
 Vue.use(VueRouter)
 
@@ -98,6 +99,98 @@ const routes = [
 
         ]
     },
+
+    // Wholesale page Layout
+    {
+        path: '/wholesale',
+        component: Wholesale,
+        children: [{
+                path: '/wholesale',
+                name: 'wholesale',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/indexPage.vue')
+            },
+            {
+                path: '/shop',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/indexView.vue'),
+                children: [{
+                        path: '/shop',
+                        name: 'Shop',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/allProducts.vue')
+                    },
+                    {
+                        path: '/store-listing',
+                        name: 'Store List',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/storeListing.vue')
+                    },
+                    {
+                        path: '/store-listing/:slug',
+                        name: 'Store',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/storeId.vue')
+                    },
+                ]
+            },
+
+            {
+                path: '/product/:slug',
+                name: 'product-detail',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/_id.vue')
+            },
+            {
+                path: '/cart',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/indexPage.vue'),
+                children: [{
+                        path: '/cart',
+                        name: 'view-cart',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/cartPage.vue')
+                    },
+
+                    {
+                        path: '/check-out',
+                        name: 'check-out',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/checkOut.vue')
+                    }
+                ]
+            },
+
+        ]
+    },
+
 
 
     // User Layout

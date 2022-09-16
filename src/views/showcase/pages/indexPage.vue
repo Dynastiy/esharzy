@@ -184,6 +184,7 @@
                         active-color="#333"
                         v-bind:star-size="11"
                         :show-rating="false"
+                        :rounded-corners="true"
                       ></star-rating>
                       <small class="" style="font-size: 10px"
                         >(10 Reviews)</small
@@ -218,12 +219,20 @@
 
           <section class="mt-4 d-lg-flex " style="gap:20px;">
 
-            <div class="w-100 growing bg-white p-4 rounded-lg">
+            <div class="w-100 growing bg-white p-4 rounded-lg d-flex flex-column justify-content-between">
               <h4 class="font-weight-bold text-dark mb-1">Growing Vendors</h4>
               <p class="text-secondary" style="font-size:14px; font-weight:500" >
                 More than 2000 vendors are joined with our market,
                 having lots of buyers and customers.
               </p>
+              <div class="growing--vendors d-flex" style="gap:20px; width: 100%; overflow-x: scroll;">
+                  <div v-for="vendor in vendors" :key="vendor.id" class="">
+                  <router-link :to=" `/store-listing/${vendor.slug}` ">
+                    <img height="70px" width="70px" style="object-position: top; object-fit:cover" :src='vendor.user.photo !== null ? config.imgUrl + vendor.user.photo : "/no-user.png"' alt="Vendor Image Here">
+                  </router-link>
+              </div>
+              </div>
+             
             </div>
 
             <div class=" w-100 bg-white p-4 rounded-lg">
@@ -234,9 +243,9 @@
               </p>
               <div class="d-lg-flex mt-3" style="gap:20px">
                 <div class="w-100 growing--vendors">
-                  <h6 class="mb-">Best Selling Products</h6>
+                  <h6 class="mb-1">Best Selling Products</h6>
                   <div class="d-flex" style="gap:20px">
-                    <div class="p-3 w-100" :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.data" :key="topRated.id">
+                    <div class="" height="70px" width="70px"  :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.data.slice(0.3)" :key="topRated.id">
                       <div class="best--selling_name">
                         {{ topRated.name }}
                       </div>
@@ -246,8 +255,12 @@
 
                 <div class="w-100 growing--vendors">
                   <h6>Weekly Deals</h6>
-                  <div class="d-flex">
-
+                  <div class="d-flex" style="gap:20px">
+                    <div class="" height="70px" width="70px"  :style="{ 'background-image': `url(${config.imgUrl}${item.app_icon})` }" v-for="item in discountedProducts.data.slice(0.3)" :key="item.id">
+                      <div class="best--selling_name">
+                        {{ item.name }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -304,6 +317,7 @@ export default {
     this.$store.dispatch("showcase/trendingProducts");
     this.$store.dispatch("showcase/topRatedProducts");
     this.$store.dispatch("showcase/discountedProducts");
+    this.$store.dispatch("showcase/getStores");
   },
   computed: {
     allCategories() {
@@ -325,6 +339,10 @@ export default {
       return this.$store.getters["showcase/getDiscountedProducts"]
         .discounted_products;
     },
+    vendors(){
+      let data =  this.$store.getters["showcase/getStores"].data;
+      return data.slice(0,5)
+    }
   },
   components: { HeroSection, StarRating },
 };

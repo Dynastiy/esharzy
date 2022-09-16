@@ -53,6 +53,14 @@ const dollarFilter2 = (value) => {
     return numeral(value).format('($ 0.00a)')
 }
 
+const numberFilter = (value) => {
+    if (!value) {
+        return '0'
+    }
+
+    return numeral(value).format('(0.0)')
+}
+
 const percentFilter = (value) => {
     return !value ? '0%' : `${Number(value).toFixed(2)}%`
 }
@@ -71,4 +79,4 @@ const percentageFilter = (value) => {
     return !value ? '0%' : `${Number(value).toFixed(2) * 100}%`
 }
 
-export { dollarFilter, percentFilter, createRef, percentageFilter, timeStamp, timeStamp2, timeRange, dollarFilter2, sliceHash, sliceHash2, sliceContent, colorSplit, formatAmount }
+export { dollarFilter, percentFilter, createRef, percentageFilter, timeStamp, timeStamp2, timeRange, dollarFilter2, sliceHash, sliceHash2, sliceContent, colorSplit, formatAmount, numberFilter }

@@ -538,3 +538,109 @@ header .header--content {
     color: var(--tertiary-color) !important;
     transition: all 0.2s !important;
 }
+
+.shop .products--list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.shop .filters .el-input__inner::placeholder {
+    font-size: 0.7rem;
+    color: var(--accent-color-dark);
+    font-weight: 300;
+}
+
+.el-select-dropdown__item {
+    font-size: 0.8rem !important;
+    width: max-content;
+    background-color: var(--gray-200);
+    border-radius: 3px;
+}
+
+.el-select-dropdown__list {
+    display: flex !important;
+    padding: 10px !important;
+    width: 200px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.el-select-dropdown__item:hover {
+    color: var(--tertiary-color);
+    /* background-color: var(--gray-200) !important; */
+}
+
+.el-select-dropdown__item.hover {
+    color: #fff;
+    background-color: var(--tertiary-color) !important;
+}
+
+.other--details .el-tabs__item {
+    font-size: 22px;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: var(--gray-400);
+}
+
+.product--video {
+    height: 350px;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: overlay;
+    width: 100%;
+}
+
+.product--video .play--icon i {
+    color: #fff;
+    font-size: 50px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
+}
+
+.description--content {
+    font-size: 0.9rem;
+}
+
+.description--content p {
+    font-weight: 400;
+}
+
+.description--content ol li {
+    font-weight: 400;
+    list-style-type: url("../img/tick.svg");
+}
+
+.description--content ol li {
+    margin-left: 15px;
+}
+
+.other--details .el-dialog__wrapper .el-dialog {
+    background-color: transparent !important;
+    box-shadow: unset;
+}
+
+.other--details .el-dialog__wrapper .el-dialog__headerbtn .el-dialog__close {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.review--textarea textarea {
+    background-color: transparent;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--gray-400);
+    border-radius: 5px;
+}
+
+.review--textarea textarea::placeholder {
+    font-size: 0.8rem;
+}

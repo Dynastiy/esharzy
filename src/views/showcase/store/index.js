@@ -12,7 +12,9 @@ export default {
         discounted_products: [],
         product: {},
         stores: [],
-        store: {}
+        store: {},
+        vendors: [],
+        vendor: {}
     },
     mutations: {
         SET_CATEGORIES(state, data) {
@@ -44,6 +46,12 @@ export default {
         },
         SET_STORE(state, data) {
             state.store = data
+        },
+        SET_VENDORS(state, data) {
+            state.vendors = data
+        },
+        SET_VENDOR(state, data) {
+            state.vendor = data
         }
     },
     actions: {
@@ -142,6 +150,17 @@ export default {
             }
         },
 
+        async getVendors({ commit }) {
+            try {
+                const res = await Axios().get(`vendor-users`);
+                commit("SET_VENDORS", res.data.vendors);
+                return res
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+
     },
     getters: {
         getCategories: (state) => state.categories,
@@ -153,6 +172,7 @@ export default {
         getSingleProduct: (state) => state.product,
         getDiscountedProducts: (state) => state.discounted_products,
         getStores: (state) => state.stores,
-        getStore: (state) => state.store
+        getStore: (state) => state.store,
+        getVendors: (state) => state.vendors
     },
 };

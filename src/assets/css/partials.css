@@ -19,7 +19,6 @@ html {
     box-sizing: border-box;
     font-family: var(--primary-font-family);
     text-decoration: none !important;
-    list-style: none;
     transition: all 0.4s;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -32,6 +31,8 @@ html {
 ::-webkit-scrollbar {
     width: 4px;
     /* width of the entire scrollbar */
+    /* height of the entire scrollbar */
+    height: 3px;
 }
 
 ::-webkit-scrollbar-track {

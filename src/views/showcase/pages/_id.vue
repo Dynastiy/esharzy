@@ -18,9 +18,9 @@
                 <img :src="config.imgUrl + item.image" alt="" />
               </el-carousel-item>
             </el-carousel>
-            <div class="text-center">
+            <!-- <div class="text-center">
               <button class="small">Watch Video Description of Product</button>
-            </div>
+            </div> -->
           </div>
           <div
             class="
@@ -42,6 +42,7 @@
                   active-color="#ffd700"
                   v-bind:star-size="13"
                   :show-rating="false"
+                  :rounded-corners="true"
                 ></star-rating>
                 <small class="text-muted" style="font-size: 12px"
                   >(10 Reviews)</small
@@ -120,12 +121,32 @@
           </div>
         </div>
 
-        <div class="mt-4 bg-white p-3 rounded-lg">
-          <div>
-            <h4>Reviews</h4>
-          </div>
-        </div>
+        <div class="other--details">
+          <el-tabs v-model="activeName" >
+            <el-tab-pane label="Description" name="first">
+              <div class="d-lg-flex mt-3 " style="gap:30px">
+                <div v-html="product.description" class="w-100 description--content">
+                  </div>
+                  <div class="product--video" :style="{ 'background-image': `url(${config.imgUrl}${product.photo_three})` }">
+                    <div class="play--icon" @click="dialogVisible = true" role="button">
+                      <i class="el-icon-video-play"></i>
+                    </div>
+                  </div>                  
+              </div>
+            </el-tab-pane>
+            <el-tab-pane :label='"Customer Reviews" + "("+product.reviews.length+")"' name="second"> <VendorReviews/> </el-tab-pane>
+            <el-tab-pane label="Vendor" name="third">Role</el-tab-pane>
+          </el-tabs>
+          <el-dialog
+            :visible.sync="dialogVisible"
+            width="60%">
+          
+            <video style="width:100%" :src=" config.imgUrl + product.video " controls></video>
+          </el-dialog>
+        </div> 
+        
       </div>
+     
     </div>
   </div>
 </template>
@@ -134,15 +155,19 @@
 <script>
 import config from "@/config/api";
 import StarRating from "vue-star-rating";
+import VendorReviews from "../components/vendorReviews.vue";
 export default {
   components: {
     StarRating,
-  },
+    VendorReviews
+},
   data() {
     return {
       config,
       rating: 5,
       num: 1,
+      activeName: 'first',
+      dialogVisible: false
     };
   },
   methods: {
@@ -154,6 +179,10 @@ export default {
       console.log(payload);
       this.$store.dispatch("auth/addToCart", payload);
     },
+  },
+  beforeMount(){
+    let slug = this.$route.params.slug
+    this.$store.dispatch("showcase/getProductBySlug", slug);
   },
   computed: {
     product() {
