@@ -186,13 +186,16 @@ export default {
 .thumbnail-image > img {
     width: 100%;
     height: 70px;
+    object-fit: contain;
+    object-position: center;
     transition: all 250ms;
-    object-fit: cover;
+    padding:0.4rem;
 }
 .thumbnail-image:hover > img, 
 .thumbnail-image.active > img {
     opacity: 0.6;
     box-shadow: 2px 2px 6px 1px rgba(0,0,0, 0.5);
+    border: 1px solid var(--tertiary-color)
 }
 .card-img {
     position: relative;
@@ -203,7 +206,8 @@ export default {
     margin: 0 auto;
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 }
 .actions {
     font-size: 1.5em;

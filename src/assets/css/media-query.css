@@ -129,4 +129,13 @@
         .other--details .el-dialog__wrapper .el-dialog {
             width: 90% !important;
         }
+        .shop--banner {
+            height: 200px;
+        }
+        .shop--banner h1 {
+            font-size: 22px;
+        }
+        .shop--banner h5 {
+            font-size: 14px;
+        }
     }

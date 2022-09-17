@@ -221,7 +221,7 @@
                 <div>
                   <ul class="m-0">
                     <li>
-                      <a href="">
+                      <a href="javascript:void(0)" @click="logout">
                         <span>Logout</span>
                       </a>
                     </li>
@@ -277,6 +277,11 @@ export default {
     return {
       drawer: false,
     };
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('auth/logout');
+    },
   },
   computed:{
         getUser(){

@@ -24,15 +24,10 @@
           style="gap: 50px"
         >
           <div class="w-100">
-            <!-- <el-carousel :interval="4000" type="card" height="350px">
-              <el-carousel-item v-for="item in images" :key="item.id">
-                <img :src="config.imgUrl + item.image" alt="" />
-              </el-carousel-item>
-            </el-carousel> -->
             <GalleryView class="mb-2"
                   :starting-image="2"
                   :images="images"
-                  :auto-slide-interval="1500"/>
+                  :auto-slide-interval="2000"/>
           </div>
           <div
             class="
@@ -66,7 +61,7 @@
 
               <hr>
 
-              <div>
+              <div class="mb-2">
                 <h1 style="font-weight:600">&#8358; {{ (product.price * num).toLocaleString() }}</h1>
               </div>
               <div class="d-flex align-items-center" style="gap: 5px">

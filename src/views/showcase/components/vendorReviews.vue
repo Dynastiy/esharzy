@@ -98,10 +98,24 @@
               <div>
                 <div class="d-flex my-2" style="gap: 5px">
                 <p class="" style="font-size: 14px">
-                  {{ my_rating.length == 0 ? "Rate this product:" : "Your rating of this product" }}
+                  {{ my_rating === null ? "Rate this product:" : "Your rating of this product" }}
                 </p>
                 
-                <star-rating v-if="my_rating.length == 0"
+                <div  v-if="!my_rating">
+                    <star-rating
+                    :increment="0.1"
+                    v-model="my_rating.scale"
+                    inactive-color="#000"
+                    active-color="#ffb20f"
+                    v-bind:star-size="13"
+                    :show-rating="false"
+                    :rounded-corners="true"
+                    :read-only="true"
+                    ></star-rating>
+                </div>
+                
+                <div v-else>
+                    <star-rating 
                     @rating-selected ="setRating"
                   :increment="0.1"
                   v-model="rating"
@@ -111,21 +125,12 @@
                   :show-rating="false"
                   :rounded-corners="true"
                 ></star-rating>
-                <star-rating
-                v-else
-                  :increment="0.1"
-                  v-model="my_rating.scale"
-                  inactive-color="#000"
-                  active-color="#ffb20f"
-                  v-bind:star-size="13"
-                  :show-rating="false"
-                  :rounded-corners="true"
-                  :read-only="true"
-                ></star-rating>
-              </div>
+                </div>
+                
+                </div>
               <div class="review--textarea">
                 <textarea
-                v-if="my_review.length == 0"
+                v-if="my_review == []"
                   placeholder="Write your review here"
                   id=""
                   cols="30"
@@ -142,7 +147,7 @@
                   v-model="my_review.comment"
                 ></textarea>
               </div>
-              <div class="mt-3" v-if="my_review.length == 0">
+              <div class="mt-3" v-if="my_review  === []">
                 <button
                   style="font-weight: 600; font-size: 13px !important"
                   @click.once="submitReview"
@@ -157,7 +162,7 @@
         </div>
       </div>
       <hr class="my-5" />
-      <div v-if="reviews.length == 0">
+      <div v-if="reviews.length === 0">
         <h5 style="font-weight:700">No reviews for this product yet</h5>
       </div>
       <div v-for="item in reviews" :key="item.id" class="mb-4">
@@ -272,13 +277,28 @@ export default {
     },
     my_review(){
         let items = this.$store.getters["showcase/getSingleProduct"].product.reviews;
-        let val = items.find(item => item.user.id === this.getUser.id)
-        return val
+        if(items.length !== 0) {
+            let val = items.find(item => item.user.id === this.getUser.id)
+            return val
+        }
+        else {
+            return {
+                comment: ''
+            }
+        }
     },
     my_rating(){
         let items = this.$store.getters["showcase/getSingleProduct"].product.ratings;
-        let val = items.find(item => item.user.id === this.getUser.id)
-        return val
+        if(items.length !== 0){
+            let val = items.find(item => item.user.id === this.getUser.id)
+            return val
+        }
+        else {
+            return {
+                scale: 0
+            }
+        }
+        
     },
     ratingValues() {
       let ratings =

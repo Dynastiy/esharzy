@@ -3,7 +3,7 @@
         <div>
             <div>
                 <div class="d-lg-flex" style="gap:30px">
-                   <div class="shop--details_left w-100 mt-4" :style="{'backgroundImage':  vendor.user.cover_photo == null ? `@/assets/img/no-cover.png` : `url(${config.imgUrl}${vendor.user.cover_photo})`}"></div>
+                   <div class="shop--details_left w-100 mt-4" :style='{"backgroundImage":  vendor.user.cover_photo == null ?  `url("/no-cover.png")` : `url(${config.imgUrl}${vendor.user.cover_photo})`}'></div>
                    <div class="shop--details_right w-100 mt-4">
                     <div class="d-flex align-items-center" style="gap:20px">
                         <img :src='vendor.user.photo == null ? "@/assets/img/no-user.png" : config.imgUrl + vendor.user.photo ' alt="">

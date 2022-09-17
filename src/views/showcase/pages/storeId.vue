@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="view--store">
-                <div class="left--side">
+                <div class="left--side mt-4">
                     <h5 class="mb-3">All Categories</h5>
                     <div>
                         <LeftSide/>
@@ -10,7 +10,7 @@
                 </div>
 
 
-                <div class="right--side">
+                <div class="right--side mt-4">
                     <div class="user--data">
                         <VendorProfile/>
                         <div class="mt-3">

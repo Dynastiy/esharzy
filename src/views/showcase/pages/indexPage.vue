@@ -132,6 +132,7 @@
             <!-- Select Cetegories  -->
             <div class="d-lg-flex  select--category" style="gap: 30px">
               <div
+              @click="goToCategory(category)"
                 role="button"
                 class="text-capitalize text-center"
                 v-for="category in allCategories.categories"
@@ -156,22 +157,25 @@
                 class=""
                 data-aos="fade-down"
               >
-                <div role="button">
+                <div>
                   <div class="img-services1">
-                    <img :src="config.imgUrl + item.app_icon" alt="" />
+                    <div>
+                      <!-- <span class="percentage"> {{ `${item.discount.percentage}% OFF` }} </span> -->
+                      <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>
+                    </div>
                     <div class="middle text-center">
                       <div class="d-flex align-items-center justify-content-around px-1 py-2">
-                        <i @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
-                        <svg @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <i role="button" @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
+                        <svg role="button" @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                           <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
                         </svg>
-                        <i @click="viewProduct(item)" class="el-icon-search text-dark" style=""></i>
+                        <i role="button" @click="viewProduct(item)" class="el-icon-search text-dark" style=""></i>
                       </div>
                     </div>
                   </div>
                   <div class="text-center mt-2">
-                    <h6 class="font-weight-bold text-dark text-capitalize" style="font-size:15px">
+                    <h6 role="button" class="font-weight-bold text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
                       {{ item.name }}
                     </h6>
                     <div
@@ -199,17 +203,17 @@
                         style="gap: 15px"
                       >
                         <span class="text-dark" style="font-weight:600">
-                          NGN {{ item.discount.price }}
+                          &#8358; {{ item.discount.price }}
                         </span>
                         <span
                           class="text-muted"
                           style="text-decoration-line: line-through !important; font-weight:600"
                         >
-                          NGN{{ item.price.toLocaleString() }}
+                          &#8358;{{ item.price.toLocaleString() }}
                         </span>
                       </div>
                       <small v-else class="text-muted" style="font-weight:600">
-                        NGN{{ item.price.toLocaleString() }}
+                        &#8358;{{ item.price.toLocaleString() }}
                       </small>
                     </div>
                   </div>
@@ -287,6 +291,9 @@ export default {
     };
   },
   methods: {
+    goToCategory(category){
+      this.$router.push(`/category/${category.slug}`)
+    },
     viewProduct(item) {
       this.$router.push({
         name: "product-detail",

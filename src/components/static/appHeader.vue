@@ -133,7 +133,7 @@
                       :key="category.id"
                     >
                       <router-link
-                        to="/"
+                        :to='"/category/"+category.slug'
                         class="text-dark"
                         style="font-size: 12px"
                       >
@@ -146,7 +146,7 @@
                 <!-- <el-button slot="reference">Click to activate</el-button> -->
                 <div
                   slot="reference"
-                  class="py-2 px-3"
+                  class="py-3 px-3"
                   role="button"
                   style="background-color: var(--tertiary-color)"
                 >

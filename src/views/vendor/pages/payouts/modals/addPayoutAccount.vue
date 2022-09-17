@@ -13,9 +13,9 @@
           </div>
           <div class="modal--content">
             <h5 class="text-dark mb-3 text-center">Add Payout Account</h5>
-            <form action="">
+            <form action="" @submit.prevent="addBankDetails">
               <div class="mb-3">
-                <select name="" @change="getAccountDetails" id="mySelect" v-model="bank_name">
+                <select name="" @change="getAccountDetails" id="mySelect" v-model="bank_name" required>
                   <option value="" selected disabled>Select Bank</option>
                   <option
                     v-for="item in banks"
@@ -29,6 +29,7 @@
               </div>
               <div class="mb-3">
                 <input
+                  required
                   type="number"
                   v-model="account_number"
                   @keyup="getAccountDetails"
@@ -47,6 +48,7 @@
                     </span>
                 </div>
                 <input
+                required
                   type="text"
                   placeholder="Account Name"
                   v-model="account.account_name"
@@ -54,7 +56,7 @@
                 />
               </div>
               <div class="text-center">
-                <button class="w-100">Done</button>
+                <button class="w-100" >Done</button>
               </div>
             </form>
           </div>
@@ -87,6 +89,19 @@ export default {
         this.$store.dispatch("removeAccountDetails");
       }
     },
+    addBankDetails(){
+      let payload = {
+        bank: this.bank_name,
+        account_no: this.$store.getters["getAccountDetails"].account_number,
+        account_name: this.$store.getters["getAccountDetails"].account_name,
+        id: this.user.id
+      }
+      this.$store.dispatch("vendor/addBankDetails", payload);
+      this.close()
+      // if (!loading) {
+      //   this.close
+      // }
+    },
     close() {
       this.$emit("close");
     },
@@ -95,6 +110,9 @@ export default {
     this.$store.dispatch("getBanks");
   },
   computed: {
+    user() {
+      return this.$store.getters["auth/getUser"];
+    },
     banks() {
       return this.$store.getters["getAllBanks"];
     },

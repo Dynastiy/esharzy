@@ -89,7 +89,11 @@
 }
 
 .add-item-content .el-input--suffix .el-input__inner {
-    width: 350px !important;
+    width: 100% !important;
+}
+
+.add-item-content .el-select {
+    width: 100%;
 }
 
 .no--shop {

@@ -91,14 +91,15 @@ export default {
                             borderRadius: "5px"
                         }
                     }).showToast();
-                    // console.log(res);
-                    // Check User Role before Redirecting to Login Page
-                    let user_role = res.data.user.role
-                    if (user_role == "buyer") {
-                        router.push('/buyer')
-                    } else if (user_role == "vendor") {
-                        router.push('/vendor')
-                    }
+                    router.push('/buyer')
+                        // console.log(res);
+                        // Check User Role before Redirecting to Login Page
+                        // let user_role = res.data.user.role
+                        // if (user_role == "buyer") {
+                        //     router.push('/buyer')
+                        // } else if (user_role == "vendor") {
+                        //     router.push('/vendor')
+                        // }
 
                     // Check redirect URL
                     let url = window.location.search
@@ -401,6 +402,42 @@ export default {
                     dispatch('setUser')
                 })
         },
+
+
+        // Remove Address
+        removeAddress({ dispatch }, id) {
+            request().post(`remove-address/${id}`)
+                .then((res) => {
+                    Toastify({
+                        text: `Delivery address deleted!`,
+                        className: "info",
+                        style: {
+                            background: "green",
+                            fontSize: "12px",
+                            borderRadius: "5px"
+                        }
+                    }).showToast();
+                    dispatch("setUser")
+                    return res
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+
+        // Make Payment
+        makePayment({ dispatch }, payload) {
+            request().post(`pay/`, payload)
+                .then((res) => {
+                    dispatch("setUser")
+                    return res
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+
+        // Place Order
 
     }
 };

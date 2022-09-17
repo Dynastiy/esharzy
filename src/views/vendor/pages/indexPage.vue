@@ -18,7 +18,7 @@
               <h6 class="text-white">Balance Available</h6>
               <small class="text-white">View Earnings</small>
             </div>
-            <h2 class="text-white"> NGN{{ getUser.account.balance }} </h2>
+            <h2 class="text-white"> &#8358;{{ getUser.account.balance }} </h2>
           </div>
 
           <!-- Analtics  -->

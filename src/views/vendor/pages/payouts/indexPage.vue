@@ -17,7 +17,7 @@
               <!-- {{ user }} -->
               <h6 class="text-white mb-3 small" style="font-weight:300">Available for payout</h6>
             </div>
-            <h2 class="text-white"> NGN {{ user.account.balance }} </h2>
+            <h2 class="text-white"> &#8358; {{ user.account.balance }} </h2>
             <div>
                 <p class="text-white w-75 mt-1" style="font-size:11px">This is the amount you currently have in earnings, available for your next payout.</p>
             </div>
@@ -28,6 +28,7 @@
             <h5 class="font-weight-bold text-dark">Payout Account</h5>
             <div class="mt-3">
               <p style="font-size:12px">Set Payout Account</p>
+              {{ bank_details }}
               <div class="mt-3">
                 <button @click="add_account = !add_account">Configure</button>
               </div>
@@ -84,10 +85,16 @@ export default {
       add_account: false
     }
   },
+  beforeMount(){
+    this.$store.dispatch('vendor/getBankDetails', this.user.id)
+  },
     components: { AddPayoutAccount },
     computed:{
       user(){
         return this.$store.getters['auth/getUser']
+      },
+      bank_details(){
+        return this.$store.getters['vendor/bankDetails']
       }
     }
 }

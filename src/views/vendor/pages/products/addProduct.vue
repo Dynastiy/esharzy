@@ -9,7 +9,7 @@
            <div class="d-lg-flex mb-2" style="gap:20px">
              <div class="w-100">
                 <label for="">Product Name</label>
-                <input type="text" v-model="payload.name" />
+                <input type="text" v-model="payload.name"/>
                 <small class="text-danger" v-show="errMessages.name" v-for="err in errMessages.name" :key="err"> *{{ err }} </small>
               </div>
               <div class="w-100">
@@ -18,28 +18,53 @@
                 <small class="text-danger" v-show="errMessages.price" v-for="err in errMessages.price" :key="err"> *{{ err }} </small>
               </div>
            </div>
-            <div class="d-lg-flex mb-3" style="gap: 20px">
-              <div class="w-100">
-                <label for="">Choose Category</label><br>
-                 <el-select v-model="payload.category_ids" multiple placeholder="Select">
+            <div class="d-lg-flex " style="gap:20px">
+              <div class=" w-100 mb-3 ">
+                <label for="">Select Category</label><br>
+                  <el-select v-model="payload.category_ids" multiple placeholder="Select">
+                    <el-option
+                    v-for="item in allCategories"
+                    :key="item.id"
+                    :label="item.category_name"
+                    :value="item.id">
+                    </el-option>
+                  </el-select>
+              </div>
+               
+              <div class=" w-100 mb-3 ">
+                <label for="">Select Sub Category</label><br>
+                 <el-select v-model="payload.subcategory_ids" multiple placeholder="Select">
                 <el-option
-                v-for="item in allCategories"
+                v-for="item in subCategories"
                 :key="item.id"
-                :label="item.category_name"
+                :label="item.sub_category_name"
                 :value="item.id">
                 </el-option>
             </el-select>
               </div>
-               <div class="w-100">
-                <label for="">Choose Tags</label><br>
-                 <el-select v-model="payload.tag_ids" multiple placeholder="Select">
-                <el-option
-                v-for="item in allTags"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id">
-                </el-option>
-            </el-select>
+
+              <div class=" w-100 mb-3 ">
+                <label for="">Select Tags</label><br>
+                  <el-select v-model="payload.tag_ids" multiple placeholder="Select">
+                    <el-option
+                    v-for="item in allTags"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                    </el-option>
+                  </el-select>
+              </div>
+
+              <div class=" w-100 mb-3 ">
+                <label for="">Select Shipping Class</label><br>
+                 <el-select v-model="payload.shipping_class_id" multiple placeholder="Select">
+                  <el-option
+                  v-for="item in shippingClasses"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                  </el-option>
+                </el-select>
               </div>
              
             </div>
@@ -167,6 +192,8 @@ export default {
         photo_five: null,
         description: "",
         category_ids:[],
+        subcategory_ids: [],
+        shipping_class_id: "",
         tag_ids: [],
         video: null
       },
@@ -225,13 +252,15 @@ export default {
       formData.append("description", this.payload.description);
       formData.append("price", this.payload.price);
       formData.append("category_ids", this.payload.category_ids);
+      formData.append("subcategory_ids", this.payload.subcategory_ids )
+      formData.append("shipping_class_id", this.payload.shipping_class_id )
       formData.append("tag_ids", this.payload.tag_ids);
       formData.append("video", this.payload.video);
       formData.append("shop_id", this.$store.getters['auth/getUser'].shop.id);
       formData.append("user_id", this.$store.getters['auth/getUser'.id]);
       this.loading = true;
      this.$store.dispatch('vendor/createProduct', formData);
-     this.payload = null
+     this.payload = {}
     },
     goBack(){
       this.$router.go(-1)
@@ -239,11 +268,19 @@ export default {
   },
  beforeMount(){
     this.$store.dispatch("showcase/getCategories");
+    this.$store.dispatch("showcase/getSubCategories");
     this.$store.dispatch("showcase/getTags");
+    this.$store.dispatch("vendor/getShippingClasses")
  },
   computed: {
     allCategories() {
       return this.$store.getters["showcase/getCategories"].categories;
+    },
+    subCategories() {
+      return this.$store.getters["showcase/getSubCategories"];
+    },
+    shippingClasses() {
+      return this.$store.getters["vendor/shippingClasses"];
     },
     allTags() {
       return this.$store.getters["showcase/getTags"].tags;

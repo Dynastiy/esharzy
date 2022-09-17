@@ -6,6 +6,8 @@ import VendorView from '../views/vendor/vendorLayout'
 import AuthView from '../views/auth/authLayout'
 import Wholesale from '../views/wholesale/wholesaleLayout'
 
+import store from '@/store/index'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -37,6 +39,15 @@ const routes = [
                         // which is lazy-loaded when the route is visited.
                         component: () =>
                             import ( /* webpackChunkName: "about" */ '../views/showcase/pages/allProducts.vue')
+                    },
+                    {
+                        path: '/category/:slug',
+                        name: 'category',
+                        // route level code-splitting
+                        // this generates a separate chunk (about.[hash].js) for this route
+                        // which is lazy-loaded when the route is visited.
+                        component: () =>
+                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/categoryId.vue')
                     },
                     {
                         path: '/store-listing',
@@ -210,6 +221,7 @@ const routes = [
     {
         path: '/buyer',
         async beforeEnter(to, from, next) {
+            var user = store.getters['auth/getUser']
             var loggedIn
             loggedIn = localStorage.getItem("token")
             console.log(loggedIn);
@@ -217,6 +229,10 @@ const routes = [
                 next({
                     path: "/login",
                     query: { redirectFrom: to.fullPath },
+                });
+            } else if (user.role === "vendor") {
+                next({
+                    path: "/vendor",
                 });
             } else {
                 next();
@@ -257,6 +273,19 @@ const routes = [
     // Vendor Layout
     {
         path: '/vendor',
+        async beforeEnter(to, from, next) {
+            var loggedIn
+            loggedIn = localStorage.getItem("token")
+            console.log(loggedIn);
+            if (!loggedIn) {
+                next({
+                    path: "/login",
+                    query: { redirectFrom: to.fullPath },
+                });
+            } else {
+                next();
+            }
+        },
         name: 'vendor',
         component: VendorView,
         children: [{

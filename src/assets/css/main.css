@@ -51,7 +51,7 @@
 
 .check--out_box {
     border: 1px solid var(--gray-400);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .check--out_box select {

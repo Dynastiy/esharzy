@@ -97,7 +97,7 @@
                           style="font-weight: 400"
                           v-if="item.product.discount"
                         >
-                          NGN{{
+                          &#8358;{{
                             formatAmount(item.product.discount.price || "0")
                           }}
                         </h6>
@@ -107,11 +107,11 @@
                           style="gap: 5px"
                         >
                           <h6 style="font-weight: 400">
-                            NGN{{ formatAmount(item.product.price) }}
+                            &#8358;{{ formatAmount(item.product.price) }}
                           </h6>
                         </div>
                       </div>
-                      <h5 v-else>NGN{{ formatAmount(item.product.price) }}</h5>
+                      <h5 v-else>&#8358;{{ formatAmount(item.product.price) }}</h5>
                     </div>
                     <div class="col-md-3">
                       <div class="my-3">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-md-2">
                       <h5 style="font-weight: 600">
-                        NGN
+                        &#8358;
                         {{
                           item.product.discount
                             ? formatAmount(

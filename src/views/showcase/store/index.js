@@ -9,6 +9,7 @@ export default {
     namespaced: true,
     state: {
         categories: [],
+        sub_categories: [],
         tags: [],
         products: [],
         new_products: [],
@@ -25,6 +26,9 @@ export default {
     mutations: {
         SET_CATEGORIES(state, data) {
             state.categories = data;
+        },
+        SET_SUB_CATEGORIES(state, data) {
+            state.sub_categories = data
         },
         SET_TAGS(state, data) {
             state.tags = data;
@@ -78,6 +82,15 @@ export default {
             try {
                 const res = await Axios().get(`all-tags`);
                 commit("SET_TAGS", res.data);
+                return res
+            } catch (error) {
+                return error
+            }
+        },
+        async getSubCategories({ commit }) {
+            try {
+                const res = await Axios().get(`all-subcategories`);
+                commit("SET_SUB_CATEGORIES", res.data.sub_categories);
                 return res
             } catch (error) {
                 return error
@@ -240,6 +253,7 @@ export default {
         getStores: (state) => state.stores,
         getStore: (state) => state.store,
         getVendors: (state) => state.vendors,
-        isLoading: (state) => state.loading
+        isLoading: (state) => state.loading,
+        getSubCategories: (state) => state.sub_categories
     },
 };

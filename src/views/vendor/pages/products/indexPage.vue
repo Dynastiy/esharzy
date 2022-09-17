@@ -50,6 +50,9 @@
                     <td>{{ timeStamp2(data.created_at) }}</td>
                     <td>
                         <button @click="viewProduct(data)" class="py-1 px-2 small">View More</button>
+                        <div>
+                          
+                        </div>
                     </td>
                   </tr>
                 </tbody>

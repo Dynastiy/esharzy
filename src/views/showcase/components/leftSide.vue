@@ -8,7 +8,7 @@
           }} -->
           <li v-for="category in allCategories.categories" :key="category.id" >
            <span class="d-flex align-items-center justify-content-between">
-            <router-link to="/" >
+            <router-link :to='"/category/"+category.slug' >
                 <span class="text-capitalize" style="font-size:14px">
                     {{ category.category_name }}
                 </span>
