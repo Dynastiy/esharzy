@@ -15,20 +15,21 @@
                 <table class="table table-centered table-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th scope="col">Order No.</th>
+                      <!-- <th scope="col">Order No.</th> -->
                       <th scope="col">Customer</th>
+                      <th scope="col">Delivery Address</th>
                       <th scope="col">Date</th>
                       <th scope="col">Amount</th>
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>John Doe</td>
-                      <td>john@mail.com</td>
-                      <td>080199229</td>
-                       <td>john@mail.com</td>
-                      <td>080199229</td>
+                    <tr v-for="item in orders" :key="item.id"> 
+                      <td>{{ item.buyer.first_name + " " + item.buyer.last_name }}</td>
+                      <td> {{ item.delivery_address }} </td>
+                      <td> {{ timeStamp(item.created_at) }} </td>
+                       <td> &#8358;{{ item.amount === null ? "0" : item.total_amount.toLocaleString() }} </td>
+                      <td> <span :class="item.status"> {{ item.status }} </span> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -39,3 +40,22 @@
     </div>
   </div>
 </template>
+
+<script>
+  import { timeStamp } from '@/plugins/filter'
+export default {
+  data(){
+    return {
+      timeStamp
+    }
+  },
+  beforeMount(){
+    this.$store.dispatch("vendor/getOrders")
+  },
+  computed:{
+    orders(){
+      return this.$store.getters["vendor/getOrders"]
+    }
+  }
+}
+</script>

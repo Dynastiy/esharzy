@@ -45,7 +45,7 @@
 }
 
 .login--page_content button {
-    background-color: var(--primary-color);
+    background-color: var(--tertiary-color);
     border: none;
     width: 100%;
     padding: 0.6rem;
@@ -98,12 +98,12 @@
 }
 
 .auth--container .auth--selection span:nth-child(1) .router-link-exact-active {
-    color: var(--primary-color);
+    color: var(--tertiary-color);
     border-bottom: none;
 }
 
 .auth--container .auth--selection span:nth-child(2) .router-link-exact-active {
-    color: var(--primary-color);
+    color: var(--tertiary-color);
     border-bottom: none;
 }
 

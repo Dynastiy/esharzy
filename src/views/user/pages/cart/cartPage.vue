@@ -27,6 +27,9 @@
               </svg>
               <h3 class="font-weight-bold">Your cart is empty</h3>
               <small>You have not added any item to your cart.</small>
+              <div class="text-center mt-3">
+                <router-link to="/shop"><button>Start Shopping</button></router-link>
+              </div>
             </div>
 
             <div class="d-lg-flex align-items-start" style="gap: 20px" v-else>

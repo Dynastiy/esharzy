@@ -26,7 +26,10 @@ import AppHeader from '../../components/static/appHeader.vue';
 import AppFooter from '../../components/static/appFooter.vue';
 import SideDrawer from './components/sideDrawer.vue';
 export default {
-    components: { AppHeader, AppFooter, SideDrawer }
+    components: { AppHeader, AppFooter, SideDrawer },
+    beforeMount(){
+      this.$store.dispatch('auth/setUser')
+    },
 }
 </script>
 

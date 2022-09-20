@@ -314,9 +314,8 @@ export default {
       let payload = {
         product_id: item.id
       }
-      localStorage.setItem("cart_details", JSON.stringify(payload))
       console.log(payload);
-      this.$store.dispatch("user/addToWishlist", payload)
+      this.$store.dispatch("auth/addToWishlist", payload)
       this.$store.dispatch("showcase/discountedProducts");
     }
   },

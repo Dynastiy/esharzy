@@ -267,6 +267,16 @@ const routes = [
                     import ( /* webpackChunkName: "about" */ '../views/user/pages/orderHistory.vue')
             },
 
+            {
+                path: '/order-history/single-order',
+                name: 'orderById',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/user/pages/orderId.vue')
+            },
+
         ]
     },
 
@@ -344,6 +354,14 @@ const routes = [
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import ( /* webpackChunkName: "about" */ '../views/vendor/pages/profile/indexPage.vue')
+            },
+            {
+                path: '/transactions',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/transactions/indexPage.vue')
             },
         ]
     },

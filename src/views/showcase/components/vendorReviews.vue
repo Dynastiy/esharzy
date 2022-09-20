@@ -98,13 +98,12 @@
               <div>
                 <div class="d-flex my-2" style="gap: 5px">
                 <p class="" style="font-size: 14px">
-                  {{ my_rating === null ? "Rate this product:" : "Your rating of this product" }}
+                  {{ !my_rating.rating ? "Rate this product:" : "Your rating of this product" }}
                 </p>
-                
-                <div  v-if="!my_rating">
+                <div  v-if="my_rating.rating">
                     <star-rating
                     :increment="0.1"
-                    v-model="my_rating.scale"
+                    v-model="my_rating.val.scale"
                     inactive-color="#000"
                     active-color="#ffb20f"
                     v-bind:star-size="13"
@@ -115,8 +114,8 @@
                 </div>
                 
                 <div v-else>
-                    <star-rating 
-                    @rating-selected ="setRating"
+                  <star-rating 
+                  @rating-selected ="setRating"
                   :increment="0.1"
                   v-model="rating"
                   inactive-color="#000"
@@ -130,7 +129,7 @@
                 </div>
               <div class="review--textarea">
                 <textarea
-                v-if="my_review == []"
+                  v-if="!my_review.review"
                   placeholder="Write your review here"
                   id=""
                   cols="30"
@@ -139,15 +138,14 @@
                 ></textarea>
                 <textarea
                     v-else
-                  placeholder="Write your review here"
                   id=""
                   cols="30"
                   rows="5"
                   readonly
-                  v-model="my_review.comment"
+                  v-model="my_review.val.comment"
                 ></textarea>
               </div>
-              <div class="mt-3" v-if="my_review  === []">
+              <div class="mt-3" v-if="!my_review.review">
                 <button
                   style="font-weight: 600; font-size: 13px !important"
                   @click.once="submitReview"
@@ -250,11 +248,71 @@ export default {
       };
       this.$store.dispatch("showcase/createRating", payload);
     },
+    
   },
   mounted() {
     // this.user_rating()
   },
   computed: {
+    my_review(){
+        var items = this.$store.getters["showcase/getSingleProduct"].product.reviews;
+        if(items.length >  0){
+            var val = items.find(item => item.user.id === this.getUser.id)
+            console.log(val);
+            var payload;
+            if (val !== undefined) {
+              payload = {
+              val,
+              review: true,
+            }
+            }
+            else {
+            payload =  {
+              comment: '',
+              review: false
+            }
+        }
+           return payload 
+        }
+
+        else {
+          return {
+            review: false,
+          }
+        }
+        
+        
+    },
+    my_rating(){
+        var items = this.$store.getters["showcase/getSingleProduct"].product.ratings;
+        
+        if(items.length > 0){
+            var val = items.find(item => item.user.id === this.getUser.id)
+            console.log(val);
+            var payload;
+            if (val !== undefined) {
+              payload = {
+              val,
+              rating: true,
+            }
+            }
+            else {
+            payload =  {
+                scale: 0,
+                rating: false
+            }
+        }
+        return payload 
+        }
+        else {
+          return {
+            rating: false,
+          }
+        }
+        
+        
+        
+    },
     loading() {
       return this.$store.getters["showcase/isLoading"];
     },
@@ -275,31 +333,7 @@ export default {
     ratings() {
       return this.$store.getters["showcase/getSingleProduct"].product.ratings;
     },
-    my_review(){
-        let items = this.$store.getters["showcase/getSingleProduct"].product.reviews;
-        if(items.length !== 0) {
-            let val = items.find(item => item.user.id === this.getUser.id)
-            return val
-        }
-        else {
-            return {
-                comment: ''
-            }
-        }
-    },
-    my_rating(){
-        let items = this.$store.getters["showcase/getSingleProduct"].product.ratings;
-        if(items.length !== 0){
-            let val = items.find(item => item.user.id === this.getUser.id)
-            return val
-        }
-        else {
-            return {
-                scale: 0
-            }
-        }
-        
-    },
+    
     ratingValues() {
       let ratings =
         this.$store.getters["showcase/getSingleProduct"].product.ratings;

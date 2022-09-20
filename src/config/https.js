@@ -54,9 +54,7 @@ export default function() {
             //  Invalid token, Not Authenticated.
             if (err.response && err.response.status === 401) {
                 console.log(9090);
-                // if (storeObj.auth) {
-
-                // }
+                window.location = "/login"
 
 
             }

@@ -93,3 +93,19 @@
     border-radius: 50%;
     padding: 0.3rem;
 }
+
+.avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.avatar {
+    position: relative;
+}
+
+.edit--icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

@@ -2,17 +2,19 @@
 import request from '@/config/https'
 import createPersistedState from 'vuex-persistedstate';
 
-import router from '@/router'
+// import router from '@/router'
 
-import "toastify-js/src/toastify.css"
-import Toastify from 'toastify-js'
+// import "toastify-js/src/toastify.css"
+// import Toastify from 'toastify-js'
 
 // Vue.prototype.$http = http
 
 const getDefaultState = () => {
     return {
         wishlist: [],
-        shipping_zones: []
+        shipping_zones: [],
+        orders: [],
+        single_order: {}
     };
 };
 
@@ -27,6 +29,12 @@ export default {
         },
         allShippingZones: state => {
             return state.shipping_zones
+        },
+        allOrders: state => {
+            return state.orders
+        },
+        singleOrder: state => {
+            return state.single_order
         }
     },
     mutations: {
@@ -38,54 +46,15 @@ export default {
         },
         SHIPPING_ZONES: (state, data) => {
             state.shipping_zones = data
+        },
+        SET_ORDERS: (state, data) => {
+            state.orders = data
+        },
+        SET_ORDER_BY_ID: (state, data) => {
+            state.single_order = data
         }
     },
     actions: {
-        // Add to cart With Login Check
-        addToWishlist(payload) {
-            // To check if User is logged in 
-            let token;
-            token = localStorage.getItem('token')
-            if (!token) {
-                router.push({
-                    path: "/login",
-                    query: { return_url: "/wishlist" }
-                })
-            } else {
-                // commit('SET_LOADING')
-                request().post('/add-to-wishlist', payload)
-                    .then((res) => {
-                        Toastify({
-                            text: `Item Added to Wishlist!`,
-                            className: "info",
-                            style: {
-                                background: "green",
-                                fontSize: "13px",
-                                borderRadius: "5px"
-                            }
-                        }).showToast();
-                        console.log(res.data)
-                            // commit("ADD_WISHLIST_ITEM")
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        // commit('SET_ERRORS', err.response.data.errors)
-                        Toastify({
-                            text: `Error!`,
-                            className: "info",
-                            style: {
-                                background: "red",
-                                fontSize: "13px",
-                                borderRadius: "5px"
-                            }
-                        }).showToast();
-                    })
-                    .finally(() => {
-                        // commit('END_LOADING')
-                    })
-            }
-        },
-
         // Get Shipping Zones
         getShippingZones({ commit }) {
             request().get('/all-shipping-zones')
@@ -96,6 +65,31 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 })
-        }
+        },
+
+
+        // Get Orders
+        getOrders({ commit }) {
+            request().get('/user-orders')
+                .then((res) => {
+                    console.log(res.data);
+                    commit("SET_ORDERS", res.data.orders.data)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+
+        // Get Order By Id
+        getOrderByID({ commit }, id) {
+            request().get('/find-order/' + id)
+                .then((res) => {
+                    console.log(res.data);
+                    commit("SET_ORDER_BY_ID", res.data.order)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
     }
 };

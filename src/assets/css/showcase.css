@@ -719,3 +719,12 @@ header .header--content {
     font-size: 0.8rem;
     outline: none;
 }
+
+.default select {
+    border: 1px solid var(--gray-400);
+    outline: none;
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px;
+    color: var(--accent-color-dark);
+}

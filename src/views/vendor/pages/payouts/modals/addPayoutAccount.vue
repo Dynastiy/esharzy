@@ -91,12 +91,13 @@ export default {
     },
     addBankDetails(){
       let payload = {
-        bank: this.bank_name,
+        bank_name: this.bank_name,
         account_no: this.$store.getters["getAccountDetails"].account_number,
         account_name: this.$store.getters["getAccountDetails"].account_name,
         id: this.user.id
       }
-      this.$store.dispatch("vendor/addBankDetails", payload);
+      console.log(payload)
+      this.$store.dispatch("auth/addBankDetails", payload);
       this.close()
       // if (!loading) {
       //   this.close

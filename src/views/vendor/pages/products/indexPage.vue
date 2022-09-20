@@ -15,7 +15,6 @@
                 Add product
             </button>
             </router-link>
-            
           </div>
         </div>
         <!-- List Products-->
@@ -27,7 +26,7 @@
                   <tr>
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Description</th>
+                    <!-- <th scope="col">Description</th> -->
                     <th scope="col">Status</th>
                     <th scope="col">Date Created</th>
                     <th scope="col">Actions</th>
@@ -40,19 +39,17 @@
                     :key="data.id"
                   >
                     <td>{{ data.name }}</td>
-                    <td>${{ data.price }}</td>
-                    <td v-html="data.description.slice(0, 20) + '...'"></td>
+                    <td>&#8358;{{ data.price }}</td>
+                    <!-- <td v-html="data.description.slice(0, 20) + '...'"></td> -->
                     <td>
                       <el-tag type="success" v-show="data.status === 'approved' " style="font-size:10px">Approved</el-tag>
                       <el-tag type="warning" v-show="data.status === 'pending' " style="font-size:10px">Pending</el-tag>
                       <el-tag type="danger" v-show="data.status === 'declined' " style="font-size:10px">Declined</el-tag>
                     </td>
                     <td>{{ timeStamp2(data.created_at) }}</td>
-                    <td>
-                        <button @click="viewProduct(data)" class="py-1 px-2 small">View More</button>
-                        <div>
-                          
-                        </div>
+                    <td class="d-lg-flex" style="gap:10px">
+                        <button @click="viewProduct(data)" class="py-1 px-2 small bg-success">View More</button>
+                        <button @click="deleteProduct(data)" class="py-1 px-2 small">Delete Product</button>
                     </td>
                   </tr>
                 </tbody>
@@ -60,6 +57,8 @@
             </div>
           </div>
         </section>
+
+        <ConfirmDelete v-show="delete_confirm" @close="close" @done=" deleteThisProduct"/>
       </div>
     </div>
   </div>
@@ -68,24 +67,40 @@
 
 <script>
 import { timeStamp2 } from "@/plugins/filter";
+import ConfirmDelete from "../../modals/confirmDelete.vue";
 export default {
-  data() {
-    return {
-      timeStamp2,
-    };
-  },
-  methods:{
-    viewProduct(data){
-        this.$router.push({ name: "vendor-product-detail", params:{slug: data.slug } });
-    }  
-  },
-  beforeMount() {
-    this.$store.dispatch("vendor/getProducts");
-  },
-  computed: {
-    getProducts() {
-      return this.$store.getters["vendor/getProducts"];
+    data() {
+        return {
+            timeStamp2,
+            delete_confirm: false,
+            product_id: ""
+        };
     },
-  },
+    methods: {
+        viewProduct(data) {
+            this.$router.push({ name: "vendor-product-detail", params: { slug: data.slug } });
+        },
+        close(){
+      this.delete_confirm = !this.delete_confirm
+      },
+      deleteProduct(data){
+        this.product_id = data.id
+        this.delete_confirm = !this.delete_confirm
+        console.log(this.product_id);
+      },
+      deleteThisProduct(){
+        this.$store.dispatch("vendor/deleteProduct", this.product_id)
+        this.close()
+      }
+    },
+    beforeMount() {
+        this.$store.dispatch("vendor/getProducts");
+    },
+    computed: {
+        getProducts() {
+            return this.$store.getters["vendor/getProducts"];
+        },
+    },
+    components: { ConfirmDelete }
 };
 </script>

@@ -38,6 +38,9 @@ export default {
             console.log(tab, event);
         },
     },
+    beforeMount(){
+      this.$store.dispatch('auth/setUser')
+    },
     components: { UserDetails, UpdatePassword }
 };
 </script>

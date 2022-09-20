@@ -7,14 +7,14 @@
             <div class="top text-center p-4">
               <div
                 class="avatar mx-auto mb-3"
-                v-if="getUser.first_name"
-                :class="getUser.first_name.charAt(0)"
               >
-                {{ getUser.first_name.charAt(0)
-                }}{{ getUser.last_name.charAt(0) }}
+                <img src='/no-user.png' alt="">
+                <div class="edit--icon">
+                  <i class="el-icon-edit" style="font-size:15px; font-weight:800"></i>
+                </div>
               </div>
               <p class="small">Welcome back,</p>
-              <h5 class="font-weight-bold text-dark mt-1">
+              <h5 class="font-weight-bold text-dark mt-1" >
                 {{ getUser.first_name }} {{ getUser.last_name }}
               </h5>
             </div>

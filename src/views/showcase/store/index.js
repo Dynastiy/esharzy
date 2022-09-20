@@ -10,6 +10,7 @@ export default {
     state: {
         categories: [],
         sub_categories: [],
+        category: {},
         tags: [],
         products: [],
         new_products: [],
@@ -29,6 +30,9 @@ export default {
         },
         SET_SUB_CATEGORIES(state, data) {
             state.sub_categories = data
+        },
+        SET_CATEGORY(state, data) {
+            state.category = data
         },
         SET_TAGS(state, data) {
             state.tags = data;
@@ -72,12 +76,22 @@ export default {
             try {
                 const res = await Axios().get(`all-categories`);
                 commit("SET_CATEGORIES", res.data);
-                console.log(res.data);
                 return res
             } catch (error) {
                 return error
             }
         },
+
+        async getCategoryById({ commit }, slug) {
+            try {
+                const res = await Axios().get(`show-category/${slug}`);
+                commit("SET_CATEGORY", res.data.category.products);
+                return res
+            } catch (error) {
+                return error
+            }
+        },
+
         async getTags({ commit }) {
             try {
                 const res = await Axios().get(`all-tags`);
@@ -136,7 +150,6 @@ export default {
             try {
                 const res = await Axios().get(`discounted-products`);
                 commit("SET_DISCOUNTED_PRODUCTS", res.data);
-                console.log(res.data);
                 return res
             } catch (error) {
                 return error
@@ -145,7 +158,6 @@ export default {
         async getProductBySlug({ commit }, slug) {
             try {
                 const res = await Axios().get(`show-product/${slug}`);
-                console.log(res.data);
                 commit("SET_SINGLE_PRODUCT", res.data);
                 return res
             } catch (error) {
@@ -176,7 +188,7 @@ export default {
             try {
                 const res = await Axios().get(`find-shop/${id}`);
                 commit("SET_STORE", res.data.shop);
-                console.log(res);
+
                 return res
             } catch (error) {
                 console.log(error);
@@ -200,7 +212,6 @@ export default {
                 // To check if User is logged in 
             try {
                 const res = await Axios().post('create-review', payload)
-                console.log(res);
                 Toastify({
                     text: `Review Added!`,
                     className: "info",
@@ -211,6 +222,7 @@ export default {
                     }
                 }).showToast();
                 dispatch("getProductBySlug", payload.slug)
+                return res
             } catch (error) {
                 return error
             } finally {
@@ -221,7 +233,6 @@ export default {
         async createRating({ dispatch, commit }, payload) {
             try {
                 const res = await Axios().post('create-rating', payload)
-                console.log(res);
                 Toastify({
                     text: `Product Rated!`,
                     className: "info",
@@ -232,6 +243,7 @@ export default {
                     }
                 }).showToast();
                 dispatch("getProductBySlug", payload.slug)
+                return res
             } catch (error) {
                 return error
             } finally {
@@ -243,6 +255,7 @@ export default {
     },
     getters: {
         getCategories: (state) => state.categories,
+        getCategory: (state) => state.category,
         getTags: (state) => state.tags,
         getProducts: (state) => state.products,
         newProducts: (state) => state.new_products,

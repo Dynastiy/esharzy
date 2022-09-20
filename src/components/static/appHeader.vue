@@ -6,7 +6,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="">
               <h6
-                style="color: var(--primary-accent); font-size: 9px"
+                style="color: var(--primary-accent); font-size: 11px"
                 class="text-uppercase"
               >
                 Hello, Welcome to E-Shazy
@@ -69,24 +69,16 @@
             <div class="d-flex align-items-center" style="gap: 20px">
               <div>
                 <router-link to="/wishlist" class="text-center">
-                  <div class="text-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-heart"
-                      width="25"
-                      height="25"
-                      viewBox="0 0 24 24"
-                      stroke-width="1"
-                      stroke="#fff"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path
-                        d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                      ></path>
-                    </svg>
+                  <div class="text-center text-white cart--icon">
+                    <el-badge
+                    :value="getUser.wish_lists ? getUser.wish_lists.length : '0'"
+                    class="item"
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                        </svg>
+                  </el-badge>
                   </div>
                   <div style="margin-top: -5px">
                     <span style="color: var(--primary-accent); font-size: 10px"
@@ -135,11 +127,11 @@
                       <router-link
                         :to='"/category/"+category.slug'
                         class="text-dark"
-                        style="font-size: 12px"
+                        style="font-size: 14px"
                       >
                         {{ category.category_name }}
                       </router-link>
-                      <hr class="m-0 my-1" />
+                      <hr class="m-0 my-2" />
                     </li>
                   </ul>
                 </div>

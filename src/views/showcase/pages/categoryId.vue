@@ -39,9 +39,14 @@
                     </div>
 
                 </div>
+
+                <div class="border--area" style="border: 1px dashed var(--gray-400)" v-if="category_products.length === 0">
+                  <h6 style="font-weight: 400">No products were found for category</h6>
+                </div>
+
                 <div class="products--list mt-2">
               <div
-                v-for="item in allProducts.data"
+                v-for="item in category_products"
                 :key="item.id"
                 class=""
                 data-aos="fade-down"
@@ -49,7 +54,6 @@
               <div>
                   <div class="img-services1">
                     <div>
-                      <!-- <span class="percentage"> {{ `${item.discount.percentage}% OFF` }} </span> -->
                       <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>
                     </div>
                     <div class="middle text-center">
@@ -164,36 +168,16 @@
         }
       },
       beforeMount() {
-        this.$store.dispatch("showcase/getProducts");
-        this.$store.dispatch("showcase/getNewProducts");
-        this.$store.dispatch("showcase/trendingProducts");
-        this.$store.dispatch("showcase/topRatedProducts");
-        this.$store.dispatch("showcase/discountedProducts");
-        this.$store.dispatch("showcase/getStores");
+        let slug = this.$route.params.slug
+        this.$store.dispatch("showcase/getCategoryById", slug)
+        this.$store.dispatch("showcase/getCategories", slug)
       },
       computed: {
-        allCategories() {
-          return this.$store.getters["showcase/getCategories"];
+        allCategories(){
+          return this.$store.getters["showcase/getCategories"]
         },
-        allProducts() {
-          return this.$store.getters["showcase/getProducts"].all_products;
-        },
-        newProducts() {
-          return this.$store.getters["showcase/newProducts"].new_products;
-        },
-        trendingProducts() {
-          return this.$store.getters["showcase/trendingProducts"].trending_products;
-        },
-        topRatedProducts() {
-          return this.$store.getters["showcase/topRatedProducts"].trending_products;
-        },
-        discountedProducts() {
-          return this.$store.getters["showcase/getDiscountedProducts"]
-            .discounted_products;
-        },
-        vendors(){
-          let data =  this.$store.getters["showcase/getStores"].data;
-          return data.slice(0,5)
+        category_products(){
+          return this.$store.getters['showcase/getCategory']
         }
       },
       components: { StarRating },

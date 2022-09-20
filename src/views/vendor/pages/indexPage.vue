@@ -9,20 +9,20 @@
             glance
           </p>
         </div>
-        <div class="analytics mt-4 d-flex" style="gap: 20px">
+        <div class="analytics d-lg-flex" style="gap: 20px">
           <div
-            class="earnings--card p-3 w-100"
+            class="earnings--card p-3 w-100 mt-4"
             style="background-color: var(--tertiary-color)"
           >
             <div class="d-flex align-items-center justify-content-between mb-1">
               <h6 class="text-white">Balance Available</h6>
               <small class="text-white">View Earnings</small>
             </div>
-            <h2 class="text-white"> &#8358;{{ getUser.account.balance }} </h2>
+            <h1 class="text-white" style="font-weight:700"> &#8358; {{ getUser.account.balance }} </h1>
           </div>
 
           <!-- Analtics  -->
-          <div class="analytics--card bg-white p-3 w-100">
+          <div class="analytics--card bg-white p-3 w-100 mt-4">
             <h5>Order Statistics</h5>
             <div>
               <div class="d-flex justify-content-between">
@@ -32,12 +32,12 @@
                 </div>
 
                 <div>
-                  <small>Customers</small>
+                  <small>Transations</small>
                   <h5>45</h5>
                 </div>
 
                 <div>
-                  <small>Sold</small>
+                  <small>Payouts</small>
                   <h5>45</h5>
                 </div>
               </div>

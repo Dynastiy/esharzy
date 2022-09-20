@@ -46,7 +46,7 @@
                   <span
                     class="small d-block text-right font-weight-bold"
                     role="button"
-                    style="color: var(--primary-color)"
+                    style="color: var(--tertiary-color)"
                     >Forgot Password?</span
                   >
                 </div>

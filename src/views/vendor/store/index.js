@@ -12,7 +12,10 @@ export default {
         errors: [],
         loading: false,
         bnak_details: {},
-        shipping_classes: []
+        shipping_classes: [],
+        payouts: [],
+        transactions: [],
+        orders: []
     },
     mutations: {
         SET_PRODUCTS(state, data) {
@@ -26,6 +29,15 @@ export default {
         },
         SHIPPING_CLASSES(state, data) {
             state.shipping_classes = data;
+        },
+        SET_PAYOUTS(state, data) {
+            state.payouts = data
+        },
+        SET_TRANSACTIONS(state, data) {
+            state.transactions = data
+        },
+        SET_ORDERS(state, data) {
+            state.orders = data
         },
         SET_LOADING: (state) => {
             state.loading = true
@@ -44,6 +56,7 @@ export default {
                 console.log(error);
             }
         },
+
         async createProduct({ dispatch, commit }, payload) {
             commit('SET_LOADING')
             try {
@@ -99,21 +112,16 @@ export default {
             }
         },
 
-        async getBankDetails({ commit }, id) {
-            try {
-                const res = await Axios().get(`show-bank-details/${id}`);
-                commit("SET_BANK_DETAILS", res)
-            } catch (error) {
-                return error
-            }
-        },
 
-        async addBankDetails({ dispatch, commit }, payload) {
+        // Delete Payout Account 
+        async deleteProduct({ dispatch, commit }, id) {
             commit('SET_LOADING')
             try {
-                const res = await Axios().post(`add-bank-details/`, payload);
+                let token = localStorage.getItem("token")
+                console.log(token);
+                const res = await Axios().post(`delete-product/${id}`);
                 Toastify({
-                    text: `Bank Details added Succesfully`,
+                    text: `Product deleted Succesfully`,
                     className: "info",
                     style: {
                         background: "green",
@@ -135,23 +143,78 @@ export default {
                 }).showToast();
                 commit("SET_ERRORS", error.response.data.errors)
             } finally {
-                commit('END_LOADING')
-                dispatch("getBankDetails", payload.id)
+                commit('END_LOADING');
+                dispatch("getProducts")
             }
         },
 
-        // Get Shipping Zones
-        getShippingClasses({ commit }) {
-            Axios().get('/all-shipping-classes')
-                .then((res) => {
-                    console.log(res.data.shipping_classes);
-                    commit("SHIPPING_CLASSES", res.data.shipping_classes.data)
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+
+        // User Payouts
+        async getPayouts({ commit }) {
+            try {
+                const res = await Axios().get(`user-payouts`);
+                console.log(res);
+                commit("SET_PAYOUTS", res.data.payouts.data);
+            } catch (error) {
+                console.log(error);
+            }
         },
 
+        // Request Payout
+        async requestPayout({ dispatch, commit }, payload) {
+            commit('SET_LOADING')
+            try {
+                const res = await Axios().post(`request-payout/`, payload);
+                Toastify({
+                    text: `Payout Requested Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                console.log(res);
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('END_LOADING');
+                dispatch("getPayouts")
+            }
+        },
+
+        // Vendor Transactions
+        async getTransactions({ commit }) {
+            try {
+                const res = await Axios().get(`user-transactions`);
+                console.log(res);
+                commit("SET_TRANSACTIONS", res.data.transactions.data);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+
+        // Vendor Orders
+        async getOrders({ commit }) {
+            try {
+                const res = await Axios().get(`vendor-orders`);
+                console.log(res);
+                commit("SET_ORDERS", res.data.vendor_orders.data);
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
 
 
@@ -161,6 +224,9 @@ export default {
         isErrors: (state) => state.errors,
         isLoading: (state) => state.loading,
         bankDetails: (state) => state.bank_details,
-        shippingClasses: (state) => state.shipping_classes
+        shippingClasses: (state) => state.shipping_classes,
+        getPayouts: (state) => state.payouts,
+        getTransactions: (state) => state.transactions,
+        getOrders: (state) => state.orders
     },
 };

@@ -437,7 +437,153 @@ export default {
                 })
         },
 
-        // Place Order
+        async addBankDetails({ dispatch, commit }, payload) {
+            commit('SET_LOADING')
+            try {
+                let token = localStorage.getItem("token")
+                console.log(token);
+                const res = await request().post(`add-bank-details/`, payload);
+                Toastify({
+                    text: `Bank Details added Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                console.log(res);
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('END_LOADING')
+                dispatch("setUser")
+            }
+        },
+
+        // Delete Payout Account 
+        async deleteBankDetails({ dispatch, commit }, id) {
+            commit('SET_LOADING')
+            try {
+                let token = localStorage.getItem("token")
+                console.log(token);
+                const res = await request().post(`delete-bank-details/${id}`);
+                Toastify({
+                    text: `Bank Details deleted Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                console.log(res);
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('END_LOADING');
+                dispatch("setUser")
+            }
+        },
+
+        // Add to Wishlist With Login Check
+        addToWishlist({ dispatch }, payload) {
+            // To check if User is logged in 
+            let token;
+            token = localStorage.getItem('token')
+            if (!token) {
+                router.push({
+                    path: "/login",
+                    query: { return_url: "/wishlist" }
+                })
+            } else {
+                // commit('SET_LOADING')
+                request().post('add-to-wishlist', { product_id: payload.product_id })
+                    .then((res) => {
+                        Toastify({
+                            text: `Item Added to Wishlist!`,
+                            className: "info",
+                            style: {
+                                background: "green",
+                                fontSize: "13px",
+                                borderRadius: "5px"
+                            }
+                        }).showToast();
+                        console.log(res)
+                        dispatch("setUser")
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        // commit('SET_ERRORS', err.response.data.errors)
+                        Toastify({
+                            text: `Error!`,
+                            className: "info",
+                            style: {
+                                background: "red",
+                                fontSize: "13px",
+                                borderRadius: "5px"
+                            }
+                        }).showToast();
+                    })
+                    .finally(() => {
+                        // commit('END_LOADING')
+                    })
+            }
+        },
+
+        // Update Profile Photo
+        async updateProfilePhoto({ dispatch, commit }, payload) {
+            commit('SET_LOADING')
+            try {
+                const res = await request().post(`delete-bank-details/`, payload);
+                Toastify({
+                    text: `Bank Details deleted Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                console.log(res);
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('END_LOADING');
+                dispatch("setUser")
+            }
+        },
+
 
     }
 };

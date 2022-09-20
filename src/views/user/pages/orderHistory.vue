@@ -43,6 +43,10 @@ export default {
             console.log(tab, event);
         },
     },
-    components: { AllOrders }
+    components: { AllOrders },
+    beforeMount(){
+      this.$store.dispatch("user/getOrders")
+    },
+    
 };
 </script>

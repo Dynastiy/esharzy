@@ -11,10 +11,9 @@
                 </div>
               </div>
 
-                <div class="filters mb-4">
-                    <div class="category">
-                        <!-- {{ allCategories }} -->
-                        <el-select v-model="category" placeholder="All Categories">
+                <div class="filters  d-lg-flex align-items-center" style="gap:20px">
+                    <div class="category mb-4">
+                        <el-select v-model="category" class="w-100" placeholder="All Categories">
                             <el-option
                             class="text-capitalize"
                             v-for="item in allCategories.categories"
@@ -25,17 +24,18 @@
                         </el-select>
                     </div>
 
-                    <div class="default">
+                    <div class="default mb-4">
                         <!-- {{ allCategories }} -->
-                        <el-select v-model="category" placeholder="Default Sorting">
-                            <el-option
+                        <select v-model="sort" class="w-100" placeholder="Default Sorting">
+                          <option value="Default Sorting" selected> Default Sorting </option>
+                            <option
                             class="text-capitalize"
                             v-for="item in sorting"
                             :key="item.id"
-                            :label="item.label"
-                            :value="item.value">
-                            </el-option>
-                        </el-select>
+                            :value="item.value"> 
+                            {{ item.value }}
+                            </option>
+                        </select>
                     </div>
 
                 </div>
@@ -55,7 +55,7 @@
                     <div class="middle text-center">
                       <div class="d-flex align-items-center justify-content-around px-1 py-2">
                         <i role="button" @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
-                        <svg role="button" @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg role="button"  @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                           <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
                         </svg>
@@ -128,10 +128,25 @@
           rating: 3,
           num: 1,
           category: "",
+          sort: "",
           sorting: [
             {
-                name: "Sort by Average rating"
-            }
+                id: 1,
+                value: "Sort by Average rating"
+            },
+            {
+                id: 2,
+                value: "Sort by Latest"
+            },
+            {
+                id: 3,
+                value: "Sort by Price: low to high"
+            },
+
+            {
+                id: 4,
+                value: "Sort by Price: high to low"
+            },
           ]
 
         };
@@ -157,11 +172,9 @@
           let payload = {
             product_id: item.id
           }
-          localStorage.setItem("cart_details", JSON.stringify(payload))
-          console.log(payload);
-          this.$store.dispatch("user/addToWishlist", payload)
+          this.$store.dispatch("auth/addToWishlist", payload)
           this.$store.dispatch("showcase/discountedProducts");
-        }
+        },
       },
       beforeMount() {
         this.$store.dispatch("showcase/getProducts");
