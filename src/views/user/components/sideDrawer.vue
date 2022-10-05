@@ -10,7 +10,7 @@
               >
                 <img src='/no-user.png' alt="">
                 <div class="edit--icon">
-                  <i class="el-icon-edit" style="font-size:15px; font-weight:800"></i>
+                  <i class="el-icon-edit" role="button" @click="updateprofilePhoto" style="font-size:15px; font-weight:800"></i>
                 </div>
               </div>
               <p class="small">Welcome back,</p>
@@ -143,6 +143,9 @@ export default {
   methods: {
     becomeAVendor() {
       this.$store.dispatch("auth/becomeAVendor");
+    },
+    updateprofilePhoto(){
+
     },
     logout(){
       this.$store.dispatch('auth/logout');

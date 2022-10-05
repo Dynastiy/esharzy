@@ -3,7 +3,7 @@
     <div class="bg-white p-3 rounded-lg shadow-lg">
       <div class="update--user">
         <h4>User Profile</h4>
-        {{ getUser }}
+        <!-- {{ getUser }} -->
         <div class="user--profile">
             <div class="top text-center p-4">
               <div

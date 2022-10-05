@@ -6,6 +6,11 @@
           <input type="text" placeholder="Search Vendors" />
           <button>APPLY</button>
         </div>
+
+        <div class="border--area" style="border: 1px dashed var(--gray-400)" v-show="stores.length == 0">
+          <h6 style="font-weight: 400">No Stores found</h6>
+        </div>
+
         <div class="store--listing">
           <div class="store" v-for="store in stores" :key="store.id">
             <div class="cover--area p-3" style="height: 200px" :style=" {'background-image': store.user.cover_photo == null ? `@/assets/img/no-cover.png` : `url(${config.imgUrl}${store.user.cover_photo})`}">

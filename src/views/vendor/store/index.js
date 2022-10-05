@@ -11,7 +11,7 @@ export default {
         products: [],
         errors: [],
         loading: false,
-        bnak_details: {},
+        bank_details: {},
         shipping_classes: [],
         payouts: [],
         transactions: [],
@@ -211,6 +211,17 @@ export default {
                 const res = await Axios().get(`vendor-orders`);
                 console.log(res);
                 commit("SET_ORDERS", res.data.vendor_orders.data);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        // Shipping Classes
+        async getShippingClasses({ commit }) {
+            try {
+                const res = await Axios().get(`all-shipping-classes`);
+                console.log(res);
+                commit("SHIPPING_CLASSES", res.data.shipping_classes.data);
             } catch (error) {
                 console.log(error);
             }

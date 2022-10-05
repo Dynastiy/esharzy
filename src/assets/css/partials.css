@@ -194,20 +194,50 @@ button {
     border: none;
 }
 
-.delivered {
+.active,
+.completed,
+.approved,
+.activated {
     color: green;
     background-color: rgba(0, 128, 0, 0.175);
     font-size: 0.7rem;
-    padding: 0.2rem 0.6rem;
-    border-radius: 3px;
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
 }
 
-.cancelled {
+.delivered {
+    color: rgb(41, 87, 89);
+    background-color: rgba(0, 255, 255, 0.175);
+    font-size: 0.7rem;
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
+}
+
+.canceled,
+.deactivated,
+.rejected,
+.banned {
     color: red;
     background-color: rgba(255, 0, 0, 0.175);
     font-size: 0.7rem;
-    padding: 0.2rem 0.6rem;
-    border-radius: 3px;
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
+}
+
+.in-progress {
+    color: purple;
+    background-color: rgba(128, 0, 128, 0.175);
+    font-size: 0.7rem;
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
+}
+
+.pending {
+    color: orange;
+    background-color: rgba(255, 166, 0, 0.175);
+    font-size: 0.7rem;
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
 }
 
 .pending {
