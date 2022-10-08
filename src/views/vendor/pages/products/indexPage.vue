@@ -26,25 +26,22 @@
                   <tr>
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
-                    <!-- <th scope="col">Description</th> -->
                     <th scope="col">Status</th>
                     <th scope="col">Date Created</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                    <!-- {{ getProducts.vendor_products.data }} -->
+                  <div class="my-2" v-if="getProducts.length === 0 ">
+                    <span class="text-danger small">You dont have any products yet</span>
+                  </div>
                   <tr
-                    v-for="data in getProducts.vendor_products.data"
-                    :key="data.id"
-                  >
+                    v-for="data in getProducts"
+                    :key="data.id">
                     <td>{{ data.name }}</td>
-                    <td>&#8358;{{ data.price }}</td>
-                    <!-- <td v-html="data.description.slice(0, 20) + '...'"></td> -->
+                    <td>&#8358; {{ data.price.toLocaleString() }}</td>
                     <td>
-                      <el-tag type="success" v-show="data.status === 'approved' " style="font-size:10px">Approved</el-tag>
-                      <el-tag type="warning" v-show="data.status === 'pending' " style="font-size:10px">Pending</el-tag>
-                      <el-tag type="danger" v-show="data.status === 'declined' " style="font-size:10px">Declined</el-tag>
+                      <span :class="data.status"> {{ data.status }} </span>
                     </td>
                     <td>{{ timeStamp2(data.created_at) }}</td>
                     <td class="d-lg-flex" style="gap:10px">
@@ -99,7 +96,7 @@ export default {
     computed: {
         getProducts() {
             return this.$store.getters["vendor/getProducts"];
-        },
+        }
     },
     components: { ConfirmDelete }
 };

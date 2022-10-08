@@ -2,7 +2,7 @@
   <div>
     <div>
       <div>
-        <div class="bg-white rounded-lg p-3 shadow-lg">
+        <div class="bg-white rounded-lg p-4 shadow-lg">
             <button class="btn btn-dark d-flex mb-2 align-items-center px-3 py-1 small" style="gap:10px; font-size:12px" @click="goBack()">
                 <i class="el-icon-d-arrow-left"></i>
               <span>

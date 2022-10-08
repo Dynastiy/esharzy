@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="bg-white create-product p-4 rounded-lg shadow-sm">
-      <div class="mt-4">
+      <div class="">
         <h4 class="mb-4 text-dark">Add Product</h4>
         <hr>
         <div class="add-item-content">
+          {{  }}
           <form action="" @submit.prevent="addProduct">
            <div class="d-lg-flex mb-2" style="gap:20px">
              <div class="w-100">
@@ -57,7 +58,7 @@
 
               <div class=" w-100 mb-3 ">
                 <label for="">Select Shipping Class</label><br>
-                 <el-select v-model="payload.shipping_class_id" multiple placeholder="Select">
+                 <el-select v-model="payload.shipping_class_id" placeholder="Select">
                   <el-option
                   v-for="item in shippingClasses"
                   :key="item.id"
@@ -251,16 +252,23 @@ export default {
       formData.append("photo_five", this.payload.photo_five);
       formData.append("description", this.payload.description);
       formData.append("price", this.payload.price);
-      formData.append("category_ids", this.payload.category_ids);
-      formData.append("subcategory_ids", this.payload.subcategory_ids )
+      formData.append("category_ids", this.payload.category_ids.join(" ").split(" "));
+      formData.append("subcategory_ids", this.payload.subcategory_ids.join(" ") )
       formData.append("shipping_class_id", this.payload.shipping_class_id )
-      formData.append("tag_ids", this.payload.tag_ids);
+      formData.append("tag_ids", this.payload.tag_ids.join(" "));
       formData.append("video", this.payload.video);
       formData.append("shop_id", this.$store.getters['auth/getUser'].shop.id);
-      formData.append("user_id", this.$store.getters['auth/getUser'.id]);
+      formData.append("user_id", this.$store.getters['auth/getUser'].id);
       this.loading = true;
-     this.$store.dispatch('vendor/createProduct', formData);
-     this.payload = {}
+      console.log(formData);
+      var object = {};
+      formData.forEach(function(value, key){
+          object[key] = value;
+      });
+      // var json = JSON.stringify(object);
+      console.log(object);
+       this.$store.dispatch('vendor/createProduct', formData);
+      this.payload = {}
     },
     goBack(){
       this.$router.go(-1)

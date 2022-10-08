@@ -138,21 +138,30 @@
                 v-for="category in allCategories.categories"
                 :key="category.id"
               >
+              <el-skeleton style="width: 100%" animated :loading="loading">
+              <template slot="template">
+                <el-skeleton-item variant="image" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 12px;" />
+                <el-skeleton-item/>
+              </template>
+              <div>
                 <div class="category">
                   <img :src="config.imgUrl + category.icon_image" alt="" />
                 </div>
                 <h6 class="text-dark font-weight-bold mt-3">
                   {{ category.category_name }}
                 </h6>
+                </div>
+                </el-skeleton>
               </div>
             </div>
           </div>
+
           <section>
             <!-- Deals of the Day -->
             <h4 class="text-dark font-weight-bold mb-3">Deals of the day</h4>
             <div class="products--list mt-2">
               <div
-                v-for="item in discountedProducts.data"
+                v-for="item in discountedProducts"
                 :key="item.id"
                 class=""
                 data-aos="fade-down"
@@ -175,7 +184,7 @@
                     </div>
                   </div>
                   <div class="text-center mt-2">
-                    <h6 role="button" class="font-weight-bold text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
+                    <h6 role="button" class="text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
                       {{ item.name }}
                     </h6>
                     <div
@@ -185,14 +194,14 @@
                       <star-rating
                       :increment="0.1"
                       v-model="item.avg_ratings"
-                      inactive-color="#000"
-                      active-color="#ffb20f"
-                      v-bind:star-size="12"
+                      inactive-color="#aaa"
+                      active-color="#666"
+                      v-bind:star-size="13"
                       :show-rating="false"
                       :rounded-corners="true"
                       :read-only="true"
                       ></star-rating>
-                      <small class="" style="font-size: 10px"
+                      <small class="" style="font-size: 13px"
                         > {{ "("+item.reviews.length + " reviews)" }} </small
                       >
                     </div>
@@ -200,20 +209,20 @@
                       <div
                         v-if="item.discount"
                         class="d-flex align-items-center justify-content-center"
-                        style="gap: 15px"
+                        style="gap: 10px"
                       >
-                        <span class="text-dark" style="font-weight:600">
+                        <span class="text-dark" style="font-weight:500; font-size:15px">
                           &#8358; {{ item.discount.price }}
                         </span>
                         <span
-                          class="text-muted"
-                          style="text-decoration-line: line-through !important; font-weight:600"
+                          class=""
+                          style="text-decoration-line: line-through !important; font-weight:500; font-size:15px; color: #666"
                         >
-                          &#8358;{{ item.price.toLocaleString() }}
+                          &#8358; {{ item.price.toLocaleString() }}
                         </span>
                       </div>
-                      <small v-else class="text-muted" style="font-weight:600">
-                        &#8358;{{ item.price.toLocaleString() }}
+                      <small v-else class="text-dark" style="font-weight:500; font-size:15px">
+                        &#8358; {{ item.price.toLocaleString() }}
                       </small>
                     </div>
                   </div>
@@ -251,7 +260,7 @@
                 <div class="w-100 growing--vendors">
                   <h6 class="mb-2">Best Selling Products</h6>
                   <div class="d-flex" style="gap:20px">
-                    <div class="" height="70px" width="70px"  :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.data.slice(0.3)" :key="topRated.id">
+                    <div class="" height="70px" width="70px"  :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.slice(0, 3)" :key="topRated.id">
                       <div class="best--selling_name">
                         {{ topRated.name }}
                       </div>
@@ -262,7 +271,7 @@
                 <div class="w-100 growing--vendors">
                   <h6 class="mt-2">Weekly Deals</h6>
                   <div class="d-flex" style="gap:20px">
-                    <div class="" height="80px" width="80px"  :style="{ 'background-image': `url(${config.imgUrl}${item.app_icon})` }" v-for="item in discountedProducts.data.slice(0.3)" :key="item.id">
+                    <div class="" height="80px" width="80px"  :style="{ 'background-image': `url(${config.imgUrl}${item.app_icon})` }" v-for="item in discountedProducts.slice(0.3)" :key="item.id">
                       <div class="best--selling_name">
                         {{ item.name }}
                       </div>
@@ -278,7 +287,7 @@
             <h4 class="text-dark font-weight-bold my-4">eSharzy Products</h4>
             <div class="products--list mt-2">
               <div
-                v-for="item in allProducts.data"
+                v-for="item in allProducts"
                 :key="item.id"
                 class=""
                 data-aos="fade-down"
@@ -301,7 +310,7 @@
                     </div>
                   </div>
                   <div class="text-center mt-2">
-                    <h6 role="button" class="font-weight-bold text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
+                    <h6 role="button" class="text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
                       {{ item.name }}
                     </h6>
                     <div
@@ -311,14 +320,14 @@
                       <star-rating
                       :increment="0.1"
                       v-model="item.avg_ratings"
-                      inactive-color="#000"
-                      active-color="#ffb20f"
-                      v-bind:star-size="12"
+                      inactive-color="#aaa"
+                      active-color="#666"
+                      v-bind:star-size="13"
                       :show-rating="false"
                       :rounded-corners="true"
                       :read-only="true"
                       ></star-rating>
-                      <small class="" style="font-size: 10px"
+                      <small class="" style="font-size: 13px"
                         > {{ "("+item.reviews.length + " reviews)" }} </small
                       >
                     </div>
@@ -326,20 +335,20 @@
                       <div
                         v-if="item.discount"
                         class="d-flex align-items-center justify-content-center"
-                        style="gap: 15px"
+                        style="gap: 10px"
                       >
-                        <span class="text-dark" style="font-weight:600">
+                        <span class="text-dark" style="font-weight:500; font-size:15px">
                           &#8358; {{ item.discount.price }}
                         </span>
                         <span
-                          class="text-muted"
-                          style="text-decoration-line: line-through !important; font-weight:600"
+                          class=""
+                          style="text-decoration-line: line-through !important; font-weight:500; font-size:15px; color: #666"
                         >
-                          &#8358;{{ item.price.toLocaleString() }}
+                          &#8358; {{ item.price.toLocaleString() }}
                         </span>
                       </div>
-                      <small v-else class="text-muted" style="font-weight:600">
-                        &#8358;{{ item.price.toLocaleString() }}
+                      <small v-else class="text-dark" style="font-weight:500; font-size:15px">
+                        &#8358; {{ item.price.toLocaleString() }}
                       </small>
                     </div>
                   </div>
@@ -394,7 +403,7 @@ export default {
       console.log(payload);
       this.$store.dispatch("auth/addToWishlist", payload)
       this.$store.dispatch("showcase/discountedProducts");
-    }
+    },
   },
   beforeMount() {
     this.$store.dispatch("showcase/getProducts");
@@ -409,24 +418,26 @@ export default {
       return this.$store.getters["showcase/getCategories"];
     },
     allProducts() {
-      return this.$store.getters["showcase/getProducts"].all_products;
+      return this.$store.getters["showcase/getProducts"];
     },
     newProducts() {
-      return this.$store.getters["showcase/newProducts"].new_products;
+      return this.$store.getters["showcase/newProducts"];
     },
     trendingProducts() {
-      return this.$store.getters["showcase/trendingProducts"].trending_products;
+      return this.$store.getters["showcase/trendingProducts"];
     },
     topRatedProducts() {
-      return this.$store.getters["showcase/topRatedProducts"].trending_products;
+      return this.$store.getters["showcase/topRatedProducts"];
     },
     discountedProducts() {
-      return this.$store.getters["showcase/getDiscountedProducts"]
-        .discounted_products;
+      return this.$store.getters["showcase/getDiscountedProducts"];
     },
     vendors(){
-      let data =  this.$store.getters["showcase/getStores"].data;
-      return data.slice(0,5)
+      let val =  this.$store.getters["showcase/getStores"];
+      return val.slice(0,5)
+    },
+    loading(){
+      return this.$store.getters["showcase/isLoading"]
     }
   },
   components: { HeroSection, StarRating },

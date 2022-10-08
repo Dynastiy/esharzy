@@ -20,9 +20,9 @@ html {
     font-family: var(--primary-font-family);
     text-decoration: none !important;
     list-style: none;
-    transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    -o-transition: all 0.1s;
 }
 
 .font-weight-bold {
@@ -194,7 +194,6 @@ button {
     border: none;
 }
 
-.active,
 .completed,
 .approved,
 .activated {

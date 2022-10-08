@@ -118,7 +118,7 @@
                   <ul class="d-flex flex-column">
                     <li v-for="category in allCategories.categories" :key="category.id" >
                     <span class="d-flex align-items-center justify-content-between">
-                      <router-link to="/" class="text-white">
+                      <router-link :to='"/category/"+category.slug' class="text-white">
                           <span class="text-capitalize d-flex align-items-center" style="font-size:14px; gap:20px">
                             <span>
                               <img :src="config.imgUrl + category.icon_image" alt="" width="25px" height="25px" style="border-radius:50%"/>

@@ -2,7 +2,7 @@
   <div>
     <div class="mt-2">
       <div class="">
-        <h4 class="mb-3 text-dark">Product Overview</h4>
+        <h4 class="mb-3 text-dark font-weight-bold">Product Overview</h4>
         <div class="add-item-content">
           <form action="" @submit.prevent="addProduct">
             <div class="d-lg-flex mb-2" style="gap: 20px">

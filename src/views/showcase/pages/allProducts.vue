@@ -25,7 +25,6 @@
                     </div>
 
                     <div class="default mb-4">
-                        <!-- {{ allCategories }} -->
                         <select v-model="sort" class="w-100" placeholder="Default Sorting">
                           <option value="Default Sorting" selected> Default Sorting </option>
                             <option
@@ -39,76 +38,92 @@
                     </div>
 
                 </div>
+
+
+                <div class="border--area" style="border: 1px dashed var(--gray-400)" v-show="allProducts.length == 0">
+                <h6 style="font-weight: 400">No Stores found</h6>
+              </div>
+
+
                 <div class="products--list mt-2">
               <div
-                v-for="item in allProducts.data"
+                v-for="item in allProducts"
                 :key="item.id"
                 class=""
                 data-aos="fade-down"
               >
-              <div>
-                  <div class="img-services1">
-                    <div>
-                      <!-- <span class="percentage"> {{ `${item.discount.percentage}% OFF` }} </span> -->
-                      <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>
-                    </div>
-                    <div class="middle text-center">
-                      <div class="d-flex align-items-center justify-content-around px-1 py-2">
-                        <i role="button" @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
-                        <svg role="button"  @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                          <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-                        </svg>
-                        <i role="button" @click="viewProduct(item)" class="el-icon-search text-dark" style=""></i>
+                <el-skeleton style="width: 100%" animated :loading="loading">
+                  <template slot="template">
+                    <el-skeleton-item variant="image" style="width: 100%; height: 300px; margin-bottom: 10px;" />
+                    <el-skeleton-item/>
+                    <el-skeleton-item/>
+                    <el-skeleton-item/>
+                  </template>
+                      <div>
+                          <div class="img-services1">
+                            <div>
+                              <!-- <span class="percentage"> {{ `${item.discount.percentage}% OFF` }} </span> -->
+                              <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>
+                            </div>
+                            <div class="middle text-center">
+                              <div class="d-flex align-items-center justify-content-around px-1 py-2">
+                                <i role="button" @click="addToCart(item)" class="el-icon-shopping-bag-2 text-dark" style=""></i>
+                                <svg role="button"  @click="addToWishlist(item)" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                  <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                                </svg>
+                                <i role="button" @click="viewProduct(item)" class="el-icon-search text-dark" style=""></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="text-center mt-2">
+                            <h6 role="button" class="text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
+                              {{ item.name }}
+                            </h6>
+                            <div
+                              class="d-flex align-items-center m-0 justify-content-center"
+                              style="gap: 10px"
+                            >
+                              <star-rating
+                              :increment="0.1"
+                              v-model="item.avg_ratings"
+                              inactive-color="#aaa"
+                              active-color="#666"
+                              v-bind:star-size="13"
+                              :show-rating="false"
+                              :rounded-corners="true"
+                              :read-only="true"
+                              ></star-rating>
+                              <small class="" style="font-size: 13px"
+                                > {{ "("+item.reviews.length + " reviews)" }} </small
+                              >
+                            </div>
+                            <div class="text-center">
+                              <div
+                                v-if="item.discount"
+                                class="d-flex align-items-center justify-content-center"
+                                style="gap: 10px"
+                              >
+                                <span class="text-dark" style="font-weight:500; font-size:15px">
+                                  &#8358; {{ item.discount.price }}
+                                </span>
+                                <span
+                                  class=""
+                                  style="text-decoration-line: line-through !important; font-weight:500; font-size:15px; color: #666"
+                                >
+                                  &#8358; {{ item.price.toLocaleString() }}
+                                </span>
+                              </div>
+                              <small v-else class="text-dark" style="font-weight:500; font-size:15px">
+                                &#8358; {{ item.price.toLocaleString() }}
+                              </small>
+                            </div>
+                          </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="text-center mt-2">
-                    <h6 role="button" class="font-weight-bold text-dark text-capitalize" style="font-size:15px"  @click="viewProduct(item)">
-                      {{ item.name }}
-                    </h6>
-                    <div
-                      class="d-flex align-items-center m-0 justify-content-center"
-                      style="gap: 10px"
-                    >
-                      <star-rating
-                      :increment="0.1"
-                      v-model="item.avg_ratings"
-                      inactive-color="#000"
-                      active-color="#ffb20f"
-                      v-bind:star-size="12"
-                      :show-rating="false"
-                      :rounded-corners="true"
-                      :read-only="true"
-                      ></star-rating>
-                      <small class="" style="font-size: 10px"
-                        > {{ "("+item.reviews.length + " reviews)" }} </small
-                      >
-                    </div>
-                    <div class="text-center">
-                      <div
-                        v-if="item.discount"
-                        class="d-flex align-items-center justify-content-center"
-                        style="gap: 15px"
-                      >
-                        <span class="text-dark" style="font-weight:600">
-                          &#8358; {{ item.discount.price }}
-                        </span>
-                        <span
-                          class="text-muted"
-                          style="text-decoration-line: line-through !important; font-weight:600"
-                        >
-                          &#8358;{{ item.price.toLocaleString() }}
-                        </span>
-                      </div>
-                      <small v-else class="text-muted" style="font-weight:600">
-                        &#8358;{{ item.price.toLocaleString() }}
-                      </small>
-                    </div>
+                </el-skeleton>
                   </div>
                 </div>
-              </div>
-                </div>
+              
 
                 <hr>
 
@@ -128,7 +143,7 @@
           rating: 3,
           num: 1,
           category: "",
-          sort: "",
+          sort: "Default Sorting",
           sorting: [
             {
                 id: 1,
@@ -178,35 +193,20 @@
       },
       beforeMount() {
         this.$store.dispatch("showcase/getProducts");
-        this.$store.dispatch("showcase/getNewProducts");
-        this.$store.dispatch("showcase/trendingProducts");
-        this.$store.dispatch("showcase/topRatedProducts");
-        this.$store.dispatch("showcase/discountedProducts");
-        this.$store.dispatch("showcase/getStores");
       },
       computed: {
         allCategories() {
           return this.$store.getters["showcase/getCategories"];
         },
         allProducts() {
-          return this.$store.getters["showcase/getProducts"].all_products;
-        },
-        newProducts() {
-          return this.$store.getters["showcase/newProducts"].new_products;
-        },
-        trendingProducts() {
-          return this.$store.getters["showcase/trendingProducts"].trending_products;
-        },
-        topRatedProducts() {
-          return this.$store.getters["showcase/topRatedProducts"].trending_products;
-        },
-        discountedProducts() {
-          return this.$store.getters["showcase/getDiscountedProducts"]
-            .discounted_products;
+          return this.$store.getters["showcase/getProducts"];
         },
         vendors(){
           let data =  this.$store.getters["showcase/getStores"].data;
           return data.slice(0,5)
+        },
+        loading(){
+          return this.$store.getters["showcase/isLoading"]
         }
       },
       components: { StarRating },

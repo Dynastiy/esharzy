@@ -50,8 +50,8 @@
                       <star-rating
                       :increment="0.1"
                       v-model="item.avg_ratings"
-                      inactive-color="#000"
-                      active-color="#ffb20f"
+                      inactive-color="#aaa"
+                      active-color="#666"
                       v-bind:star-size="12"
                       :show-rating="false"
                       :rounded-corners="true"

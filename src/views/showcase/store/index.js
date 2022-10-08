@@ -85,7 +85,8 @@ export default {
         async getCategoryById({ commit }, slug) {
             try {
                 const res = await Axios().get(`show-category/${slug}`);
-                commit("SET_CATEGORY", res.data.category.products);
+                commit("SET_CATEGORY", res.data.category.activated_products);
+                // console.log(res.data.category);
                 return res
             } catch (error) {
                 return error
@@ -111,66 +112,93 @@ export default {
             }
         },
         async getProducts({ commit }) {
+
+
             try {
+                commit("SET_LOADING", true)
                 const res = await Axios().get(`all-products`);
-                commit("SET_PRODUCTS", res.data);
+                commit("SET_PRODUCTS", res.data.all_products.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async getNewProducts({ commit }) {
+
             try {
+                commit("SET_LOADING", true)
                 const res = await Axios().get(`new-products`);
-                commit("SET_NEW_PRODUCTS", res.data);
+                commit("SET_NEW_PRODUCTS", res.data.new_products.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async trendingProducts({ commit }) {
+
             try {
+                commit("SET_LOADING", true)
                 const res = await Axios().get(`trending-products`);
-                commit("SET_TRENDING_PRODUCTS", res.data);
+                commit("SET_TRENDING_PRODUCTS", res.data.trending_products.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async topRatedProducts({ commit }) {
+
             try {
-                const res = await Axios().get(`trending-products`);
-                commit("SET_TOP_RATED_PRODUCTS", res.data);
+                commit("SET_LOADING", true)
+                const res = await Axios().get(`top-rated-products`);
+                commit("SET_TOP_RATED_PRODUCTS", res.data.top_rated_products.data);
+
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async discountedProducts({ commit }) {
+            commit("SET_LOADING", true)
             try {
                 const res = await Axios().get(`discounted-products`);
-                commit("SET_DISCOUNTED_PRODUCTS", res.data);
+                commit("SET_DISCOUNTED_PRODUCTS", res.data.discounted_products.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async getProductBySlug({ commit }, slug) {
+            commit("SET_LOADING", true)
             try {
                 const res = await Axios().get(`show-product/${slug}`);
                 commit("SET_SINGLE_PRODUCT", res.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
         async getStores({ commit }) {
+            commit("SET_LOADING", true)
             try {
                 const res = await Axios().get(`all-shops`);
-                commit("SET_STORES", res.data.shops);
+                commit("SET_STORES", res.data.shops.data);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
 
@@ -181,6 +209,8 @@ export default {
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
 
@@ -193,6 +223,8 @@ export default {
             } catch (error) {
                 console.log(error);
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
 
@@ -203,6 +235,8 @@ export default {
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
 
@@ -231,6 +265,7 @@ export default {
         },
 
         async createRating({ dispatch, commit }, payload) {
+            commit("SET_LOADING", true)
             try {
                 const res = await Axios().post('create-rating', payload)
                 Toastify({

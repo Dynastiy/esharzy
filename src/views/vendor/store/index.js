@@ -50,8 +50,8 @@ export default {
         async getProducts({ commit }) {
             try {
                 const res = await Axios().get(`vendor-products`);
-                console.log(res);
-                commit("SET_PRODUCTS", res.data);
+                commit("SET_PRODUCTS", res.data.vendor_products.data);
+                return res
             } catch (error) {
                 console.log(error);
             }

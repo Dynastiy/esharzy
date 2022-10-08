@@ -61,7 +61,7 @@ import config from "@/config/api";
   },
   computed: {
     stores() {
-      return this.$store.getters["showcase/getStores"].data;
+      return this.$store.getters["showcase/getStores"];
     },
   },
 };

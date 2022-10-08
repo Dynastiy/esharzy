@@ -68,7 +68,7 @@
                 <star-rating
                   :increment="0.1"
                   v-model="product.avg_ratings"
-                  inactive-color="#000"
+                  inactive-color="#aaa"
                   active-color="#ffb20f"
                   v-bind:star-size="14"
                   :show-rating="false"

@@ -40,8 +40,9 @@
 
                 </div>
 
+
                 <div class="border--area" style="border: 1px dashed var(--gray-400)" v-if="category_products.length === 0">
-                  <h6 style="font-weight: 400">No products were found for category</h6>
+                  <h6 style="font-weight: 400">No products were found for this category</h6>
                 </div>
 
                 <div class="products--list mt-2">
@@ -78,8 +79,8 @@
                       <star-rating
                       :increment="0.1"
                       v-model="item.avg_ratings"
-                      inactive-color="#000"
-                      active-color="#ffb20f"
+                      inactive-color="#aaa"
+                      active-color="#666"
                       v-bind:star-size="12"
                       :show-rating="false"
                       :rounded-corners="true"
