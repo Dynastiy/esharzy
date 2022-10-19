@@ -25,7 +25,7 @@
               <!-- <small class="text-white">View Earnings</small> -->
             </div>
             <h1 class="text-white" style="font-weight: 700">
-              &#8358; {{ getUser.account.balance }}
+              &#8358; {{ getUser.account === null ? 0 : getUser.account.balance }}
             </h1>
           </div>
 
@@ -56,6 +56,7 @@
          <!-- Recent Orders -->
          <section class="mt-4">
             <div class="mt-4 other--tables bg-white rounded-lg p-3">
+              <h5 class="font-weight-bold mb-3">Recent Orders</h5>
               <div class="table-responsive">
                 <table class="table table-centered table-nowrap mb-0">
                   <thead>
@@ -69,6 +70,13 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <div class="mt-3" v-if="orders.length == 0">
+                      <el-alert
+                        title="No items here"
+                        type="error"
+                        :closable="false">
+                      </el-alert>
+                    </div>
                     <tr v-for="item in orders" :key="item.id"> 
                       <td>{{ item.buyer.first_name + " " + item.buyer.last_name }}</td>
                       <td> {{ item.delivery_address }} </td>

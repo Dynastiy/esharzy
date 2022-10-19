@@ -17,7 +17,7 @@
               <!-- {{ user }} -->
               <h6 class="text-white mb-3 small" style="font-weight:300">Available for payout</h6>
             </div>
-            <h1 class="text-white" style="font-weight:700"> &#8358; {{ user.account.balance }} </h1>
+            <h1 class="text-white" style="font-weight:700"> &#8358; {{ user.account === null ? 0 : user.account.balance }} </h1>
             <div>
                 <p class="text-white w-75 mt-1" style="font-size:11px">This is the amount you currently have in earnings, available for your next payout.</p>
             </div>

@@ -14,37 +14,40 @@
             <div class="mb-3">
               <div class="d-flex align-items-center" style="gap:20px">
                 <div class="w-100">
-                <label for="" class="d-block small"
+                <!-- <label for="" class="d-block small"
                   >First Name<sup class="text-danger">*</sup>
-                </label>
+                </label> -->
                 <input
                   type="text"
                   v-model="credentials.first_name"
                   class="input--text"
+                  placeholder="First Name"
                 />
                 <small class="text-danger" v-show="errMessages.first_name" v-for="err in errMessages.first_name" :key="err"> *{{ err }} </small>
               </div>
               <div class="w-100">
-                <label for="" class="d-block small"
+                <!-- <label for="" class="d-block small"
                   >Last Name<sup class="text-danger">*</sup>
-                </label>
+                </label> -->
                 <input
                   type="text"
                   v-model="credentials.last_name"
                   class="input--text"
+                  placeholder="Last Name"
                 />
                 <small class="text-danger" v-show="errMessages.last_name" v-for="err in errMessages.last_name" :key="err"> *{{ err }} </small>
               </div>
               </div>
             </div>
             <div class="mb-3">
-              <label for="" class="d-block small"
+              <!-- <label for="" class="d-block small"
                 >Email<sup class="text-danger">*</sup>
-              </label>
+              </label> -->
               <input
                 type="email"
                 v-model="credentials.email"
                 class="input--text"
+                placeholder="Email"
               />
               <small
                 class="text-danger"
@@ -56,13 +59,14 @@
               </small>
             </div>
             <div class="mb-3">
-              <label for="" class="d-block small"
+              <!-- <label for="" class="d-block small"
                 >Phone Number<sup class="text-danger">*</sup>
-              </label>
+              </label> -->
               <input
                 type="tel"
                 v-model="credentials.phone_no"
                 class="input--text"
+                placeholder="Phone Number"
               />
               <small
                 class="text-danger"
@@ -74,24 +78,38 @@
               </small>
             </div>
             <div class="mb-3">
-              <label for="" class="d-block small"
-                >Country<sup class="text-danger">*</sup>
-              </label>
+              <div class="d-flex" style="gap:20px"> 
+                <country-select
+                  class="form-control w-100"
+                  v-model="credentials.country"
+                  :country="credentials.country"
+                  topCountry="NG"
+                  :countryName="true"
+                />
+                <region-select class="w-100" v-model="credentials.city" :countryName="true" :country="credentials.country" :region="credentials.city" :regionName="true" />
+              </div>
+            </div>
+            <div class="mb-3">
+              <!-- <label for="" class="d-block small"
+                >Address<sup class="text-danger">*</sup>
+              </label> -->
               <input
                 type="text"
-                v-model="credentials.country"
+                v-model="credentials.address"
                 class="input--text"
+                placeholder="Address"
               />
             </div>
             <div class="mb-3">
-              <label class="d-block small" for=""
+              <!-- <label class="d-block small" for=""
                 >Password<sup class="text-danger">*</sup>
-              </label>
+              </label> -->
               <div class="input--field d-flex align-items-center">
                 <input
                   :type="type"
                   class="input-area"
                   v-model="credentials.password"
+                  placeholder="Password"
                 />
                 <div @click="showPassword" role="button">
                   <span
@@ -108,6 +126,7 @@
                 v-show="errMessages.password"
                 v-for="err in errMessages.password"
                 :key="err"
+                style="font-size:10px"
               >
                 *{{ err }}
               </small>
@@ -123,14 +142,13 @@
         </div>
       </div>
     </div>
-
-    <!-- <AppLoader  /> -->
   </div>
 </template>
 
 <script>
-// import AppLoader from "@/components/static/appLoader.vue";
 export default {
+  components: {
+  },
   data() {
     return {
       type: "password",
@@ -142,8 +160,11 @@ export default {
         phone_no: "",
         first_name: "",
         last_name:"",
-        country: ""
+        country: "",
+        address: "",
+        city: ""
       },
+      
     };
   },
   methods: {
@@ -159,8 +180,9 @@ export default {
       }
     },
     async register() {
+      console.log(this.credentials);
       this.$store.dispatch("auth/userRegister", this.credentials);
-      this.credentials = {}
+      // this.credentials = {}
     },
     goToLogin() {
       this.$router.push("/sign-up");

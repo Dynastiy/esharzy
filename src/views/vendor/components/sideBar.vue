@@ -121,7 +121,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/vendor/profile">
+              <router-link to="/vendor/settings">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@
                     <circle cx="12" cy="12" r="3"></circle>
                   </svg>
                 </span>
-                <span>Profile</span>
+                <span>Settings</span>
               </router-link>
             </li>
           </ul>

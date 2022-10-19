@@ -181,7 +181,8 @@ export default {
             commit("SET_LOADING", true)
             try {
                 const res = await Axios().get(`show-product/${slug}`);
-                commit("SET_SINGLE_PRODUCT", res.data);
+                commit("SET_SINGLE_PRODUCT", res.data.product);
+                console.log(res.data.product);
                 return res
             } catch (error) {
                 return error
@@ -206,6 +207,7 @@ export default {
             try {
                 const res = await Axios().get(`show-shop/${slug}`);
                 commit("SET_STORE", res.data.shop);
+                console.log(res.data.shop);
                 return res
             } catch (error) {
                 return error
@@ -218,7 +220,7 @@ export default {
             try {
                 const res = await Axios().get(`find-shop/${id}`);
                 commit("SET_STORE", res.data.shop);
-
+                console.log(res.data.shop);
                 return res
             } catch (error) {
                 console.log(error);

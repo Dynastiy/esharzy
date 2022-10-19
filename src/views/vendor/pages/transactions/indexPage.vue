@@ -26,7 +26,7 @@
                         <div class="py-2 w-100" v-if="transactions.length === 0">
                             <el-alert
                             class="w-100"
-                                title="No Payouts yet"
+                                title="No Transactions yet"
                                 type="error"
                                 :closable="false">
                             </el-alert>

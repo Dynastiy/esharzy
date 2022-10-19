@@ -1,10 +1,15 @@
     @media (max-width: 990px) {
-        .container-fluid {
-            padding-left: 1.5rem !important;
-            padding-right: 1.5rem !important;
+        .container-fluid,
+        .main-dashboard,
+        .vendor--header {
+            padding-left: 1.2rem !important;
+            padding-right: 1.2rem !important;
         }
         .auth--container .options {
             width: 85%;
+        }
+        .modal--container {
+            width: 80%;
         }
         .vendor--menu {
             display: none;
@@ -137,5 +142,9 @@
         }
         .shop--banner h5 {
             font-size: 14px;
+        }
+        .flex--photos {
+            display: grid !important;
+            grid-template-columns: auto;
         }
     }

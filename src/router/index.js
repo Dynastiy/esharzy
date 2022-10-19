@@ -182,6 +182,24 @@ const routes = [
                     import ( /* webpackChunkName: "about" */ '../views/user/pages/wishList.vue')
             },
             {
+                path: '/vendor-applications',
+                name: 'vendor-applications',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/user/pages/vendorApplications.vue')
+            },
+            {
+                path: '/vendor-application/:id',
+                name: 'vendor-application',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/user/pages/applicationID.vue')
+            },
+            {
                 path: '/order-history',
                 name: 'order-history',
                 // route level code-splitting
@@ -272,12 +290,12 @@ const routes = [
                     import ( /* webpackChunkName: "about" */ '../views/vendor/pages/payouts/indexPage.vue')
             },
             {
-                path: '/vendor/profile',
+                path: '/vendor/settings',
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/profile/indexPage.vue')
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/indexPage.vue')
             },
             {
                 path: '/transactions',

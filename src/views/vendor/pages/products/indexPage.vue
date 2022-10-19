@@ -26,6 +26,7 @@
                   <tr>
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Availability</th>
                     <th scope="col">Status</th>
                     <th scope="col">Date Created</th>
                     <th scope="col">Actions</th>
@@ -38,15 +39,24 @@
                   <tr
                     v-for="data in getProducts"
                     :key="data.id">
-                    <td>{{ data.name }}</td>
-                    <td>&#8358; {{ data.price.toLocaleString() }}</td>
+                    <td class="d-flex align-items-center" style="gap:10px">
+                      <span> <img :src='config.imgUrl+data.app_icon' alt="" width="30px" height="30px" style="border-radius:50%; object-fit:cover; object-position: center "> </span>
+                      <span>
+                        {{ data.name }}
+                      </span>
+                    </td>
+                    <td>&#8358; {{ data.price == null ? 0 : data.price.toLocaleString() }}</td>
+                    <td>
+                      <span :class="data.availability"> {{ data.availability }} </span>
+                    </td>
                     <td>
                       <span :class="data.status"> {{ data.status }} </span>
                     </td>
                     <td>{{ timeStamp2(data.created_at) }}</td>
                     <td class="d-lg-flex" style="gap:10px">
-                        <button @click="viewProduct(data)" class="py-1 px-2 small bg-success">View More</button>
-                        <button @click="deleteProduct(data)" class="py-1 px-2 small">Delete Product</button>
+                        <button @click="deleteProduct(data)" style="width:max-content" class="py-1 px-2 small">Delete</button>
+                        <button @click="deleteProduct(data)" style="width:max-content" class="py-1 px-2 small bg-info">Edit</button>
+                        <button @click="viewProduct(data)" style="width:max-content" class="py-1 px-2 small bg-success">View &raquo; </button>
                     </td>
                   </tr>
                 </tbody>
@@ -55,7 +65,11 @@
           </div>
         </section>
 
+        <!-- Confirm delete Modal  -->
         <ConfirmDelete v-show="delete_confirm" @close="close" @done=" deleteThisProduct"/>
+
+        <!-- Edit Product modal  -->
+        <!-- <EditProduct/> -->
       </div>
     </div>
   </div>
@@ -63,12 +77,14 @@
 
 
 <script>
+import config from '@/config/api'
 import { timeStamp2 } from "@/plugins/filter";
 import ConfirmDelete from "../../modals/confirmDelete.vue";
+// import EditProduct from './components/editProduct.vue';
 export default {
     data() {
         return {
-            timeStamp2,
+            timeStamp2,config,
             delete_confirm: false,
             product_id: ""
         };

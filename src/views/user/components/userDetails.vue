@@ -21,6 +21,17 @@
               <input type="text" v-model="userData.country" />
             </div>
             <div class="w-100">
+              <label for="">City</label>
+              <input type="text" v-model="userData.city" />
+            </div>
+          </div>
+
+          <div class="mb-3 d-flex" style="gap: 20px">
+            <div class="w-100">
+              <label for="">Address</label>
+              <input type="text" v-model="userData.address" />
+            </div>
+            <div class="w-100">
               <label for="">Date of Birth</label>
               <input type="date" v-model="userData.dob" />
             </div>

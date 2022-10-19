@@ -14,10 +14,45 @@
 .modal--container {
     background-color: #fff;
     padding: 2rem;
+    width: 35%;
+}
+
+.modal--container .business--images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px
+}
+
+.modal--container input,
+.modal--container select,
+.modal--container textarea {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--gray-400);
+    border-radius: 5px;
+    color: var(--gray-600);
+    outline: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.modal--container input::placeholder,
+.modal--container select::placeholder,
+.modal--container textarea::placeholder {
+    color: var(--gray-500);
+    font-size: 0.7rem;
+}
+
+.modal--container input[type=checkbox] {
+    display: unset;
+    width: unset;
 }
 
 .modal--content input,
-.modal--content select {
+.modal--content select,
+.modal--content form input,
+.modal--content form select {
     display: block;
     width: 100%;
     padding: 0.4rem 0.8rem;
@@ -108,4 +143,57 @@
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.business--photo img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.jpg {
+    background-image: url('../icons/jpg.png');
+}
+
+.jpeg {
+    background-image: url('../icons/jpeg.png');
+}
+
+.png {
+    background-image: url('../icons/png.png');
+}
+
+.docx {
+    background-image: url('../icons/docx.png');
+}
+
+.doc {
+    background-image: url('../icons/doc.png');
+}
+
+.pdf {
+    background-image: url('../icons/pdf.png');
+}
+
+.svg {
+    background-image: url('../icons/svg.png');
+}
+
+.gif {
+    background-image: url('../icons/gif.png');
+}
+
+.jpg,
+.jpeg,
+.png,
+.docx,
+.doc,
+.pdf,
+.svg,
+.gif {
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+    background-position: center;
 }

@@ -194,9 +194,12 @@ button {
     border: none;
 }
 
+.active,
 .completed,
 .approved,
-.activated {
+.activated,
+.in-stock,
+.registered {
     color: green;
     background-color: rgba(0, 128, 0, 0.175);
     font-size: 0.7rem;
@@ -215,7 +218,8 @@ button {
 .canceled,
 .deactivated,
 .rejected,
-.banned {
+.banned,
+.out-of-stock {
     color: red;
     background-color: rgba(255, 0, 0, 0.175);
     font-size: 0.7rem;
@@ -251,7 +255,7 @@ button {
 .table th {
     border-top: none;
     border-bottom: none;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     vertical-align: middle;
 }
 
@@ -259,7 +263,7 @@ button {
     /* color: var(--main-color); */
     border-bottom: 1px solid var(--gray-300);
     font-weight: 400;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .table tbody tr:hover {

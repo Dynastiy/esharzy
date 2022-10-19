@@ -3,7 +3,6 @@
     <div>
       <div>
         <div class="search--field">
-          {{ category_products }}
           <div>
             <select name="" id="" v-model="searchValue" @change="getValue">
               <option value="All Categories" selected>All Categories</option>

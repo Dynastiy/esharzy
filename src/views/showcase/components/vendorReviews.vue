@@ -223,7 +223,7 @@ export default {
   methods: {
     user_rating(item) {
       let ratings =
-        this.$store.getters["showcase/getSingleProduct"].product.ratings;
+        this.$store.getters["showcase/getSingleProduct"].ratings;
       let users = ratings.find((user) => user.user.id === item);
       return users;
     },
@@ -255,7 +255,7 @@ export default {
   },
   computed: {
     my_review(){
-        var items = this.$store.getters["showcase/getSingleProduct"].product.reviews;
+        var items = this.$store.getters["showcase/getSingleProduct"].reviews;
         if(items.length >  0){
             var val = items.find(item => item.user.id === this.getUser.id)
             console.log(val);
@@ -284,7 +284,7 @@ export default {
         
     },
     my_rating(){
-        var items = this.$store.getters["showcase/getSingleProduct"].product.ratings;
+        var items = this.$store.getters["showcase/getSingleProduct"].ratings;
         
         if(items.length > 0){
             var val = items.find(item => item.user.id === this.getUser.id)
@@ -325,18 +325,18 @@ export default {
       return this.$store.getters["auth/getUser"];
     },
     product() {
-      return this.$store.getters["showcase/getSingleProduct"].product;
+      return this.$store.getters["showcase/getSingleProduct"];
     },
     reviews() {
-      return this.$store.getters["showcase/getSingleProduct"].product.reviews;
+      return this.$store.getters["showcase/getSingleProduct"].reviews;
     },
     ratings() {
-      return this.$store.getters["showcase/getSingleProduct"].product.ratings;
+      return this.$store.getters["showcase/getSingleProduct"].ratings;
     },
     
     ratingValues() {
       let ratings =
-        this.$store.getters["showcase/getSingleProduct"].product.ratings;
+        this.$store.getters["showcase/getSingleProduct"].ratings;
       let one = ratings.filter((rating) => (rating.scale > 0 && rating.scale <= 1.5)).length;
       one = (one / ratings.length) * 100;
       let two = ratings.filter((rating) => (rating.scale > 1.5 && rating.scale <= 2.5)).length;

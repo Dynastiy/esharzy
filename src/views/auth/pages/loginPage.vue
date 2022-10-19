@@ -15,22 +15,23 @@
           <div>
             <form action="" @submit.prevent="login()">
               <div class="mb-3">
-                <label for="" class="d-block small"
+                <!-- <label for="" class="d-block small"
                   >Email<sup class="text-danger">*</sup>
-                </label>
+                </label> -->
                 <input
                   type="email"
                   v-model="credentials.email"
                   class="input--text"
+                  placeholder="Email"
                 />
                 <small class="text-danger" v-show="errMessages.email" v-for="err in errMessages.email" :key="err"> *{{ err }} </small>
               </div>
               <div class="mb-3">
-                <label class="d-block small" for=""
+                <!-- <label class="d-block small" for=""
                   >Password<sup class="text-danger">*</sup>
-                </label>
+                </label> -->
                 <div class="input--field d-flex align-items-center">
-                  <input :type="type" class="input-area" v-model="credentials.password" />
+                  <input :type="type" placeholder="password" class="input-area" v-model="credentials.password" />
                   <div @click="showPassword" role="button">
                    <span class="text-danger" style="font-size:10px; margin-right: 5px;"> {{ actions }} </span>
                   </div>

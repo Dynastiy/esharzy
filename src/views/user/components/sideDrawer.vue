@@ -99,6 +99,35 @@
                   <span>Wishlist</span>
                 </router-link>
               </li>
+
+              <li>
+                <router-link to="/vendor-applications">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-shopping-cart-plus"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="1"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <circle cx="6" cy="19" r="2"></circle>
+                      <circle cx="17" cy="19" r="2"></circle>
+                      <path d="M17 17h-11v-14h-2"></path>
+                      <path
+                        d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13"
+                      ></path>
+                      <path d="M15 6h6m-3 -3v6"></path>
+                    </svg>
+                  </span>
+                  <span>Vendor Applications</span>
+                </router-link>
+              </li>
               <li>
                 <a href="javascript:void(0)" @click="logout">
                   <span
@@ -133,31 +162,43 @@
           </div>
         </div>
       </div>
+
+      <!-- Become a Vendor Modal  -->
+      <BecomeAVendor @closeModal="closeModal" v-show="become_a_vendor"/>
     </div>
   </div>
 </template>
 
 
 <script>
+import BecomeAVendor from './modals/becomeAVendor.vue';
 export default {
-  methods: {
-    becomeAVendor() {
-      this.$store.dispatch("auth/becomeAVendor");
-    },
-    updateprofilePhoto(){
-
-    },
-    logout(){
-      this.$store.dispatch('auth/logout');
-    },
+  data(){
+    return {
+      become_a_vendor: false
+    }
   },
-  computed: {
-    getUser() {
-      return this.$store.getters["auth/getUser"];
+    methods: {
+        becomeAVendor() {
+            this.become_a_vendor = true
+        },
+        closeModal(){
+          this.become_a_vendor = false
+        },
+        updateprofilePhoto() {
+        },
+        logout() {
+            this.$store.dispatch("auth/logout");
+        },
     },
-    loading() {
-      return this.$store.getters["auth/isLoading"];
+    computed: {
+        getUser() {
+            return this.$store.getters["auth/getUser"];
+        },
+        loading() {
+            return this.$store.getters["auth/isLoading"];
+        },
     },
-  },
+    components: { BecomeAVendor }
 };
 </script>

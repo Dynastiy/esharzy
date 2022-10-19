@@ -24,6 +24,13 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <div class="mt-3" v-if="orders.length == 0">
+                      <el-alert
+                        title="No items here"
+                        type="error"
+                        :closable="false">
+                      </el-alert>
+                    </div>
                     <tr v-for="item in orders" :key="item.id"> 
                       <td>{{ item.buyer.first_name + " " + item.buyer.last_name }}</td>
                       <td> {{ item.delivery_address }} </td>

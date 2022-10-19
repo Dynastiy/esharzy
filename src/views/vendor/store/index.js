@@ -39,12 +39,10 @@ export default {
         SET_ORDERS(state, data) {
             state.orders = data
         },
-        SET_LOADING: (state) => {
-            state.loading = true
+        SET_LOADING: (state, data) => {
+            state.loading = data
         },
-        END_LOADING: (state) => {
-            state.loading = false
-        },
+
     },
     actions: {
         async getProducts({ commit }) {
@@ -58,7 +56,7 @@ export default {
         },
 
         async createProduct({ dispatch, commit }, payload) {
-            commit('SET_LOADING')
+            commit('SET_LOADING', true)
             try {
                 const res = await Axios().post(`create-product`, payload);
                 Toastify({
@@ -66,6 +64,8 @@ export default {
                     className: "info",
                     style: {
                         background: "green",
+                        borderRadius: "3px",
+                        fontSize: "13px"
                     }
                 }).showToast();
                 console.log(res);
@@ -77,16 +77,18 @@ export default {
                     className: "info",
                     style: {
                         background: "red",
+                        borderRadius: "3px",
+                        fontSize: "13px"
                     }
                 }).showToast();
                 commit("SET_ERRORS", error.response.data.errors)
             } finally {
-                commit('END_LOADING')
+                commit('SET_LOADING', false)
             }
         },
 
         async addDiscount({ commit }, { id, price, product_id }) {
-            commit('SET_LOADING')
+            commit('SET_LOADING', true)
             try {
                 const res = await Axios().post(`add-discount/${id}`, { price, product_id });
                 Toastify({
@@ -108,14 +110,14 @@ export default {
                 }).showToast();
                 commit("SET_ERRORS", error.response.data.errors)
             } finally {
-                commit('END_LOADING')
+                commit('SET_LOADING', false)
             }
         },
 
 
         // Delete Payout Account 
         async deleteProduct({ dispatch, commit }, id) {
-            commit('SET_LOADING')
+            commit('SET_LOADING', true)
             try {
                 let token = localStorage.getItem("token")
                 console.log(token);
@@ -143,7 +145,7 @@ export default {
                 }).showToast();
                 commit("SET_ERRORS", error.response.data.errors)
             } finally {
-                commit('END_LOADING');
+                commit('SET_LOADING', false);
                 dispatch("getProducts")
             }
         },
@@ -162,7 +164,7 @@ export default {
 
         // Request Payout
         async requestPayout({ dispatch, commit }, payload) {
-            commit('SET_LOADING')
+            commit('SET_LOADING', true)
             try {
                 const res = await Axios().post(`request-payout/`, payload);
                 Toastify({
@@ -188,7 +190,7 @@ export default {
                 }).showToast();
                 commit("SET_ERRORS", error.response.data.errors)
             } finally {
-                commit('END_LOADING');
+                commit('SET_LOADING', false);
                 dispatch("getPayouts")
             }
         },

@@ -8,13 +8,13 @@
 
 .side--bar li a {
     display: block;
-    padding: 1rem;
+    padding: 1rem 2rem;
     color: var(--tertiary-color);
-    font-size: 0.8rem;
+    /* font-size: 0.8rem; */
 }
 
 .side--bar li a:hover {
-    background-color: var(--accent-color-light);
+    background-color: var(--gray-300);
     color: var(--tertiary-color);
 }
 
@@ -28,13 +28,13 @@
 .side--bar li a {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
     gap: 10px;
     margin-bottom: 1rem;
 }
 
 .side--bar li .router-link-exact-active {
-    background-color: var(--accent-color-light);
+    background-color: var(--gray-300);
     color: var(--tertiary-color);
     border-right: 3px solid var(--tertiary-color);
 }
@@ -71,7 +71,8 @@
 .update--user form textarea {
     width: 100%;
     display: block;
-    padding: 0.6rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     outline: none;

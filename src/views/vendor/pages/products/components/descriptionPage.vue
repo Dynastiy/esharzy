@@ -68,11 +68,7 @@ export default {
       this.$router.go(-1)
     }
   },
- beforeMount(){
-    this.$store.dispatch("showcase/getCategories");
-    this.$store.dispatch("showcase/getTags");
-    this.payload = this.$store.getters["showcase/getSingleProduct"].product
- },
+ 
   computed: {
     allCategories() {
       return this.$store.getters["showcase/getCategories"].categories;

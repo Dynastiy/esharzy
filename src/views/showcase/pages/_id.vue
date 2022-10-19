@@ -1,33 +1,36 @@
 <template>
-  <div>
+  <div
+    v-loading="loading"
+    element-loading-background="rgba(255, 255, 255, 0.7)"
+    style="width: 100%"
+  >
     <div class="">
       <div class="container-fluid py-3">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item
-                ><router-link to="/" style="font-weight:400"
-                  > Home </router-link
-                ></el-breadcrumb-item
-              >
-              <el-breadcrumb-item
-                ><router-link :to="currentRoute.path" style="font-weight:400"
-                  > {{currentRoute.name}} </router-link
-                ></el-breadcrumb-item
-              >
-              <el-breadcrumb-item v-if="currentRoute.params !== {}"
-                  > {{ currentRoute.params.slug }} </el-breadcrumb-item
-              >
-            </el-breadcrumb>
+          <el-breadcrumb-item
+            ><router-link to="/" style="font-weight: 400">
+              Home
+            </router-link></el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            ><router-link :to="currentRoute.path" style="font-weight: 400">
+              {{ currentRoute.name }}
+            </router-link></el-breadcrumb-item
+          >
+          <el-breadcrumb-item v-if="currentRoute.params !== {}">
+            {{ currentRoute.params.slug }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
       </div>
       <div class="container-fluid py-4">
-        <div
-          class="d-lg-flex"
-          style="gap: 50px"
-        >
+        <div class="d-lg-flex" style="gap: 50px">
           <div class="w-100">
-            <GalleryView class="mb-2"
-                  :starting-image="2"
-                  :images="images"
-                  :auto-slide-interval="2000"/>
+            <GalleryView
+              class="mb-2"
+              :starting-image="1"
+              :images="images"
+              :auto-slide-interval="2000"
+            />
           </div>
           <div
             class="
@@ -44,25 +47,48 @@
               </h3>
 
               <!-- Listing this product's Categories -->
-              <div class="categories my-3 d-flex align-items-center" style="gap:5px">
+              <div
+                class="categories my-3 d-flex align-items-center"
+                style="gap: 5px"
+              >
                 <h6 class="small">Categories:</h6>
-                <span class="small text-capitalize text-secondary" >
-                  {{ categories}}
+                <span class="no--item" v-if="categories.length === 0">
+                  No Categories for this product
+                </span>
+                <span
+                  v-for="item in categories"
+                  :key="item.id"
+                  :class="item.category_name.charAt(0)"
+                  class="text-white small text-capitalize px-2 py-1"
+                  style="border-radius: 4px"
+                >
+                  {{ item.category_name }}
                 </span>
               </div>
 
               <!-- Listing this product's Tags -->
-              <div class="tags my-3 d-flex align-items-center" style="gap:5px">
+              <div class="tags my-3 d-flex align-items-center" style="gap: 5px">
                 <h6 class="small">Tags:</h6>
-                <span class="small text-capitalize text-secondary" >
-                  {{ tags }}
+                <span class="no--item" v-if="tags.length === 0">
+                  No Categories for this product
+                </span>
+                <span
+                  v-for="item in tags"
+                  :key="item.id"
+                  :class="item.name.charAt(0)"
+                  class="text-white small text-capitalize px-2 py-1"
+                  style="border-radius: 4px"
+                >
+                  {{ item.name }}
                 </span>
               </div>
 
-              <hr>
+              <hr />
 
               <div class="mb-2">
-                <h1 style="font-weight:600">&#8358; {{ (product.price * num).toLocaleString() }}</h1>
+                <h1 style="font-weight: 600">
+                  &#8358; {{ (product.price * num).toLocaleString() }}
+                </h1>
               </div>
               <div class="d-flex align-items-center" style="gap: 5px">
                 <star-rating
@@ -74,9 +100,9 @@
                   :show-rating="false"
                   :rounded-corners="true"
                 ></star-rating>
-                <small class="text-muted" style="font-size: 12px"
-                  >{{ `(${product.reviews.length} reviews)` }}</small
-                >
+                <small class="text-muted" style="font-size: 12px">{{
+                  `(${product.reviews.length} reviews)`
+                }}</small>
               </div>
               <!-- description -->
               <div class="mt-3">
@@ -87,16 +113,13 @@
                 ></span>
               </div>
 
-              <hr>
-
-             
-              
+              <hr />
             </div>
 
             <!-- Bottom Area that contains Quantity Increase and Add to Cart and Add to wishlist -->
-            <div class="d-lg-flex align-items-center " style="gap: 20px">
-               <!-- Increase Quantity  -->
-               <div class="mt-3">
+            <div class="d-lg-flex align-items-center" style="gap: 20px">
+              <!-- Increase Quantity  -->
+              <div class="mt-3">
                 <el-input-number
                   v-model="num"
                   :min="1"
@@ -104,8 +127,21 @@
                 ></el-input-number>
               </div>
 
-              <div class="d-flex align-items-center mt-3 w-100" style="gap: 20px">
-                <button class="text-uppercase w-100" style="font-size:15px !important; font-weight:600; border-radius:3px !important" @click="addToCart">Add to Cart</button>
+              <div
+                class="d-flex align-items-center mt-3 w-100"
+                style="gap: 20px"
+              >
+                <button
+                  class="text-uppercase w-100"
+                  style="
+                    font-size: 15px !important;
+                    font-weight: 600;
+                    border-radius: 3px !important;
+                  "
+                  @click="addToCart"
+                >
+                  Add to Cart
+                </button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-tabler icon-tabler-heart"
@@ -130,43 +166,58 @@
 
         <!-- Other Details  -->
         <div class="other--details">
-          <el-tabs v-model="activeName" >
+          <el-tabs v-model="activeName">
             <el-tab-pane label="Description" name="first">
-              <div class="d-lg-flex " style="gap:30px">
-                  <div v-html="product.description" class="w-100 description--content mt-4">
+              <div class="d-lg-flex" style="gap: 30px">
+                <div
+                  v-html="product.description"
+                  class="w-100 description--content mt-4"
+                ></div>
+                <div
+                  class="product--video mt-4"
+                  :style="{
+                    'background-image': `url(${config.imgUrl}${product.photo_three})`,
+                  }"
+                >
+                  <div
+                    class="play--icon"
+                    @click="dialogVisible = true"
+                    role="button"
+                  >
+                    <i class="el-icon-video-play"></i>
                   </div>
-                  <div class="product--video mt-4" :style="{ 'background-image': `url(${config.imgUrl}${product.photo_three})` }">
-                    <div class="play--icon" @click="dialogVisible = true" role="button">
-                      <i class="el-icon-video-play"></i>
-                    </div>
-                  </div>                  
+                </div>
               </div>
             </el-tab-pane>
-            <el-tab-pane :label='"Customer Reviews" + "("+product.reviews.length+")"' name="second"> <VendorReviews/> </el-tab-pane>
+            <el-tab-pane
+              :label="'Customer Reviews' + '(' + product.reviews.length + ')'"
+              name="second"
+            >
+              <VendorReviews />
+            </el-tab-pane>
             <el-tab-pane label="Vendor" name="third">
-              <ShopDetails/>
+              <ShopDetails />
             </el-tab-pane>
           </el-tabs>
-          <el-dialog
-            :visible.sync="dialogVisible"
-            width="60%">
-          
-            <video style="width:100%" :src=" config.imgUrl + product.video " controls></video>
+          <el-dialog :visible.sync="dialogVisible" width="60%">
+            <video
+              style="width: 100%"
+              :src="config.imgUrl + product.video"
+              controls
+            ></video>
           </el-dialog>
-        </div> 
+        </div>
 
         <!-- More Products from this Vendor -->
         <div class="mt-4">
-          <VendorProducts/>
+          <VendorProducts />
         </div>
 
         <!-- related Products  -->
         <div>
-          <RelatedProducts/>
+          <RelatedProducts />
         </div>
-        
       </div>
-     
     </div>
   </div>
 </template>
@@ -187,123 +238,86 @@ export default {
     ShopDetails,
     VendorProducts,
     RelatedProducts,
-    GalleryView
-},
+    GalleryView,
+  },
   data() {
     return {
       config,
       rating: 5,
       num: 1,
-      activeName: 'first',
-      dialogVisible: false
+      activeName: "first",
+      dialogVisible: false,
     };
   },
   methods: {
     addToCart() {
       let payload = {
-        product_id: this.$store.getters["showcase/getSingleProduct"].product.id,
+        product_id: this.$store.getters["showcase/getSingleProduct"].id,
         quantity: this.num,
       };
       console.log(payload);
       this.$store.dispatch("auth/addToCart", payload);
     },
   },
-  beforeMount(){
-    let slug = this.$route.params.slug
+  beforeMount() {
+    let slug = this.$route.params.slug;
     this.$store.dispatch("showcase/getProductBySlug", slug);
-    this.$store.dispatch("showcase/getStoreById", this.product.shop_id)
+    this.$store.dispatch("showcase/getStoreById", this.product.shop_id);
   },
   computed: {
     product() {
-      return this.$store.getters["showcase/getSingleProduct"].product;
+      return this.$store.getters["showcase/getSingleProduct"];
     },
-    categories(){
-      if(this.product.categories.length > 0){
-        var val = this.product.categories;
-      let i 
-      for(i = 0; i < val.length; i++) {
-        var data = val[i].category_name
-        var result = [];
-        result.push(data)
-      }
-      var product_categories = result.join(",")
-      return product_categories
-      }
-      else {
-        return "This product has no category"
-      }
+    categories() {
+      return this.product.categories;
     },
 
-    tags(){
-      if(this.product.tags.length > 0){
-        var val = this.product.tags;
-      let i 
-      for(i = 0; i < val.length; i++) {
-        var data = val[i].name
-        var result = [];
-        result.push(data)
-      }
-      var product_tags = result.join(",")
-      return product_tags
-      }
-      else {
-        return "This product has no tag"
-      }
+    tags() {
+      return this.product.tags;
     },
     slugName() {
       return this.$route.params.slug;
     },
-    currentRoute(){
-      return this.$route
+    currentRoute() {
+      return this.$route;
     },
     images() {
       let imagestoArray = [
         {
           id: 1,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product.app_icon,
-            thumb:
-            this.$store.getters["showcase/getSingleProduct"].product.app_icon,
+          big: this.product.app_icon,
+          thumb: this.product.app_icon,
         },
         {
           id: 2,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_one,
-            thumb:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_one,
+          big: this.product.photo_one,
+          thumb: this.product.photo_one,
         },
         {
           id: 3,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_two,
-            thumb:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_two,
+          big: this.product.photo_two,
+          thumb: this.product.photo_two,
         },
         {
           id: 4,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product
-              .photo_three,
-              thumb:
-            this.$store.getters["showcase/getSingleProduct"].product
-              .photo_three,
+          big: this.product.photo_three,
+          thumb: this.product.photo_three,
         },
         {
           id: 5,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_four,
-            thumb:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_four,
+          big: this.product.photo_four,
+          thumb: this.product.photo_four,
         },
         {
           id: 6,
-          big:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_five,
-            thumb:
-            this.$store.getters["showcase/getSingleProduct"].product.photo_five,
+          big: this.product.photo_five,
+          thumb: this.product.photo_five,
         },
       ];
       return imagestoArray;
+    },
+    loading() {
+      return this.$store.getters["showcase/isLoading"];
     },
   },
 };

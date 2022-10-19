@@ -21,7 +21,7 @@
             <div 
                 v-for="(image, index) in  images"
                 :key="image.id"
-                :class="['thumbnail-image', (activeImage == index) ? 'active' : '']"
+                :class="['thumbnail-image', (activeImage === index) ? 'active' : '']"
                 @click="activateImage(index)"
             >
                 <img :src="config.imgUrl + image.thumb">
@@ -41,7 +41,7 @@ export default {
    data(){
        return {
         config,
-           currentImage: null,
+        //    currentImage: null,
            //Index of the active image
             activeImage: 0,
             //Hold the timeout, so we can clear it when it is needed
@@ -54,17 +54,16 @@ export default {
             timerInterval: null,
             //Every 10ms decrease the timeLeft
             countdownInterval: 10,
-            // url: 'https://api.risingwork.com/',
        }
    },
    computed: {
         // currentImage gets called whenever activeImage changes
         // and is the reason why we don't have to worry about the 
         // big image getting updated
-        // currentImage() {
-        //     this.timeLeft = this.autoSlideInterval;
-        //     return this.images[this.activeImage].big;
-        // },
+        currentImage() {
+            // this.timeLeft = this.autoSlideInterval;
+            return this.images[this.activeImage].big;
+        },
         progressBar() {
             //Calculate the width of the progressbar
             return 100 - (this.timeLeft/this.autoSlideInterval) * 100;
@@ -129,9 +128,9 @@ export default {
             }, this.countdownInterval);
         }
     },
-    mounted(){
-        this.currentImage = this.images[this.activeImage].big;
-    },
+    // mounted(){
+    //     this.currentImage = this.images[this.activeImage].big;
+    // },
     created() {
         //Check if startingImage prop was given and if the index is inside the images array bounds
         if(this.startingImage 

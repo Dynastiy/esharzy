@@ -107,7 +107,7 @@ export default {
       return this.$store.getters["showcase/getStore"];
     },
     store_products() {
-      return this.$store.getters["showcase/getStore"].products;
+      return this.store.activated_products;
     },
   },
 };
