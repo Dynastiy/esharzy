@@ -46,15 +46,25 @@ export default function() {
                 return Promise.reject(err);
             }
             if (err.response && err.response.status === 500) {
-                // window.location.href = "/login";
+                // window.location.href = "/";
                 console.log(9090);
+                console.log(err.response.data.message)
+                var currentUrl = window.location.pathname
+                if (err.response.data.message === 'Attempt to read property "role" on null') {
+                    window.location.href = `/login?redirectFrom=${currentUrl}`;
+                }
                 return Promise.reject(err);
             }
 
             //  Invalid token, Not Authenticated.
             if (err.response && err.response.status === 401) {
+                console.log(err.response.data.message);
+                let currentUrl = window.location.pathname
+                if (err.response.data.message === 'Unauthenticated.') {
+                    window.location.href = `/login?redirectFrom=${currentUrl}`;
+                }
                 console.log(9090);
-                window.location = "/login"
+                return Promise.reject(err);
 
 
             }

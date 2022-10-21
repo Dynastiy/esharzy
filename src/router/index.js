@@ -254,7 +254,25 @@ const routes = [
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/indexPage.vue')
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/indexPage.vue'),
+            },
+            {
+                path: '/vendor/add-product',
+                name: 'add-product',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/addProduct.vue')
+            },
+            {
+                path: '/vendor/edit-product',
+                name: 'edit-product',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/components/editProduct.vue')
             },
             {
                 path: '/vendor/product/:slug',
@@ -265,14 +283,7 @@ const routes = [
                 component: () =>
                     import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/_id.vue')
             },
-            {
-                path: '/add-product',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/addProduct.vue')
-            },
+
             {
                 path: '/orders',
                 // route level code-splitting
@@ -296,6 +307,22 @@ const routes = [
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/indexPage.vue')
+            },
+            {
+                path: '/vendor/applications/:id',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/singleApplication.vue')
+            },
+            {
+                path: '/vendor/manufacturer-applications/:id',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/manufacturerSingleApplication.vue')
             },
             {
                 path: '/transactions',

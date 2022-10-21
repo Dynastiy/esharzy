@@ -180,7 +180,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/settings">
+                  <router-link to="/vendor/settings">
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,7 @@
             </p>
           </div>
           <div>
-            <router-link to="/add-product" class="text-white">
+            <router-link to="/vendor/add-product" class="text-white">
             <button>
                 Add product
             </button>

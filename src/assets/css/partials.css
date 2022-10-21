@@ -56,6 +56,7 @@ html {
     --primary-color: #95194D;
     --secondary-color: #1cbcd0;
     --tertiary-color: #F14242;
+    --inactive-color: #fac6c6;
     --primary-accent: #bfbfbf;
     --accent-color-light: #ccc;
     --accent-color-dark: #333333;
@@ -194,6 +195,16 @@ button {
     border: none;
 }
 
+button.inactive {
+    background-color: var(--inactive-color);
+    padding: 0.5rem 2rem;
+    color: #fff;
+    border-radius: 5px !important;
+    font-size: 13px !important;
+    border: none;
+    pointer-events: none;
+}
+
 .active,
 .completed,
 .approved,
@@ -219,7 +230,8 @@ button {
 .deactivated,
 .rejected,
 .banned,
-.out-of-stock {
+.out-of-stock,
+.not-registered {
     color: red;
     background-color: rgba(255, 0, 0, 0.175);
     font-size: 0.7rem;

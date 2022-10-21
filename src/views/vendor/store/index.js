@@ -15,7 +15,10 @@ export default {
         shipping_classes: [],
         payouts: [],
         transactions: [],
-        orders: []
+        orders: [],
+        applications: [],
+        submittedApplication: {},
+        submitted: false
     },
     mutations: {
         SET_PRODUCTS(state, data) {
@@ -35,6 +38,15 @@ export default {
         },
         SET_TRANSACTIONS(state, data) {
             state.transactions = data
+        },
+        SET_APPLICATIONS(state, data) {
+            state.applications = data
+        },
+        SET_SUBMITTED_APPLICATION(state, data) {
+            state.submittedApplication = data
+        },
+        SET_SUBMITTED(state, data) {
+            state.submitted = data
         },
         SET_ORDERS(state, data) {
             state.orders = data
@@ -229,7 +241,74 @@ export default {
             }
         },
 
+        // Become a Manufacturer
+        becomeAManufacturer({ commit, dispatch }, payload) {
+            commit("SET_LOADING", true)
+            Axios().post(`/create-manufacturer-application`, payload)
+                .then((res) => {
+                    commit("SET_SUBMITTED_APPLICATION", res.data.manufacturerApplication)
+                    commit("SET_SUBMITTED", true);
+                    Toastify({
+                        text: `Vendor Application Submitted`,
+                        className: "info",
+                        style: {
+                            background: "green",
+                            fontSize: "12px",
+                            borderRadius: "3px"
+                        }
+                    }).showToast();
+                    dispatch("getApplications")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    Toastify({
+                        text: `Error`,
+                        className: "info",
+                        style: {
+                            background: "red",
+                            fontSize: "12px",
+                            borderRadius: "3px"
+                        }
+                    }).showToast();
+                })
+                .finally(() => {
+                    commit("SET_LOADING", false)
+                })
+        },
 
+        getApplication({ commit }, id) {
+            commit("SET_LOADING", true)
+            Axios().get(`/find-manufacturer-application/${id}`)
+                .then((res) => {
+                    commit("SET_APPLICATION", res.data.manufacturerApplication)
+                    console.log(res.data.manufacturerApplication);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    commit("SET_LOADING", false)
+                })
+        },
+
+        getApplications({ commit }) {
+            commit("SET_LOADING", true)
+            Axios().get(`/my-manufacturer-applications`)
+                .then((res) => {
+                    commit("SET_APPLICATIONS", res.data.manufacturerApplications.data)
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    commit("SET_LOADING", false)
+                })
+        },
+
+        removeSubmitted({ commit }) {
+            commit("SET_SUBMITTED", false)
+        },
 
     },
     getters: {
@@ -240,6 +319,9 @@ export default {
         shippingClasses: (state) => state.shipping_classes,
         getPayouts: (state) => state.payouts,
         getTransactions: (state) => state.transactions,
-        getOrders: (state) => state.orders
+        getOrders: (state) => state.orders,
+        getApplications: (state) => state.applications,
+        submittedApplication: (state) => state.submittedApplication,
+        isSubmitted: (state) => state.submitted
     },
 };
