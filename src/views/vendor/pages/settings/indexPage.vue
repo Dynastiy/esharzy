@@ -9,7 +9,7 @@
         <GeneralData/> 
       </el-tab-pane>
       <el-tab-pane label="User Profile" name="second">
-        
+        <UserProfile/>
       </el-tab-pane>
     </el-tabs>
    </div>
@@ -17,6 +17,7 @@
 </template>
 <script>
 import GeneralData from './components/generalData.vue';
+import UserProfile from './components/userProfile.vue';
 export default {
     data() {
         return {
@@ -28,6 +29,6 @@ export default {
             console.log(tab, event);
         },
     },
-    components: { GeneralData }
+    components: { GeneralData, UserProfile }
 };
 </script>

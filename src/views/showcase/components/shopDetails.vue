@@ -7,9 +7,11 @@
                    <div class="shop--details_right w-100 mt-4">
                     <div class="d-flex align-items-center" style="gap:20px">
                         <img :src='user.photo == null ? "@/assets/img/no-user.png" : config.imgUrl + user.photo ' alt="">
-                        <div>
+                        <div class="d-flex align-items-center" style="gap:5px">
                             <h5 style="font-weight:600"> {{ user.first_name + " " + user.last_name }} </h5>
-
+                            <div class="badge">
+                                M
+                            </div>
                         </div>
                     </div>
 

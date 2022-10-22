@@ -118,6 +118,7 @@ export default {
                 commit("SET_LOADING", true)
                 const res = await Axios().get(`all-products`);
                 commit("SET_PRODUCTS", res.data.all_products.data);
+                console.log(res.data.all_products.data);
                 return res
             } catch (error) {
                 return error

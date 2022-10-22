@@ -48,6 +48,9 @@
                     <td>&#8358; {{ data.price == null ? 0 : data.price.toLocaleString() }}</td>
                     <td>
                       <span :class="data.availability"> {{ data.availability }} </span>
+                      <button class="py-1 px-1" @click='toggleAvailability(data, data.availability === "in-stock" ? "out-of-stock" : "in-stock")'
+                      :class='data.availability === "in-stock" ? "" : "bg-success"  ' > 
+                      {{ data.availability === "in-stock" ? "Out of Stock" : "In Stock"  }} </button>
                     </td>
                     <td>
                       <span :class="data.status"> {{ data.status }} </span>
@@ -96,7 +99,14 @@ export default {
         close(){
       this.delete_confirm = !this.delete_confirm
       },
-      deleteProduct(data){
+      toggleAvailability(data, value) {
+        let payload = {
+          id: data.id,
+          availability: value
+        }
+        this.$store.dispatch("vendor/updateStock", payload)
+      },
+        deleteProduct(data){
         this.product_id = data.id
         this.delete_confirm = !this.delete_confirm
         console.log(this.product_id);

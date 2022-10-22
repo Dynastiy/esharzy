@@ -61,6 +61,7 @@
                   </template>
                       <div>
                           <div class="img-services1">
+                            <div class="ribbon" v-if="item.availability !== 'in-stock' "><span class="ribbon__content">out of stock</span></div>
                             <div>
                               <!-- <span class="percentage"> {{ `${item.discount.percentage}% OFF` }} </span> -->
                               <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>

@@ -17,6 +17,7 @@ export default {
         transactions: [],
         orders: [],
         applications: [],
+        application: {},
         submittedApplication: {},
         submitted: false
     },
@@ -42,6 +43,9 @@ export default {
         SET_APPLICATIONS(state, data) {
             state.applications = data
         },
+        SET_APPLICATION(state, data) {
+            state.application = data
+        },
         SET_SUBMITTED_APPLICATION(state, data) {
             state.submittedApplication = data
         },
@@ -66,6 +70,39 @@ export default {
                 console.log(error);
             }
         },
+
+        async updateStock({ commit, dispatch }, payload) {
+            commit('SET_LOADING', true)
+            try {
+                const res = await Axios().post(`/update-stock/${payload.id}`, payload);
+                Toastify({
+                    text: `Stock Updated Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        borderRadius: "3px",
+                        fontSize: "13px"
+                    }
+                }).showToast();
+                console.log(res);
+                dispatch('getProducts')
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        borderRadius: "3px",
+                        fontSize: "13px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('SET_LOADING', false)
+            }
+        },
+
 
         async createProduct({ dispatch, commit }, payload) {
             commit('SET_LOADING', true)
@@ -321,6 +358,7 @@ export default {
         getTransactions: (state) => state.transactions,
         getOrders: (state) => state.orders,
         getApplications: (state) => state.applications,
+        getApplication: (state) => state.application,
         submittedApplication: (state) => state.submittedApplication,
         isSubmitted: (state) => state.submitted
     },
