@@ -84,12 +84,15 @@ export default {
 
         async getCategoryById({ commit }, slug) {
             try {
+                commit("SET_LOADING", true)
                 const res = await Axios().get(`show-category/${slug}`);
                 commit("SET_CATEGORY", res.data.category.activated_products);
                 // console.log(res.data.category);
                 return res
             } catch (error) {
                 return error
+            } finally {
+                commit("SET_LOADING", false)
             }
         },
 
@@ -112,8 +115,6 @@ export default {
             }
         },
         async getProducts({ commit }) {
-
-
             try {
                 commit("SET_LOADING", true)
                 const res = await Axios().get(`all-products`);

@@ -243,12 +243,11 @@
               </p>
               <div class="growing--vendors d-flex" style="gap:20px; width: 100%; overflow-x: scroll;">
                   <div v-for="vendor in vendors" :key="vendor.id" class="">
-                  <router-link :to=" `/store-listing/${vendor.slug}` ">
-                    <img height="70px" width="70px" style="object-position: top; object-fit:cover" :src='vendor.user.photo !== null ? config.imgUrl + vendor.user.photo : "/no-user.png"' alt="Vendor Image Here">
-                  </router-link>
+                    <router-link :to=" `/store-listing/${vendor.slug}` ">
+                      <img height="70px" width="70px" style="object-position: top; object-fit:cover" :src='vendor.user.photo !== null ? config.imgUrl + vendor.user.photo : "/no-user.png"' alt="Vendor Image Here">
+                    </router-link>
+                  </div>
               </div>
-              </div>
-             
             </div>
 
             <div class=" w-100 bg-white p-4 rounded-lg">
@@ -258,24 +257,24 @@
                 leave the facility within 15 days.
               </p>
               <div class="d-lg-flex mt-3" style="gap:20px">
-                <div class="w-100 growing--vendors">
-                  <h6 class="mb-2">Best Selling Products</h6>
+                <div class="w-100 growing--vendors mt-3">
+                  <h6 class="my-3">Best Selling Products</h6>
                   <div class="d-flex" style="gap:20px">
-                    <div class="" height="70px" width="70px"  :style="{ 'background-image': `url(${config.imgUrl}${topRated.app_icon})` }" v-for="topRated in topRatedProducts.slice(0, 3)" :key="topRated.id">
-                      <div class="best--selling_name">
-                        {{ topRated.name }}
-                      </div>
+                    <div v-for="item in discountedProducts.slice(0, 3)" :key="item.id" class="">
+                      <router-link :to=" `/store-listing/${item.slug}` ">
+                        <img height="70px" width="70px" style="object-position: top; object-fit:cover" :src='item.app_icon !== null ? config.imgUrl + item.app_icon : "/no-user.png"' alt="Product Image">
+                      </router-link>
                     </div>
                   </div>
                 </div>
 
-                <div class="w-100 growing--vendors">
-                  <h6 class="mt-2">Weekly Deals</h6>
+                <div class="w-100 growing--vendors mt-3">
+                  <h6 class="my-3">Weekly Deals</h6>
                   <div class="d-flex" style="gap:20px">
-                    <div class="" height="80px" width="80px"  :style="{ 'background-image': `url(${config.imgUrl}${item.app_icon})` }" v-for="item in discountedProducts.slice(0.3)" :key="item.id">
-                      <div class="best--selling_name">
-                        {{ item.name }}
-                      </div>
+                    <div v-for="item in allProducts.slice(0,3)" :key="item.id" class="">
+                      <router-link :to=" `/store-listing/${item.slug}` ">
+                        <img height="70px" width="70px" style="object-position: top; object-fit:cover" :src='item.app_icon !== null ? config.imgUrl + item.app_icon : "/no-user.png"' alt="Product Image">
+                      </router-link>
                     </div>
                   </div>
                 </div>

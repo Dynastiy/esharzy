@@ -27,7 +27,7 @@
             >
             <div>
                   <div class="img-services1">
-                    <div class="ribbon" v-if="item.availability !== 'in-stock' "><span class="ribbon__content">out of stock</span></div>
+                    <div class="ribbon" v-if="item.availability !== 'in-stock' "><span class="ribbon__content">sold out</span></div>
                     <img :src="config.imgUrl + item.app_icon" alt="" role="button" @click="viewProduct(item)"/>
                     <div class="middle text-center">
                       <div class="d-flex align-items-center justify-content-around px-1 py-2">

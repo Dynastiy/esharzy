@@ -205,7 +205,6 @@ button.inactive {
     pointer-events: none;
 }
 
-.active,
 .completed,
 .approved,
 .activated,

@@ -214,9 +214,9 @@
         </div>
 
         <!-- related Products  -->
-        <div>
+        <!-- <div>
           <RelatedProducts />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -229,7 +229,7 @@ import StarRating from "vue-star-rating";
 import VendorReviews from "../components/vendorReviews.vue";
 import ShopDetails from "../components/shopDetails.vue";
 import VendorProducts from "../components/vendorProducts.vue";
-import RelatedProducts from "../components/relatedProducts.vue";
+// import RelatedProducts from "../components/relatedProducts.vue";
 import GalleryView from "../components/galleryView.vue";
 export default {
   components: {
@@ -237,7 +237,6 @@ export default {
     VendorReviews,
     ShopDetails,
     VendorProducts,
-    RelatedProducts,
     GalleryView,
   },
   data() {
@@ -260,9 +259,12 @@ export default {
     },
   },
   beforeMount() {
+    
+    this.$store.dispatch("showcase/getStoreById", this.product.shop_id);
+  },
+  beforeCreate(){
     let slug = this.$route.params.slug;
     this.$store.dispatch("showcase/getProductBySlug", slug);
-    this.$store.dispatch("showcase/getStoreById", this.product.shop_id);
   },
   computed: {
     product() {

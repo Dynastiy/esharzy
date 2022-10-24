@@ -35,6 +35,16 @@
     left: 0;
 }
 
+.app--header_menu li .router-link-exact-active::before {
+    content: "";
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+}
+
 .app--header_menu li a::after {
     content: "";
     width: 100%;

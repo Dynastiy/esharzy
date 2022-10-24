@@ -3,10 +3,10 @@
         <div>
             <div>
                 <div class="d-lg-flex" style="gap:30px">
-                   <div class="shop--details_left w-100 mt-4" :style='{"backgroundImage":  user.cover_photo == null ?  `url("/no-cover.png")` : `url(${config.imgUrl}${user.cover_photo})`}'></div>
+                   <div class="shop--details_left w-100 mt-4" :style='{"backgroundImage":  user.cover_photo === null ?  `url("/no-cover.png")` : `url(${config.imgUrl}${user.cover_photo})`}'></div>
                    <div class="shop--details_right w-100 mt-4">
                     <div class="d-flex align-items-center" style="gap:20px">
-                        <img :src='user.photo == null ? "@/assets/img/no-user.png" : config.imgUrl + user.photo ' alt="">
+                        <img :src='user.photo === null ? "/no-user.png" : config.imgUrl + user.photo ' alt="">
                         <div class="d-flex align-items-center" style="gap:5px">
                             <h5 style="font-weight:600"> {{ user.first_name + " " + user.last_name }} </h5>
                             <div class="badge">
@@ -36,7 +36,7 @@
                         </span>
                     </div>
                    </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
