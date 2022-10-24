@@ -9,7 +9,7 @@
                         <img :src='user.photo === null ? "/no-user.png" : config.imgUrl + user.photo ' alt="">
                         <div class="d-flex align-items-center" style="gap:5px">
                             <h5 style="font-weight:600"> {{ user.first_name + " " + user.last_name }} </h5>
-                            <div class="badge">
+                            <div class="badge" v-if="user.is_manufacturer === 'yes' ">
                                 M
                             </div>
                         </div>

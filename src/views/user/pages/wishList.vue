@@ -8,7 +8,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="py-2 w-100" v-if="wishlist.length === 0">
+                <div class="py-2 w-100" v-if="wishlist.length === 0 || wishlist.product === null ">
                       <el-alert
                       class="w-100"
                         title="Oops!!! No Wishlist Item yet"
@@ -23,7 +23,7 @@
                     </div>
                 <div class="single--order_list d-flex justify-content-between mb-4" v-for="item in wishlist" :key="item.id">
                     <div class="d-flex align-items-center" style="gap:10px">
-                        <img :src=' config.imgUrl + item.product.app_icon ' alt="product Image">
+                        <img :src='item.product.app_icon === null ? "/no-product.webp" : config.imgUrl + item.product.app_icon ' alt="product Image">
                         <div>
                             <h5 class="font-weight-bold text-dark"> {{ item.product.name }} </h5>
                         </div>

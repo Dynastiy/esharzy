@@ -183,15 +183,11 @@
         this.$store.dispatch("auth/removeAddress", id)
       },
       addAddress(){
-        this.$store.dispatch("auth/addAddress", this.payload)
-        this.payload = {}
+        this.$store.dispatch("auth/addNewAddress", this.payload)
       },
       addAddressCard(){
         this.add = !this.add
       },
-      // placeOrder(){
-
-      // }
       makePayment(){
         let payload = {
           name: this.dataObj.name,

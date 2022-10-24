@@ -403,6 +403,39 @@ export default {
                 })
         },
 
+        // Add Address
+        async addNewAddress({ dispatch, commit }, payload) {
+            commit('SET_LOADING')
+            try {
+                const res = await request().post(`add-address/`, payload);
+                Toastify({
+                    text: `Address added Succesfully`,
+                    className: "info",
+                    style: {
+                        background: "green",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                console.log(res);
+            } catch (error) {
+                console.log(error.response.data.errors);
+                Toastify({
+                    text: `Error!`,
+                    className: "info",
+                    style: {
+                        background: "red",
+                        fontSize: "12px",
+                        borderRadius: "3px"
+                    }
+                }).showToast();
+                commit("SET_ERRORS", error.response.data.errors)
+            } finally {
+                commit('END_LOADING')
+                dispatch("setUser")
+            }
+        },
+
 
         // Remove Address
         removeAddress({ dispatch }, id) {

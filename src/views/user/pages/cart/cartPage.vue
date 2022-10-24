@@ -4,6 +4,7 @@
       <div class="checkout my-4">
         <div class="">
           <div>
+            <!-- {{ cart }} -->
             <div class="bg-white p-5 text-center" v-if="cart.length == 0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
