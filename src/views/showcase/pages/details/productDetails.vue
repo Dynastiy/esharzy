@@ -4,7 +4,6 @@
     element-loading-background="rgba(255, 255, 255, 0.7)"
     style="width: 100%"
   >
-    <div class="">
       <div class="container-fluid py-3">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item
@@ -219,108 +218,105 @@
         </div> -->
       </div>
     </div>
-  </div>
 </template>
 
-
 <script>
-import config from "@/config/api";
-import StarRating from "vue-star-rating";
-import VendorReviews from "../components/vendorReviews.vue";
-import ShopDetails from "../components/shopDetails.vue";
-import VendorProducts from "../components/vendorProducts.vue";
+import config from '@/config/api'
+import StarRating from 'vue-star-rating'
+import VendorReviews from '../../components/vendorReviews.vue'
+import ShopDetails from '../../components/shopDetails.vue'
+import VendorProducts from '../../components/vendorProducts.vue'
 // import RelatedProducts from "../components/relatedProducts.vue";
-import GalleryView from "../components/galleryView.vue";
+import GalleryView from '../../components/galleryView.vue'
 export default {
   components: {
     StarRating,
     VendorReviews,
     ShopDetails,
     VendorProducts,
-    GalleryView,
+    GalleryView
   },
-  data() {
+  data () {
     return {
       config,
       rating: 5,
       num: 1,
-      activeName: "first",
-      dialogVisible: false,
-    };
+      activeName: 'first',
+      dialogVisible: false
+    }
   },
   methods: {
-    addToCart() {
-      let payload = {
-        product_id: this.$store.getters["showcase/getSingleProduct"].id,
-        quantity: this.num,
-      };
-      console.log(payload);
-      this.$store.dispatch("auth/addToCart", payload);
-    },
+    addToCart () {
+      const payload = {
+        product_id: this.$store.getters['showcase/getSingleProduct'].id,
+        quantity: this.num
+      }
+      console.log(payload)
+      this.$store.dispatch('auth/addToCart', payload)
+    }
   },
-  beforeMount() {
-    
-    this.$store.dispatch("showcase/getStoreById", this.product.shop_id);
+  beforeMount () {
+    this.$store.dispatch('showcase/getStoreById', this.product.shop_id)
   },
-  beforeCreate(){
-    let slug = this.$route.params.slug;
-    this.$store.dispatch("showcase/getProductBySlug", slug);
+  beforeCreate () {
+    const slug = this.$route.params.slug
+    this.$store.dispatch('showcase/getProductBySlug', slug)
   },
   computed: {
-    product() {
-      return this.$store.getters["showcase/getSingleProduct"];
+    product () {
+      return this.$store.getters['showcase/getSingleProduct']
     },
-    categories() {
-      return this.product.categories;
+    categories () {
+      return this.product.categories
     },
 
-    tags() {
-      return this.product.tags;
+    tags () {
+      return this.product.tags
     },
-    slugName() {
-      return this.$route.params.slug;
+    slugName () {
+      return this.$route.params.slug
     },
-    currentRoute() {
-      return this.$route;
+    currentRoute () {
+      return this.$route
     },
-    images() {
-      let imagestoArray = [
+    images () {
+      const imagestoArray = [
         {
           id: 1,
           big: this.product.app_icon,
-          thumb: this.product.app_icon,
+          thumb: this.product.app_icon
         },
         {
           id: 2,
           big: this.product.photo_one,
-          thumb: this.product.photo_one,
+          thumb: this.product.photo_one
         },
         {
           id: 3,
           big: this.product.photo_two,
-          thumb: this.product.photo_two,
+          thumb: this.product.photo_two
         },
         {
           id: 4,
           big: this.product.photo_three,
-          thumb: this.product.photo_three,
+          thumb: this.product.photo_three
         },
         {
           id: 5,
           big: this.product.photo_four,
-          thumb: this.product.photo_four,
+          thumb: this.product.photo_four
         },
         {
           id: 6,
           big: this.product.photo_five,
-          thumb: this.product.photo_five,
-        },
-      ];
-      return imagestoArray;
+          thumb: this.product.photo_five
+        }
+      ]
+      return imagestoArray
     },
-    loading() {
-      return this.$store.getters["showcase/isLoading"];
-    },
-  },
-};
+    loading () {
+      return this.$store.getters['showcase/isLoading']
+    }
+  }
+}
 </script>

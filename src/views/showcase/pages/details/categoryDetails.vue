@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid" style="margin-top:2.5rem">
       <div class="shop">
         <!-- Shop Banner  -->
         <div class="shop--banner mb-4">
@@ -26,13 +26,10 @@
           </div>
         </div>
 
-        <div class="filters d-lg-flex align-items-center" style="gap: 20px">
-          <div class="category mb-4">
-            <el-select
-              v-model="category"
-              class="w-100"
-              placeholder="All Categories"
-            >
+        <div class="filters mb-4 d-flex" style="gap: 20px">
+          <div class="category">
+            <!-- {{ allCategories }} -->
+            <el-select v-model="category" placeholder="All Categories">
               <el-option
                 class="text-capitalize"
                 v-for="item in allCategories.categories"
@@ -44,33 +41,34 @@
             </el-select>
           </div>
 
-          <div class="default mb-4">
-            <select v-model="sort" class="w-100" placeholder="Default Sorting">
-              <option value="Default Sorting" selected>Default Sorting</option>
-              <option
+          <div class="default">
+            <!-- {{ allCategories }} -->
+            <el-select v-model="sort" placeholder="Default Sorting">
+              <el-option
                 class="text-capitalize"
                 v-for="item in sorting"
                 :key="item.id"
+                :label="item.label"
                 :value="item.value"
               >
-                {{ item.value }}
-              </option>
-            </select>
+              </el-option>
+            </el-select>
           </div>
         </div>
 
         <div
           class="border--area"
           style="border: 1px dashed var(--gray-400)"
-          v-show="allProducts.length == 0"
+          v-if="category_products.length === 0"
         >
-          <h6 style="font-weight: 400">No Stores found</h6>
+          <h6 style="font-weight: 400">
+            No products were found for this category
+          </h6>
         </div>
 
-        <!-- List Products  -->
-        <product-list :products="allProducts" @add_to_wishlist="addToWishlist('value')" @add_to_cart="addToCart('value')"/>
+          <!-- List Products -->
+         <product-list :products="category_products"  @add_to_wishlist="addToWishlist('value')" @add_to_cart="addToCart('value')"/>
 
-        <hr />
       </div>
     </div>
   </div>
@@ -78,9 +76,10 @@
 
 <script>
 import config from '@/config/api'
+import productList from '../../components/productList.vue'
 // import StarRating from "vue-star-rating";
-import ProductList from '../components/productList.vue'
 export default {
+  components: { productList },
   data () {
     return {
       config,
@@ -123,21 +122,27 @@ export default {
       const payload = {
         product_id: item.id
       }
+      const slug = this.$route.params.slug
       this.$store.dispatch('auth/addToWishlist', payload)
-      this.$store.dispatch('showcase/discountedProducts')
+      this.$store.dispatch('showcase/getCategoryById', slug)
     }
   },
   beforeMount () {
-    this.$store.dispatch('showcase/getProducts')
+    const slug = this.$route.params.slug
+    this.$store.dispatch('showcase/getCategoryById', slug)
+    this.$store.dispatch('showcase/getCategories', slug)
   },
   computed: {
     allCategories () {
       return this.$store.getters['showcase/getCategories']
     },
-    allProducts () {
-      return this.$store.getters['showcase/getProducts']
+    category_products () {
+      return this.$store.getters['showcase/getCategory']
+    },
+    loading () {
+      return this.$store.getters['showcase/isLoading']
     }
-  },
-  components: { ProductList }
+  }
+  // components: { StarRating },
 }
 </script>

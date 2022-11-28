@@ -21,7 +21,6 @@
                 </el-carousel>
               </div>
             </el-skeleton>
-            
           </div>
 
           <div class="promo--images">

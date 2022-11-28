@@ -1,384 +1,168 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/showcase/showCaseLayout'
-import UserView from '../views/user/userLayout'
 import VendorView from '../views/vendor/vendorLayout'
-import AuthView from '../views/auth/authLayout'
+// import AuthView from '../views/auth/authLayout'
 import Wholesale from '../views/wholesale/wholesaleLayout'
 
-import store from '@/store/index'
+import authRoutes from '../views/auth/router'
+import showcaseRoutes from '../views/showcase/router'
+import buyerRoutes from '../views/user/router'
+
+// import store from '@/store/index'
 
 Vue.use(VueRouter)
 
 const routes = [
-    // Showcase/Landing page Layout
+
+  // Wholesale page Layout
+  {
+    path: '/wholesale',
+    component: Wholesale,
+    children: [{
+      path: '/wholesale',
+      name: 'wholesale',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/showcase/pages/indexPage.vue')
+    }]
+  },
+
+  // Vendor Layout
+  {
+    path: '/vendor',
+    async beforeEnter (to, from, next) {
+      const
+        loggedIn = localStorage.getItem('token')
+      console.log(loggedIn)
+      if (!loggedIn) {
+        next({
+          path: '/login',
+          query: { redirectFrom: to.fullPath }
+        })
+      } else {
+        next()
+      }
+    },
+    name: 'vendor',
+    component: VendorView,
+    children: [{
+      path: '/vendor',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/indexPage.vue')
+    },
     {
-        path: '/',
-        component: HomeView,
-        children: [{
-                path: '/',
-                name: 'home',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/indexPage.vue')
-            },
-            {
-                path: '/shop',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/indexView.vue'),
-                children: [{
-                        path: '/shop',
-                        name: 'Shop',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/allProducts.vue')
-                    },
-                    {
-                        path: '/category/:slug',
-                        name: 'category',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/categoryId.vue')
-                    },
-                    {
-                        path: '/store-listing',
-                        name: 'Store List',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/storeListing.vue')
-                    },
-                    {
-                        path: '/store-listing/:slug',
-                        name: 'Store',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/showcase/pages/storeId.vue')
-                    },
-                ]
-            },
-
-            {
-                path: '/product/:slug',
-                name: 'product-detail',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/showcase/pages/_id.vue')
-            },
-            {
-                path: '/cart',
-                async beforeEnter(to, from, next) {
-                    var loggedIn
-                    loggedIn = localStorage.getItem("token")
-                    console.log(loggedIn);
-                    if (!loggedIn) {
-                        next({
-                            path: "/login",
-                            query: { redirectFrom: to.fullPath },
-                        });
-                    } else {
-                        next();
-                    }
-                },
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/indexPage.vue'),
-                children: [{
-                        path: '/cart',
-                        name: 'view-cart',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/cartPage.vue')
-                    },
-
-                    {
-                        path: '/check-out',
-                        name: 'check-out',
-                        // route level code-splitting
-                        // this generates a separate chunk (about.[hash].js) for this route
-                        // which is lazy-loaded when the route is visited.
-                        component: () =>
-                            import ( /* webpackChunkName: "about" */ '../views/user/pages/cart/checkOut.vue')
-                    }
-                ]
-            },
-
-        ]
+      path: '/vendor/all-products',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/products/indexPage.vue')
+    },
+    {
+      path: '/vendor/add-product',
+      name: 'add-product',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/products/addProduct.vue')
+    },
+    {
+      path: '/vendor/edit-product',
+      name: 'edit-product',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/products/components/editProduct.vue')
+    },
+    {
+      path: '/vendor/product/:slug',
+      name: 'vendor-product-detail',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/products/_id.vue')
     },
 
-    // Wholesale page Layout
     {
-        path: '/wholesale',
-        component: Wholesale,
-        children: [{
-            path: '/wholesale',
-            name: 'wholesale',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () =>
-                import ( /* webpackChunkName: "about" */ '../views/showcase/pages/indexPage.vue')
-        }, ]
+      path: '/orders',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/orders/indexPage.vue')
     },
-
-
-
-    // User Layout
     {
-        path: '/buyer',
-        async beforeEnter(to, from, next) {
-            var user = store.getters['auth/getUser']
-            var loggedIn
-            loggedIn = localStorage.getItem("token")
-            console.log(loggedIn);
-            if (!loggedIn) {
-                next({
-                    path: "/login",
-                    query: { redirectFrom: to.fullPath },
-                });
-            } else if (user.role === "vendor") {
-                next({
-                    path: "/vendor",
-                });
-            } else {
-                next();
-            }
-        },
-        name: 'user',
-        component: UserView,
-        children: [{
-                path: '/buyer',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/indexPage.vue')
-            },
-            {
-                path: '/wishlist',
-                name: 'wishlist',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/wishList.vue')
-            },
-            {
-                path: '/vendor-applications',
-                name: 'vendor-applications',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/vendorApplications.vue')
-            },
-            {
-                path: '/vendor-application/:id',
-                name: 'vendor-application',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/applicationID.vue')
-            },
-            {
-                path: '/order-history',
-                name: 'order-history',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/orderHistory.vue')
-            },
-
-            {
-                path: '/order-history/single-order',
-                name: 'orderById',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/user/pages/orderId.vue')
-            },
-
-        ]
+      path: '/payouts',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/payouts/indexPage.vue')
     },
-
-    // Vendor Layout
     {
-        path: '/vendor',
-        async beforeEnter(to, from, next) {
-            var loggedIn
-            loggedIn = localStorage.getItem("token")
-            console.log(loggedIn);
-            if (!loggedIn) {
-                next({
-                    path: "/login",
-                    query: { redirectFrom: to.fullPath },
-                });
-            } else {
-                next();
-            }
-        },
-        name: 'vendor',
-        component: VendorView,
-        children: [{
-                path: '/vendor',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/indexPage.vue')
-            },
-            {
-                path: '/vendor/all-products',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/indexPage.vue'),
-            },
-            {
-                path: '/vendor/add-product',
-                name: 'add-product',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/addProduct.vue')
-            },
-            {
-                path: '/vendor/edit-product',
-                name: 'edit-product',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/components/editProduct.vue')
-            },
-            {
-                path: '/vendor/product/:slug',
-                name: "vendor-product-detail",
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/products/_id.vue')
-            },
-
-            {
-                path: '/orders',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/orders/indexPage.vue')
-            },
-            {
-                path: '/payouts',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/payouts/indexPage.vue')
-            },
-            {
-                path: '/vendor/settings',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/indexPage.vue')
-            },
-            {
-                path: '/vendor/applications/:id',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/singleApplication.vue')
-            },
-            {
-                path: '/vendor/manufacturer-applications/:id',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/manufacturerSingleApplication.vue')
-            },
-            {
-                path: '/transactions',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/vendor/pages/transactions/indexPage.vue')
-            },
-        ]
+      path: '/vendor/settings',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/settings/indexPage.vue')
     },
-
-    // Auth Layout
     {
-        path: '/login',
-        component: AuthView,
-        children: [{
-                path: '/login',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/auth/pages/loginPage.vue')
-            },
-            {
-                path: '/register',
-                name: 'register',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/auth/pages/registerPage.vue')
-            },
-        ]
+      path: '/vendor/applications/:id',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/singleApplication.vue')
     },
-
-
     {
-        path: '/about',
-        name: 'about',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/AboutView.vue')
+      path: '/vendor/manufacturer-applications/:id',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/settings/components/manufacturerSingleApplication.vue')
+    },
+    {
+      path: '/transactions',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ '../views/vendor/pages/transactions/indexPage.vue')
     }
+    ]
+  },
+
+  {
+    path: '/about',
+    name: 'about',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  }
 ]
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    scrollBehavior() {
-        return window.scrollTo({ top: 0, behavior: 'smooth' });
-    },
-    routes
-})
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: routes.concat(
+    authRoutes, showcaseRoutes, buyerRoutes
+  ),
+  scrollBehavior () {
+    return window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
+})
 
 export default router

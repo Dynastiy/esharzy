@@ -163,42 +163,45 @@
         </div>
       </div>
 
+      <!-- Update Profile Photo  -->
+      <update-profile-photo/>
+
       <!-- Become a Vendor Modal  -->
       <BecomeAVendor @closeModal="closeModal" v-show="become_a_vendor"/>
     </div>
   </div>
 </template>
 
-
 <script>
-import BecomeAVendor from './modals/becomeAVendor.vue';
+import BecomeAVendor from './modals/becomeAVendor.vue'
+import UpdateProfilePhoto from './modals/updateProfilePhoto.vue'
 export default {
-  data(){
+  data () {
     return {
       become_a_vendor: false
     }
   },
-    methods: {
-        becomeAVendor() {
-            this.become_a_vendor = true
-        },
-        closeModal(){
-          this.become_a_vendor = false
-        },
-        updateprofilePhoto() {
-        },
-        logout() {
-            this.$store.dispatch("auth/logout");
-        },
+  methods: {
+    becomeAVendor () {
+      this.become_a_vendor = true
     },
-    computed: {
-        getUser() {
-            return this.$store.getters["auth/getUser"];
-        },
-        loading() {
-            return this.$store.getters["auth/isLoading"];
-        },
+    closeModal () {
+      this.become_a_vendor = false
     },
-    components: { BecomeAVendor }
-};
+    updateprofilePhoto () {
+    },
+    logout () {
+      this.$store.dispatch('auth/logout')
+    }
+  },
+  computed: {
+    getUser () {
+      return this.$store.getters['auth/getUser']
+    },
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  },
+  components: { BecomeAVendor, UpdateProfilePhoto }
+}
 </script>

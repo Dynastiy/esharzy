@@ -441,9 +441,12 @@ header .header--content {
 }
 
 .footer a,
-.footer p {
+.footer p,
+.footer h6 {
     color: var(--gray-500);
     font-size: 0.9rem;
+    font-weight: 300;
+    font-size: 0.8rem;
 }
 
 .footer a:hover {
@@ -452,7 +455,15 @@ header .header--content {
 
 .footer h4 {
     color: var(--gray-200);
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 
@@ -590,7 +601,7 @@ header .header--content {
 
 .shop--products .search button {
     border-radius: 0 !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
 }
 
 .shop--products input {
@@ -602,6 +613,8 @@ header .header--content {
     padding: 0.5rem 0.5rem;
     font-size: 14px;
     color: var(--accent-color-dark);
+    font-weight: 300;
+    font-size: 0.8rem;
 }
 
 .shop--products input::placeholder {

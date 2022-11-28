@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div>
-      <div>
+    <div class="container-fluid mt-4">
         <div class="search--area bg-white my-4 p-3">
           <input type="text" placeholder="Search Vendors" />
           <button>APPLY</button>
@@ -38,31 +37,30 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-import config from "@/config/api";
-    export default {
-        data(){
-            return {
-                config
-            }
-        },
-        methods:{
-            goToStore(store) {
-                this.$router.push(`/store-listing/${store.slug}`)
-                this.$store.dispatch('showcase/getStoreBySlug', store.slug)
-            }
-        },
-        
-  beforeMount() {
-    this.$store.dispatch("showcase/getStores");
+import config from '@/config/api'
+export default {
+  data () {
+    return {
+      config
+    }
+  },
+  methods: {
+    goToStore (store) {
+      this.$router.push(`/store-listing/${store.slug}`)
+      this.$store.dispatch('showcase/getStoreBySlug', store.slug)
+    }
+  },
+
+  beforeMount () {
+    this.$store.dispatch('showcase/getStores')
   },
   computed: {
-    stores() {
-      return this.$store.getters["showcase/getStores"];
-    },
-  },
-};
+    stores () {
+      return this.$store.getters['showcase/getStores']
+    }
+  }
+}
 </script>
