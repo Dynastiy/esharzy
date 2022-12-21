@@ -18,11 +18,16 @@ export default {
     applications: [],
     application: {},
     submittedApplication: {},
-    submitted: false
+    submitted: false,
+    product: {}
   },
   mutations: {
     SET_PRODUCTS (state, data) {
       state.products = data
+    },
+
+    SET_SINGLE_PRODUCT (state, data) {
+      state.product = data
     },
     SET_ERRORS (state, data) {
       state.errors = data
@@ -67,6 +72,20 @@ export default {
         return res
       } catch (error) {
         console.log(error)
+      }
+    },
+
+    async getProductBySlug ({ commit }, slug) {
+      commit('SET_LOADING', true)
+      try {
+        const res = await Axios().get(`show-product/${slug}`)
+        commit('SET_SINGLE_PRODUCT', res.data.product)
+        console.log(res.data.product)
+        return res
+      } catch (error) {
+        return error
+      } finally {
+        commit('SET_LOADING', false)
       }
     },
 
@@ -134,7 +153,7 @@ export default {
       }
     },
 
-    async addDiscount ({ commit }, payload) {
+    async addDiscount ({ commit, dispatch }, payload) {
       commit('SET_LOADING', true)
       try {
         const res = await Axios().post(`add-discount/${payload.id}`, payload)
@@ -148,6 +167,7 @@ export default {
           }
         }).showToast()
         console.log(res)
+        dispatch('getProductBySlug', payload.slug)
       } catch (error) {
         console.log(error.response.data.errors)
         Toastify({
@@ -165,10 +185,10 @@ export default {
       }
     },
 
-    async removeDiscount ({ commit }, id) {
+    async removeDiscount ({ commit, dispatch }, payload) {
       commit('SET_LOADING', true)
       try {
-        const res = await Axios().post(`remove-discount/${id}`)
+        const res = await Axios().post(`remove-discount/${payload.id}`)
         Toastify({
           text: 'Discount Removed Succesfully',
           className: 'info',
@@ -178,6 +198,7 @@ export default {
             fontSize: '13px'
           }
         }).showToast()
+        dispatch('getProductBySlug', payload.slug)
         console.log(res)
       } catch (error) {
         console.log(error.response.data.errors)
@@ -390,6 +411,7 @@ export default {
     getApplications: (state) => state.applications,
     getApplication: (state) => state.application,
     submittedApplication: (state) => state.submittedApplication,
-    isSubmitted: (state) => state.submitted
+    isSubmitted: (state) => state.submitted,
+    getSingleProduct: (state) => state.product
   }
 }

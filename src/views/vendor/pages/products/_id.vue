@@ -56,12 +56,12 @@ export default {
       this.$store.dispatch('showcase/getTags')
       // this.payload = this.$store.getters['showcase/getSingleProduct']
       const slug = this.$route.params.slug
-      this.$store.dispatch('showcase/getProductBySlug', slug)
+      this.$store.dispatch('vendor/getProductBySlug', slug)
     }
   },
   computed: {
     product () {
-      return this.$store.getters['showcase/getSingleProduct']
+      return this.$store.getters['vendor/getSingleProduct']
     }
   },
   components: { OverviewPage, DescriptionPage, MediaPage, ReviewsAndRatings }
