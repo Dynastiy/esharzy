@@ -178,7 +178,7 @@ export default {
       }
     },
     my_rating () {
-      const items = this.$store.getters['showcase/getSingleProduct'].ratings
+      const items = this.product.ratings
 
       if (items.length > 0) {
         const val = items.find(item => item.user.id === this.getUser.id)
@@ -213,18 +213,18 @@ export default {
       return this.$store.getters['auth/getUser']
     },
     product () {
-      return this.$store.getters['showcase/getSingleProduct']
+      return this.$store.getters['vendor/getSingleProduct']
     },
     reviews () {
-      return this.$store.getters['showcase/getSingleProduct'].reviews
+      return this.product.reviews
     },
     ratings () {
-      return this.$store.getters['showcase/getSingleProduct'].ratings
+      return this.product.ratings
     },
 
     ratingValues () {
       const ratings =
-          this.$store.getters['showcase/getSingleProduct'].ratings
+          this.product.ratings
       let one = ratings.filter((rating) => (rating.scale > 0 && rating.scale <= 1.5)).length
       one = (one / ratings.length) * 100
       let two = ratings.filter((rating) => (rating.scale > 1.5 && rating.scale <= 2.5)).length

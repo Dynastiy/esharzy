@@ -89,6 +89,38 @@ export default {
       }
     },
 
+    async editProduct ({ commit, dispatch }, payload) {
+      commit('SET_LOADING', true)
+      try {
+        const res = await Axios().post(`edit-product/${payload.id}`, payload.formData)
+        Toastify({
+          text: 'Product updated Succesfully',
+          className: 'info',
+          style: {
+            background: 'green',
+            borderRadius: '3px',
+            fontSize: '13px'
+          }
+        }).showToast()
+        dispatch('getProductBySlug', payload.slug)
+        console.log(res)
+      } catch (error) {
+        console.log(error.response.data.errors)
+        Toastify({
+          text: 'Error!',
+          className: 'info',
+          style: {
+            background: 'red',
+            borderRadius: '3px',
+            fontSize: '13px'
+          }
+        }).showToast()
+        commit('SET_ERRORS', error.response.data.errors)
+      } finally {
+        commit('SET_LOADING', false)
+      }
+    },
+
     async updateStock ({ commit, dispatch }, payload) {
       commit('SET_LOADING', true)
       try {

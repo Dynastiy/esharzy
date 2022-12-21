@@ -47,6 +47,11 @@
                     :value="item.id"
                   ></el-option>
                 </el-select>
+                <div>
+                  <ul class="m-0">
+                    <li v-for="item in product.categories" :key="item.id"> {{ item.category_name }}</li>
+                  </ul>
+                </div>
               </div>
               <div class="w-100">
                 <label for="">Choose Tags</label>
@@ -63,12 +68,52 @@
                     :value="item.id"
                   ></el-option>
                 </el-select>
+                <div>
+                  <ul>
+                    <li v-for="item in product.tags" :key="item.id"> {{ item.name }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-lg-flex mb-3" style="gap: 20px;">
+              <div class="w-100 mb-3">
+                <label for="">Select Shipping Class</label><br />
+                <el-select
+                  v-model="payload.shipping_class_id"
+                  placeholder="Select"
+                >
+                  <el-option
+                    v-for="item in shippingClasses"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="w-100 mb-3">
+                <label for="">Select Sub Category</label><br />
+                <el-select
+                  v-model="payload.subcategory_ids"
+                  multiple
+                  placeholder="Select"
+                >
+                  <el-option
+                    v-for="item in subCategories"
+                    :key="item.id"
+                    :label="item.sub_category_name"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
               </div>
             </div>
 
             <div>
               <div class="text-right">
-                <button class="btn-dark btn">Update Product</button>
+                <i v-if="loading" class="el-icon-loading"></i>
+                <button class="btn-dark btn" v-else>Update Product</button>
               </div>
             </div>
           </form>
@@ -138,7 +183,9 @@ export default {
         name: '',
         price: '',
         category_ids: [],
-        tag_ids: []
+        tag_ids: [],
+        subcategory_ids: [],
+        shipping_class_id: ''
       },
       dataObj: {
         price: ''
@@ -169,20 +216,35 @@ export default {
       const formData = new FormData()
       formData.append('name', this.payload.name)
       formData.append('price', this.payload.price)
-      formData.append('category_ids', this.payload.category_ids)
-      formData.append('tag_ids', this.payload.tag_ids)
-      this.loading = true
-      this.$store.dispatch('vendor/createProduct', formData)
+      // formData.append('category_ids', this.payload.category_ids);
+      this.payload.category_ids.forEach(function (value) {
+        formData.append('category_ids[]', value)
+      })
+
+      // formData.append('subcategory_ids[]', this.payload.subcategory_ids);
+      this.payload.subcategory_ids.forEach(function (value) {
+        formData.append('subcategory_ids[]', value)
+      })
+
+      formData.append('shipping_class_id', this.payload.shipping_class_id)
+
+      // formData.append('tag_ids[]', this.payload.tag_ids);
+      this.payload.tag_ids.forEach(function (value) {
+        formData.append('tag_ids[]', value)
+      })
+      const payload = {
+        id: this.product.id,
+        slug: this.product.slug,
+        formData
+      }
+      this.$store.dispatch('vendor/editProduct', payload)
     }
   },
   mounted () {
-    this.payload = this.product
+    // this.payload = this.product
   },
   beforeMount () {
-    const slug = this.$route.params.slug
-    this.$store.dispatch('vendor/getProductBySlug', slug)
-    this.$store.dispatch('showcase/getCategories')
-    this.$store.dispatch('showcase/getTags')
+    this.payload = this.product
   },
   computed: {
     allCategories () {
@@ -190,6 +252,12 @@ export default {
     },
     allTags () {
       return this.$store.getters['showcase/getTags'].tags
+    },
+    subCategories () {
+      return this.$store.getters['showcase/getSubCategories']
+    },
+    shippingClasses () {
+      return this.$store.getters['vendor/shippingClasses']
     },
     errMessages () {
       return this.$store.getters['vendor/isErrors']

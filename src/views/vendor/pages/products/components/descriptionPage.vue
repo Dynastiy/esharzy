@@ -3,7 +3,7 @@
       <div class="">
         <h4 class="text-dark my-3">Product Description</h4>
         <div class="add-item-content">
-          <form action="" @submit.prevent="addProduct">
+          <form action="" @submit.prevent="updateProduct">
 
             <div class="mb-2">
               <vue-editor
@@ -52,8 +52,15 @@ export default {
     }
   },
   methods: {
-    goBack () {
-      this.$router.go(-1)
+    async updateProduct () {
+      const formData = new FormData()
+      formData.append('description', this.payload.description)
+      const payload = {
+        id: this.product.id,
+        slug: this.product.slug,
+        formData
+      }
+      this.$store.dispatch('vendor/editProduct', payload)
     }
   },
 
@@ -72,7 +79,7 @@ export default {
       return this.$store.getters['vendor/isErrors']
     },
     product () {
-      return this.$store.getters['showcase/getSingleProduct']
+      return this.$store.getters['vendor/getSingleProduct']
     }
   }
 }

@@ -23,7 +23,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -36,7 +37,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/products/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -49,7 +51,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/products/addProduct.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -60,9 +63,10 @@ export default [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ '../pages/products/components/editProduct.vue'),
+      import(/* webpackChunkName: "about" */ '../pages/products/singleProduct.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -73,9 +77,10 @@ export default [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ '../pages/products/_id.vue'),
+      import(/* webpackChunkName: "about" */ '../pages/products/singleProduct.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -88,7 +93,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/orders/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -100,7 +106,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/payouts/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -112,7 +119,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/settings/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -124,7 +132,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/settings/components/singleApplication.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -136,7 +145,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/settings/components/manufacturerSingleApplication.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   },
@@ -148,7 +158,8 @@ export default [
     component: () =>
       import(/* webpackChunkName: "about" */ '../pages/transactions/indexPage.vue'),
     meta: {
-      layout: 'vendorLayout'
+      layout: 'vendorLayout',
+      parent: 'products'
     },
     beforeEnter: guardMyroute
   }

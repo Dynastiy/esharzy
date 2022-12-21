@@ -7,7 +7,7 @@
           </div>
           <ul>
             <li>
-              <router-link to="/vendor">
+              <router-link to="/vendor" :class="[{ 'router-link-exact-active': route === 'dashboard' }]">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/vendor/all-products">
+              <router-link to="/vendor/all-products" :class="[{ 'router-link-exact-active': route === 'products' }]">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/orders">
+              <router-link to="/orders" :class="[{ 'router-link-exact-active': route === 'orders' }]">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@
               </router-link>
             </li>
              <li>
-              <router-link to="/transactions">
+              <router-link to="/transactions" :class="[{ 'router-link-exact-active': route === 'transactions' }]">
                 <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-receipt" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -96,7 +96,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/payouts">
+              <router-link to="/payouts" :class="[{ 'router-link-exact-active': route === 'payouts' }]">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/vendor/settings">
+              <router-link to="/vendor/settings" :class="[{ 'router-link-exact-active': route === 'settings' }]">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -152,3 +152,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    route () {
+      return this.$route.meta.parent
+    }
+  }
+}
+</script>

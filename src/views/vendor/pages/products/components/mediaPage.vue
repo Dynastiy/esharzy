@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     product () {
-      return this.$store.getters['showcase/getSingleProduct']
+      return this.$store.getters['vendor/getSingleProduct']
     }
   }
 }

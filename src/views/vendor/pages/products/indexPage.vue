@@ -96,9 +96,11 @@ export default {
   methods: {
     viewProduct (data) {
       this.$router.push({ name: 'vendor-product-detail', params: { slug: data.slug } })
+      this.$store.dispatch('vendor/getProductBySlug', data.slug)
     },
     editProduct (data) {
       this.$router.push({ name: 'edit-product', params: { slug: data.slug } })
+      this.$store.dispatch('vendor/getProductBySlug', data.slug)
     },
     close () {
       this.delete_confirm = !this.delete_confirm
