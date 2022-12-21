@@ -15,8 +15,7 @@
             <button
               class="discover--btn mt-3"
               data-aos="fade-up"
-              style="
-                font-weight: 600;
+              style="font-weight: 600;
                 border: 2px solid #000 !important;
                 color: var(--accent-color-dark);
               "
@@ -68,7 +67,7 @@
         </div>
 
         <!-- List Products  -->
-        <product-list :products="allProducts" @add_to_wishlist="addToWishlist('value')" @add_to_cart="addToCart('value')"/>
+        <product-list :products="allProducts" @add_to_wishlist="addToWishlist" @add_to_cart="addToCart"/>
 
         <hr />
       </div>
@@ -110,21 +109,21 @@ export default {
     }
   },
   methods: {
-    addToCart (item) {
+    addToCart (value) {
       const payload = {
-        product_id: item.id,
+        product_id: value,
         quantity: this.num
       }
       localStorage.setItem('cart_details', JSON.stringify(payload))
       console.log(payload)
       this.$store.dispatch('auth/addToCart', payload)
     },
-    addToWishlist (item) {
+    addToWishlist (value) {
       const payload = {
-        product_id: item.id
+        product_id: value
       }
       this.$store.dispatch('auth/addToWishlist', payload)
-      this.$store.dispatch('showcase/discountedProducts')
+      this.$store.dispatch('showcase/getProducts')
     }
   },
   beforeMount () {

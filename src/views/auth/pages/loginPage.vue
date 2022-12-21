@@ -24,7 +24,7 @@
                   class="input--text"
                   placeholder="Email"
                 />
-                <small class="text-danger" v-show="errMessages.email" v-for="err in errMessages.email" :key="err"> *{{ err }} </small>
+                <!-- <small class="text-danger" v-for="err in errMessages.email" :key="err"> *{{ err }} </small> -->
               </div>
               <div class="mb-3">
                 <!-- <label class="d-block small" for=""
@@ -37,12 +37,12 @@
                   </div>
                 </div>
                 <span class="text-secondary" style="font-size:0.7rem !important">Min. 8 Characters</span>
-                <small class="text-danger" v-show="errMessages.password" v-for="err in errMessages.password" :key="err"> *{{ err }} </small>
+                <!-- <small class="text-danger" v-for="err in errMessages.password" :key="err"> *{{ err }} </small> -->
               </div>
               <div
                 class="mb-1 d-flex justify-content-between align-items-center"
               >
-                
+
                 <div class="">
                   <span
                     class="small d-block text-right font-weight-bold"
@@ -64,55 +64,53 @@
         </div>
     </div>
 
-    
   </div>
 </template>
 
 <script>
 
 export default {
-  data() {
+  data () {
     return {
-      type: "password",
-      icon: "bi:eye-slash",
-      actions: "show",
+      type: 'password',
+      icon: 'bi:eye-slash',
+      actions: 'show',
       credentials: {
-        email: "",
-        password: "",
-      },
-    };
+        email: '',
+        password: ''
+      }
+    }
   },
   methods: {
-    showPassword() {
-      if (this.type === "password") {
-        this.type = "text";
-        this.icon = "clarity:eye-line";
-        this.actions = "hide"
+    showPassword () {
+      if (this.type === 'password') {
+        this.type = 'text'
+        this.icon = 'clarity:eye-line'
+        this.actions = 'hide'
       } else {
-        this.type = "password";
-        this.icon = "bi:eye-slash";
-        this.actions = "show"
+        this.type = 'password'
+        this.icon = 'bi:eye-slash'
+        this.actions = 'show'
       }
     },
-    async login() {
-        this.$store.dispatch('auth/userLogin', this.credentials)
+    async login () {
+      this.$store.dispatch('auth/userLogin', this.credentials)
     },
-    goToLogin() {
-      this.$router.push("/sign-up");
-    },
-    
+    goToLogin () {
+      this.$router.push('/sign-up')
+    }
+
   },
-  computed:{
-    
-        errMessages(){
-            return this.$store.getters['auth/isError']
-        },
-        loading(){
-            return this.$store.getters['auth/isLoading']
-        }
+  computed: {
+    errMessages () {
+      return this.$store.getters['auth/isError']
     },
-  
-};
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  }
+
+}
 </script>
 
 <style>

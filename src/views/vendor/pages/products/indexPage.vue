@@ -48,17 +48,18 @@
                     <td>&#8358; {{ data.price == null ? 0 : data.price.toLocaleString() }}</td>
                     <td>
                       <span :class="data.availability"> {{ data.availability }} </span>
-                      <button class="py-1 px-1" @click='toggleAvailability(data, data.availability === "in-stock" ? "out-of-stock" : "in-stock")'
-                      :class='data.availability === "in-stock" ? "" : "bg-success"  ' > 
-                      {{ data.availability === "in-stock" ? "Out of Stock" : "In Stock"  }} </button>
+
                     </td>
                     <td>
                       <span :class="data.status"> {{ data.status }} </span>
                     </td>
                     <td>{{ timeStamp2(data.created_at) }}</td>
                     <td class="d-lg-flex" style="gap:10px">
+                        <button class="py-1 px-2" @click='toggleAvailability(data, data.availability === "in-stock" ? "out-of-stock" : "in-stock")'
+                        :class='data.availability === "in-stock" ? "" : "bg-success"  ' >
+                        {{ data.availability === "in-stock" ? "Out of Stock" : "In Stock"  }} </button>
                         <button @click="deleteProduct(data)" style="width:max-content" class="py-1 px-2 small">Delete</button>
-                        <button @click="deleteProduct(data)" style="width:max-content" class="py-1 px-2 small bg-info">Edit</button>
+                        <button @click="editProduct(data)" style="width:max-content" class="py-1 px-2 small bg-info">Edit</button>
                         <button @click="viewProduct(data)" style="width:max-content" class="py-1 px-2 small bg-success">View &raquo; </button>
                     </td>
                   </tr>
@@ -78,52 +79,55 @@
   </div>
 </template>
 
-
 <script>
 import config from '@/config/api'
-import { timeStamp2 } from "@/plugins/filter";
-import ConfirmDelete from "../../modals/confirmDelete.vue";
+import { timeStamp2 } from '@/plugins/filter'
+import ConfirmDelete from '../../modals/confirmDelete.vue'
 // import EditProduct from './components/editProduct.vue';
 export default {
-    data() {
-        return {
-            timeStamp2,config,
-            delete_confirm: false,
-            product_id: ""
-        };
+  data () {
+    return {
+      timeStamp2,
+      config,
+      delete_confirm: false,
+      product_id: ''
+    }
+  },
+  methods: {
+    viewProduct (data) {
+      this.$router.push({ name: 'vendor-product-detail', params: { slug: data.slug } })
     },
-    methods: {
-        viewProduct(data) {
-            this.$router.push({ name: "vendor-product-detail", params: { slug: data.slug } });
-        },
-        close(){
+    editProduct (data) {
+      this.$router.push({ name: 'edit-product', params: { slug: data.slug } })
+    },
+    close () {
       this.delete_confirm = !this.delete_confirm
-      },
-      toggleAvailability(data, value) {
-        let payload = {
-          id: data.id,
-          availability: value
-        }
-        this.$store.dispatch("vendor/updateStock", payload)
-      },
-        deleteProduct(data){
-        this.product_id = data.id
-        this.delete_confirm = !this.delete_confirm
-        console.log(this.product_id);
-      },
-      deleteThisProduct(){
-        this.$store.dispatch("vendor/deleteProduct", this.product_id)
-        this.close()
+    },
+    toggleAvailability (data, value) {
+      const payload = {
+        id: data.id,
+        availability: value
       }
+      this.$store.dispatch('vendor/updateStock', payload)
     },
-    beforeMount() {
-        this.$store.dispatch("vendor/getProducts");
+    deleteProduct (data) {
+      this.product_id = data.id
+      this.delete_confirm = !this.delete_confirm
+      console.log(this.product_id)
     },
-    computed: {
-        getProducts() {
-            return this.$store.getters["vendor/getProducts"];
-        }
-    },
-    components: { ConfirmDelete }
-};
+    deleteThisProduct () {
+      this.$store.dispatch('vendor/deleteProduct', this.product_id)
+      this.close()
+    }
+  },
+  beforeMount () {
+    this.$store.dispatch('vendor/getProducts')
+  },
+  computed: {
+    getProducts () {
+      return this.$store.getters['vendor/getProducts']
+    }
+  },
+  components: { ConfirmDelete }
+}
 </script>

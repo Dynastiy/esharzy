@@ -31,7 +31,7 @@
                         :closable="false">
                       </el-alert>
                     </div>
-                    <tr v-for="item in orders" :key="item.id"> 
+                    <tr v-for="item in orders" :key="item.id">
                       <td>{{ item.buyer.first_name + " " + item.buyer.last_name }}</td>
                       <td> {{ item.delivery_address }} </td>
                       <td> {{ timeStamp(item.created_at) }} </td>
@@ -49,19 +49,19 @@
 </template>
 
 <script>
-  import { timeStamp } from '@/plugins/filter'
+import { timeStamp } from '@/plugins/filter'
 export default {
-  data(){
+  data () {
     return {
       timeStamp
     }
   },
-  beforeMount(){
-    this.$store.dispatch("vendor/getOrders")
+  beforeMount () {
+    this.$store.dispatch('vendor/getOrders')
   },
-  computed:{
-    orders(){
-      return this.$store.getters["vendor/getOrders"]
+  computed: {
+    orders () {
+      return this.$store.getters['vendor/getOrders']
     }
   }
 }

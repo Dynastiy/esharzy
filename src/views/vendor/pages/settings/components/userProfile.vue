@@ -26,13 +26,13 @@
                 <label for="">First Name</label>
                 <input type="text" v-model="userData.first_name" />
               </div>
-  
+
               <div class="w-100">
                 <label for="">Last Name</label>
                 <input type="text" v-model="userData.last_name" />
               </div>
             </div>
-  
+
             <div class="mb-3 d-flex" style="gap: 20px">
               <div class="w-100">
                 <label for="">Country</label>
@@ -54,39 +54,39 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        userData: {
-          first_name: "",
-          last_name: "",
-          country: "",
-          dob: "",
-        },
-      };
+
+<script>
+export default {
+  data () {
+    return {
+      userData: {
+        first_name: '',
+        last_name: '',
+        country: '',
+        dob: ''
+      }
+    }
+  },
+  methods: {
+    updateUserData () {
+      const formData = new FormData()
+      formData.append('first_name', this.userData.first_name)
+      formData.append('last_name', this.userData.last_name)
+      formData.append('country', this.userData.country)
+      formData.append('dob', this.userData.dob)
+      this.$store.dispatch('auth/updateUser', formData)
+    }
+  },
+  mounted () {
+    this.userData = this.$store.getters['auth/getUser']
+  },
+  computed: {
+    getUser () {
+      return this.$store.getters['auth/getUser']
     },
-    methods: {
-      updateUserData() {
-        let formData = new FormData();
-        formData.append("first_name", this.userData.first_name);
-        formData.append("last_name", this.userData.last_name);
-        formData.append("country", this.userData.country);
-        formData.append("dob", this.userData.dob);
-        this.$store.dispatch("auth/updateUser", formData);
-      },
-    },
-    mounted() {
-      this.userData = this.$store.getters["auth/getUser"];
-    },
-    computed: {
-      getUser() {
-        return this.$store.getters["auth/getUser"];
-      },
-      loading() {
-        return this.$store.getters["auth/isLoading"];
-      },
-    },
-  };
-  </script>
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  }
+}
+</script>

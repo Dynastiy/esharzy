@@ -12,25 +12,25 @@
 </template>
 
 <script>
-import config from "@/config/api";
+import config from '@/config/api'
 export default {
-    data(){
-        return {
-            config
-        }
-    },
-
-    beforeMount(){
-        let slug = this.$route.params.slug
-        this.$store.dispatch('showcase/getStoreBySlug', slug)
-    },
-   computed:{
-    store(){
-        return this.$store.getters["showcase/getStore"]
-    },
-    user(){
-        return this.store.user
+  data () {
+    return {
+      config
     }
-   }
+  },
+
+  beforeMount () {
+    const slug = this.$route.params.slug
+    this.$store.dispatch('showcase/getStoreBySlug', slug)
+  },
+  computed: {
+    store () {
+      return this.$store.getters['showcase/getStore']
+    },
+    user () {
+      return this.store.user
+    }
+  }
 }
 </script>

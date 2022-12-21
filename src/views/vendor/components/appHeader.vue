@@ -273,22 +273,20 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      drawer: false,
-    };
-  },
-  methods:{
-    logout(){
-      this.$store.dispatch('auth/logout');
-    },
-  },
-  computed:{
-        getUser(){
-            return this.$store.getters['auth/getUser']
-        }
+      drawer: false
     }
-};
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('auth/logout')
+    }
+  },
+  computed: {
+    getUser () {
+      return this.$store.getters['auth/getUser']
+    }
+  }
+}
 </script>
-
-

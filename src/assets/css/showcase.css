@@ -835,3 +835,25 @@ header .header--content {
     font-weight: 800;
     font-size: 0.9rem;
 }
+
+.avatar img, .media--preview img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.avatar {
+    position: relative;
+}
+.overlay--loading {
+position: absolute;
+background-color: rgba(0, 0, 0, 0.5);
+width: 60px;
+height: 60px;
+display: grid;
+place-items: center;
+color: #fff;
+border-radius: 50%;
+}

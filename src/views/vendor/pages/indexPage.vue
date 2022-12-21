@@ -77,7 +77,7 @@
                         :closable="false">
                       </el-alert>
                     </div>
-                    <tr v-for="item in orders" :key="item.id"> 
+                    <tr v-for="item in orders" :key="item.id">
                       <td>{{ item.buyer.first_name + " " + item.buyer.last_name }}</td>
                       <td> {{ item.delivery_address }} </td>
                       <td> {{ timeStamp(item.created_at) }} </td>
@@ -94,34 +94,32 @@
   </div>
 </template>
 
-
-
 <script>
-  import { timeStamp } from '@/plugins/filter';
+import { timeStamp } from '@/plugins/filter'
 export default {
-  data() {
+  data () {
     return {
       timeStamp
-    };
+    }
   },
-  beforeMount() {
-    this.$store.dispatch("vendor/getPayouts");
-    this.$store.dispatch("vendor/getOrders");
-    this.$store.dispatch("vendor/getTransactions");
+  beforeMount () {
+    this.$store.dispatch('vendor/getPayouts')
+    this.$store.dispatch('vendor/getOrders')
+    this.$store.dispatch('vendor/getTransactions')
   },
   computed: {
-    getUser() {
-      return this.$store.getters["auth/getUser"];
+    getUser () {
+      return this.$store.getters['auth/getUser']
     },
-    transactions() {
-      return this.$store.getters["vendor/getTransactions"];
+    transactions () {
+      return this.$store.getters['vendor/getTransactions']
     },
-    payouts() {
-      return this.$store.getters["vendor/getPayouts"];
+    payouts () {
+      return this.$store.getters['vendor/getPayouts']
     },
-    orders() {
-      return this.$store.getters["vendor/getOrders"];
-    },
-  },
-};
+    orders () {
+      return this.$store.getters['vendor/getOrders']
+    }
+  }
+}
 </script>

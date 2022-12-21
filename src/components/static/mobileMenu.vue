@@ -13,7 +13,7 @@
               </h6>
             </div>
             <div>
-              <ul
+              <ul v-if="!isLoggedIn"
                 class="m-0 top--header_menu d-flex align-items-center"
                 style="gap: 20px"
               >
@@ -23,6 +23,8 @@
                   <router-link to="register"> Register</router-link>
                 </li>
               </ul>
+
+              <router-link v-else to="/buyer" style="color: var(--primary-accent); font-size: 11px">My Account</router-link>
             </div>
           </div>
         </div>
@@ -38,7 +40,7 @@
             <div>
               <span @click="drawer = true">
                 <svg
-                  
+
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6"
                   fill="none"
@@ -127,7 +129,7 @@
                                 {{ category.category_name }}
                               </span>
                           </span>
-                        
+
                       </router-link>
                       <i class="text-white" :class= 'more ? "el-icon-arrow-up" : "el-icon-arrow-down" ' @click="doSomething(category)" role="button" v-if="category.sub_categories.length > 0" style="font-size:12px"></i>
                     </span>
@@ -139,7 +141,7 @@
                       </transition>
                       <hr class="" style="background:var(--gray-600)">
                     </li>
-                   
+
                   </ul>
 
                 </div>
@@ -151,39 +153,44 @@
     </div>
   </div>
 </template>
-  <script>
-    import config from '@/config/api'
+<script>
+import config from '@/config/api'
 export default {
-  data() {
+  data () {
     return {
       config,
       drawer: false,
-      direction: "ltr",
-      activeName: "first",
-      more: false,
-    };
+      direction: 'ltr',
+      activeName: 'first',
+      more: false
+    }
   },
   methods: {
-    doSomething(category){
-      this.more = this.more === category.id ? null : category.id;
-        },
-    closeDrawer(){
+    doSomething (category) {
+      this.more = this.more === category.id ? null : category.id
+    },
+    closeDrawer () {
       this.drawer = false
     }
   },
-  beforeMount() {
-    this.$store.dispatch("showcase/getCategories");
+  beforeMount () {
+    this.$store.dispatch('showcase/getCategories')
   },
   computed: {
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"];
+    allCategories () {
+      return this.$store.getters['showcase/getCategories']
     },
-    getUser() {
-      return this.$store.getters["auth/getUser"];
+    getUser () {
+      return this.$store.getters['auth/getUser']
     },
-    loggedIn() {
-      return this.$store.getters["auth/isLoggedIn"];
+    loggedIn () {
+      return this.$store.getters['auth/isLoggedIn']
     },
-  },
-};
+    isLoggedIn () {
+      const
+        token = localStorage.getItem('token')
+      return token
+    }
+  }
+}
 </script>

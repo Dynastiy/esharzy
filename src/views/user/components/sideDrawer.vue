@@ -1,20 +1,33 @@
 <template>
   <div>
-    <div class="">
       <div class="sidebar--container">
         <div class="side--bar">
           <div class="user--profile">
             <div class="top text-center p-4">
-              <div
-                class="avatar mx-auto mb-3"
-              >
-                <img src='/no-user.png' alt="">
+              <div class="avatar mx-auto mb-3">
+                <div class="overlay--loading" v-if="loading">
+                  <i class="el-icon-loading"></i>
+                </div>
+                <img
+                  :src="
+                    getUser.photo === null
+                      ? '/no-user.png'
+                      : config.imgUrl + getUser.photo
+                  "
+                  alt=""
+                />
+
                 <div class="edit--icon">
-                  <i class="el-icon-edit" role="button" @click="updateprofilePhoto" style="font-size:15px; font-weight:800"></i>
+                  <i
+                    class="el-icon-edit"
+                    role="button"
+                    @click="updateprofilePhoto"
+                    style="font-size: 15px; font-weight: 800"
+                  ></i>
                 </div>
               </div>
               <p class="small">Welcome back,</p>
-              <h5 class="font-weight-bold text-dark mt-1" >
+              <h5 class="font-weight-bold text-dark mt-1">
                 {{ getUser.first_name }} {{ getUser.last_name }}
               </h5>
             </div>
@@ -47,7 +60,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/order-history">
+                <router-link to="/buyer/order-history">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +85,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/wishlist">
+                <router-link to="/buyer/wishlist">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +114,7 @@
               </li>
 
               <li>
-                <router-link to="/vendor-applications">
+                <router-link to="/buyer/vendor-applications">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -164,21 +177,23 @@
       </div>
 
       <!-- Update Profile Photo  -->
-      <update-profile-photo/>
+      <update-profile-photo @closeModal="closeModal" v-if="update_profile_photo"/>
 
       <!-- Become a Vendor Modal  -->
-      <BecomeAVendor @closeModal="closeModal" v-show="become_a_vendor"/>
-    </div>
+      <BecomeAVendor @closeModal="closeModal" v-if="become_a_vendor" />
   </div>
 </template>
 
 <script>
 import BecomeAVendor from './modals/becomeAVendor.vue'
 import UpdateProfilePhoto from './modals/updateProfilePhoto.vue'
+import config from '@/config/api'
 export default {
   data () {
     return {
-      become_a_vendor: false
+      config,
+      become_a_vendor: false,
+      update_profile_photo: false
     }
   },
   methods: {
@@ -187,8 +202,10 @@ export default {
     },
     closeModal () {
       this.become_a_vendor = false
+      this.update_profile_photo = false
     },
     updateprofilePhoto () {
+      this.update_profile_photo = true
     },
     logout () {
       this.$store.dispatch('auth/logout')

@@ -91,15 +91,15 @@ export default {
               borderRadius: '5px'
             }
           }).showToast()
-          router.push('/buyer')
+          //   router.push('/buyer')
           // console.log(res);
-          // Check User Role before Redirecting to Login Page
-          // let user_role = res.data.user.role
-          // if (user_role == "buyer") {
-          //     router.push('/buyer')
-          // } else if (user_role == "vendor") {
-          //     router.push('/vendor')
-          // }
+          //   Check User Role before Redirecting to Login Page
+          const userRole = res.data.user.role
+          if (userRole === 'buyer') {
+            router.push('/buyer')
+          } else if (userRole === 'vendor') {
+            router.push('/vendor')
+          }
 
           // Check redirect URL
           const url = window.location.search
@@ -617,9 +617,9 @@ export default {
     async updateProfilePhoto ({ dispatch, commit }, payload) {
       commit('SET_LOADING')
       try {
-        const res = await request().post('delete-bank-details/', payload)
+        const res = await request().post('auth/update-profile-photo/', payload)
         Toastify({
-          text: 'Bank Details deleted Succesfully',
+          text: 'User Photo added Succesfully',
           className: 'info',
           style: {
             background: 'green',

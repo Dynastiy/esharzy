@@ -49,19 +49,19 @@
                               <th scope="row"> Phone Number </th>
                               <td> {{ user.phone_no }} </td>
                           </tr> -->
-                          
+
                           <tr v-if="kyc.status !== 'pending' ">
                               <th scope="row"> Comment </th>
                               <td> {{ kyc.admin_comment }} </td>
                           </tr>
-                          
+
                       </tbody>
                   </table>
-                 
+
               </div>
-  
+
           </div>
-  
+
           <div class="bg-white p-4 mt-3">
               <h5 class="mb-2" style="font-weight:600">Documents/Photos</h5>
               <div>
@@ -75,7 +75,7 @@
                           </div>
                       </div>
                   </div>
-  
+
                   <div class="mt-3">
                       <label class="text-muted small" for="">Business/Company Photos</label>
                       <div class="d-flex flex--photos" style="gap:30px">
@@ -93,7 +93,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Add Comment  -->
       <div v-if="dialogVisible">
           <div class="modal--mask add-comment">
@@ -102,7 +102,7 @@
                       <i class="el-icon-circle-close" style="font-size:25px" role="button" @click="dialogVisible =  !dialogVisible"></i>
                   </div>
                   <div>
-  
+
                   </div>
                   <form action="" @submit.prevent="updateStatus">
                       <div class="mb-3">
@@ -119,63 +119,64 @@
       <!-- End of Add Comment  -->
     </div>
   </template>
-  
-  <script>
-  import config from '@/config/api'
-  import { mapState, mapActions } from 'vuex'
-  import { timeStamp2 } from '@/plugins/filter'
-  export default {
-    data() {
-      return {
-          id: this.$route.params.id,
-          select: '',
-          timeStamp2, config,
-          dialogVisible: false, 
-          status: "",
-          visible: false, 
-          admin_comment: "",
-          status_update: null
-      };
-    },
-    methods:{
-      ...mapActions("user", ["getApplication" ]),
-    },
-    beforeMount(){
-      this.getApplication(this.id)
-    },
-    computed:{
-      ...mapState("user", ["loading", "kyc"]),
-      user(){
-          return this.kyc.user
-      },
-      file_extension(){
-          return this.kyc.registration_document.split('.').pop();
-      },
-      photos(){
-          let photos = [
-              {
-                  id: 1,
-                  photo: this.kyc.photo_one
-              },
-              {
-                  id: 2,
-                  photo: this.kyc.photo_two
-              },
-              {
-                  id: 3,
-                  photo: this.kyc.photo_three
-              },
-              {
-                  id: 4,
-                  photo: this.kyc.photo_four
-              }
-          ]
-          return photos
-      }
+
+<script>
+import config from '@/config/api'
+import { mapState, mapActions } from 'vuex'
+import { timeStamp2 } from '@/plugins/filter'
+export default {
+  data () {
+    return {
+      id: this.$route.params.id,
+      select: '',
+      timeStamp2,
+      config,
+      dialogVisible: false,
+      status: '',
+      visible: false,
+      admin_comment: '',
+      status_update: null
     }
-  };
-  </script>
-  
+  },
+  methods: {
+    ...mapActions('user', ['getApplication'])
+  },
+  beforeMount () {
+    this.getApplication(this.id)
+  },
+  computed: {
+    ...mapState('user', ['loading', 'kyc']),
+    user () {
+      return this.kyc.user
+    },
+    file_extension () {
+      return this.kyc.registration_document.split('.').pop()
+    },
+    photos () {
+      const photos = [
+        {
+          id: 1,
+          photo: this.kyc.photo_one
+        },
+        {
+          id: 2,
+          photo: this.kyc.photo_two
+        },
+        {
+          id: 3,
+          photo: this.kyc.photo_three
+        },
+        {
+          id: 4,
+          photo: this.kyc.photo_four
+        }
+      ]
+      return photos
+    }
+  }
+}
+</script>
+
   <style>
     .el-dropdown {
       vertical-align: top;

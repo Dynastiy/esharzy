@@ -53,7 +53,7 @@
 
             <div class="d-flex align-items-center" style="gap: 20px">
               <div>
-                <router-link to="/wishlist" class="text-center">
+                <router-link to="/buyer/wishlist" class="text-center">
                   <div class="text-center text-white cart--icon">
                     <el-badge
                     :value="getUser.wish_lists ? getUser.wish_lists.length : '0'"
@@ -203,36 +203,36 @@
   </div>
 </template>
 <script>
-import MobileMenu from "./mobileMenu.vue";
-import SearchResults from "../searchResults.vue";
+import MobileMenu from './mobileMenu.vue'
+import SearchResults from '../searchResults.vue'
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    logout(){
-      this.$store.dispatch('auth/logout');
-    },
+    logout () {
+      this.$store.dispatch('auth/logout')
+    }
   },
-  beforeMount() {
-    this.$store.dispatch("showcase/getCategories");
+  beforeMount () {
+    this.$store.dispatch('showcase/getCategories')
   },
   computed: {
-    isLoggedIn() {
-      let token;
-      token = localStorage.getItem("token");
-      return token;
+    isLoggedIn () {
+      const
+        token = localStorage.getItem('token')
+      return token
     },
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"];
+    allCategories () {
+      return this.$store.getters['showcase/getCategories']
     },
-    getUser() {
-      return this.$store.getters["auth/getUser"];
+    getUser () {
+      return this.$store.getters['auth/getUser']
     },
-    loggedIn() {
-      return this.$store.getters["auth/isLoggedIn"];
-    },
+    loggedIn () {
+      return this.$store.getters['auth/isLoggedIn']
+    }
   },
-  components: { MobileMenu, SearchResults },
-};
+  components: { MobileMenu, SearchResults }
+}
 </script>

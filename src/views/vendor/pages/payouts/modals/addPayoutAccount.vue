@@ -68,64 +68,64 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      bank_name: "",
-      account_number: "",
-    };
+      bank_name: '',
+      account_number: ''
+    }
   },
   methods: {
-    getAccountDetails() {
-        this.$store.dispatch("removeErrorMessage");
-      var priceOptions = document.getElementById("mySelect");
-      var bank_code = priceOptions.options[priceOptions.selectedIndex].id;
-      var payload = {
-        bank_code: bank_code,
-        account_number: this.account_number,
-      };
-      if (Object.keys(this.account).length === 0 || this.account_number.length === 10 ) {
-        this.$store.dispatch("getAccountName", payload);
+    getAccountDetails () {
+      this.$store.dispatch('removeErrorMessage')
+      const priceOptions = document.getElementById('mySelect')
+      const bankCode = priceOptions.options[priceOptions.selectedIndex].id
+      const payload = {
+        bankCode,
+        account_number: this.account_number
+      }
+      if (Object.keys(this.account).length === 0 || this.account_number.length === 10) {
+        this.$store.dispatch('getAccountName', payload)
       } else {
-        this.$store.dispatch("removeAccountDetails");
+        this.$store.dispatch('removeAccountDetails')
       }
     },
-    addBankDetails(){
-      let payload = {
+    addBankDetails () {
+      const payload = {
         bank_name: this.bank_name,
-        account_no: this.$store.getters["getAccountDetails"].account_number,
-        account_name: this.$store.getters["getAccountDetails"].account_name,
+        account_no: this.$store.getters.getAccountDetails.account_number,
+        account_name: this.$store.getters.getAccountDetails.account_name,
         id: this.user.id
       }
       console.log(payload)
-      this.$store.dispatch("auth/addBankDetails", payload);
+      this.$store.dispatch('auth/addBankDetails', payload)
       this.close()
       // if (!loading) {
       //   this.close
       // }
     },
-    close() {
-      this.$emit("close");
-    },
-  },
-  beforeMount() {
-    this.$store.dispatch("getBanks");
-  },
-  computed: {
-    user() {
-      return this.$store.getters["auth/getUser"];
-    },
-    banks() {
-      return this.$store.getters["getAllBanks"];
-    },
-    account() {
-      return this.$store.getters["getAccountDetails"];
-    },
-    loader(){
-        return this.$store.getters['isLoading']
-    },
-    err(){
-        return this.$store.getters["isError"]
+    close () {
+      this.$emit('close')
     }
   },
-};
+  beforeMount () {
+    this.$store.dispatch('getBanks')
+  },
+  computed: {
+    user () {
+      return this.$store.getters['auth/getUser']
+    },
+    banks () {
+      return this.$store.getters.getAllBanks
+    },
+    account () {
+      return this.$store.getters.getAccountDetails
+    },
+    loader () {
+      return this.$store.getters.isLoading
+    },
+    err () {
+      return this.$store.getters.isError
+    }
+  }
+}
 </script>

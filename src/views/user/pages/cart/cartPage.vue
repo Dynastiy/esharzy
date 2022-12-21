@@ -4,7 +4,6 @@
       <div class="checkout my-4">
         <div class="">
           <div>
-            <!-- {{ cart }} -->
             <div class="bg-white p-5 text-center" v-if="cart.length == 0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +75,7 @@
                               rounded-circle
                               font-weight-bold
                             "
-                            style="
-                              font-size: 12px;
+                            style="font-size: 12px;
                               padding: 5px;
                               position: absolute;
                               left: 80px;
@@ -87,16 +85,16 @@
                         <div>
                           <h6 class="small mb-3">
                             <span class="text-muted">Seller:</span>
-                            <span> {{ item.product.shop.name }} </span>
+                            <span> {{ item.product === null ? 'No data' : item.product.shop.name }} </span>
                           </h6>
                           <h6 class="text-capitalize" style="font-weight: 500">
-                            {{ item.product.name }}
+                            {{ item.product === null ? 'No data' :item.product.name }}
                           </h6>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-2">
-                      <div v-if="item.product.discount">
+                      <div v-if="item.product.discount !== null && item.product !== null">
                         <h6
                           style="font-weight: 400"
                           v-if="item.product.discount"
@@ -149,7 +147,7 @@
                       <h5 style="font-weight: 600">
                         &#8358;
                         {{
-                          item.product.discount
+                          item.product.discount !== null && item.product !== null
                             ? formatAmount(
                                 item.quantity * item.product.discount.price
                               )
@@ -228,54 +226,54 @@
 </template>
 
 <script>
-import { formatAmount } from "@/plugins/filter";
-import url from "@/config/api";
+import { formatAmount } from '@/plugins/filter'
+import url from '@/config/api'
 export default {
   components: {},
-  data() {
+  data () {
     return {
       url,
       formatAmount,
       item: {
-        quantity: "",
+        quantity: ''
       },
-      total: "",
+      total: '',
       // cart: [],
-      price: "",
+      price: ''
       // cartAmount: ""
-    };
+    }
   },
   methods: {
-    goToCheckOut() {
-      this.$router.push("/check-out");
+    goToCheckOut () {
+      this.$router.push('/check-out')
     },
-    removeItemFromCart(item) {
-      let payload = item.id;
-      this.$store.dispatch("auth/deleteItemFromCart", payload);
+    removeItemFromCart (item) {
+      const payload = item.id
+      this.$store.dispatch('auth/deleteItemFromCart', payload)
     },
-    updateTotal(item) {
-    item.quantity--
-      let formData = new FormData();
-      formData.append("quantity", item.quantity);
-      let payload = {
+    updateTotal (item) {
+      item.quantity--
+      const formData = new FormData()
+      formData.append('quantity', item.quantity)
+      const payload = {
         id: item.id,
-        payload: formData,
-      };
-      console.log(payload);
-      this.$store.dispatch("auth/updateCart", payload);
+        payload: formData
+      }
+      console.log(payload)
+      this.$store.dispatch('auth/updateCart', payload)
     },
-    handleChange(item) {
+    handleChange (item) {
       item.quantity++
-      let formData = new FormData();
-      formData.append("quantity", item.quantity);
-      let payload = {
+      const formData = new FormData()
+      formData.append('quantity', item.quantity)
+      const payload = {
         id: item.id,
-        payload: formData,
-      };
-      console.log(payload);
-      this.$store.dispatch("auth/updateCart", payload);
+        payload: formData
+      }
+      console.log(payload)
+      this.$store.dispatch('auth/updateCart', payload)
     },
-    addAmount(){
+    addAmount () {
       // this.cartAmount = +this.totalAmount + +this.price
     }
   },
@@ -285,35 +283,37 @@ export default {
   // updated() {
   //   this.cart = this.$store.getters["auth/getUser"].cart;
   // },
-  beforeMount() {
-    this.$store.dispatch("user/getShippingZones");
+  beforeMount () {
+    this.$store.dispatch('user/getShippingZones')
   },
-  async created() {},
+  async created () {},
   computed: {
-    cart(){
-      return this.$store.getters["auth/getUser"].cart;
+    cart () {
+      const cart = this.$store.getters['auth/getUser'].cart
+      const val = cart.filter(elem => elem.product !== null)
+      return val
     },
-    totalAmount() {
-      let cartItem = this.$store.getters["auth/getUser"].cart;
-      let totalPrice = cartItem.reduce((accumulator, item) => {
-        if (item.product.discount) {
-          return accumulator + item.quantity * item.product.discount.price;
+
+    totalAmount () {
+      const cartItem = this.cart
+      const totalPrice = cartItem.reduce((accumulator, item) => {
+        if (item.product.discount === null) {
+          return accumulator + item.quantity * item.product.price
         } else {
-          return accumulator + item.quantity * item.product.price;
+          return accumulator + item.quantity * item.product.discount.price
         }
-      }, 0);
-      // console.log(totalPrice);
-      return totalPrice;
+      }, 0)
+      return totalPrice
     },
 
-    shippingZones() {
-      return this.$store.getters["user/allShippingZones"];
+    shippingZones () {
+      return this.$store.getters['user/allShippingZones']
     },
 
-    cartAmount(){
-      return +this.totalAmount + +this.price 
+    cartAmount () {
+      return +this.totalAmount + +this.price
     }
 
-  },
-};
+  }
+}
 </script>

@@ -10,10 +10,10 @@
 </template>
 
 <script>
-    import CartHeader from '../../components/headers/cartHeader.vue'
+import CartHeader from '../../components/headers/cartHeader.vue'
 export default {
-    components:{
-        CartHeader
-    }
+  components: {
+    CartHeader
+  }
 }
 </script>

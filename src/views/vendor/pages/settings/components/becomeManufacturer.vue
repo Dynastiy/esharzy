@@ -10,7 +10,7 @@
                     <div class="mb-2">
                         <input type="text" v-model="business_name" placeholder="Business Name" required>
                     </div>
-                    
+
                     <div class="mb-2">
                         <input type="text" v-model="tax_number" placeholder="Tax Number" required>
                     </div>
@@ -50,46 +50,46 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-    data(){
-        return {
-            val: "",
-            registration_document: null,
-            business_description:null,
-            company_type: null,
-            registered_business: false,
-            payload: {
-                registration_document: null
-            }
-        }
-    },
-    methods: {
-        ...mapActions("vendor", ["becomeAManufacturer", "removeSubmitted"]),
-        registrationDocument(){
-            var input = event.target;
-            this.payload.registration_document = input.files[0];
-            console.log(this.payload.registration_document);
-        },
-        submit(){
-            let formData = new FormData()
-            formData.append("business_name", this.business_name);
-            formData.append("business_address", this.business_address)
-            formData.append("business_description", this.business_description)
-            formData.append("registration_document", this.payload.registration_document)
-            formData.append("tax_number", this.tax_number)
-            formData.append("registration_number", this.registration_number)
-            formData.append("rc_number", this.rc_number)
-            // formData.append("photo_four", this.payload.photo_four)
-            this.becomeAManufacturer(formData)
-        },
-        viewApplication(){
-            this.$router.push(`/vendor/manufacturer-applications/${this.submittedApplication.id}`)
-            this.removeSubmitted()
-            this.$emit('closeModal')
-        }
-    },
-    computed:{
-        // ...mapState("user", ["loading", "submitted", "submittedApplication"])
-        ...mapState("vendor", ["loading", "submitted", "submittedApplication"])
+  data () {
+    return {
+      val: '',
+      registration_document: null,
+      business_description: null,
+      company_type: null,
+      registered_business: false,
+      payload: {
+        registration_document: null
+      }
     }
+  },
+  methods: {
+    ...mapActions('vendor', ['becomeAManufacturer', 'removeSubmitted']),
+    registrationDocument () {
+      const input = event.target
+      this.payload.registration_document = input.files[0]
+      console.log(this.payload.registration_document)
+    },
+    submit () {
+      const formData = new FormData()
+      formData.append('business_name', this.business_name)
+      formData.append('business_address', this.business_address)
+      formData.append('business_description', this.business_description)
+      formData.append('registration_document', this.payload.registration_document)
+      formData.append('tax_number', this.tax_number)
+      formData.append('registration_number', this.registration_number)
+      formData.append('rc_number', this.rc_number)
+      // formData.append("photo_four", this.payload.photo_four)
+      this.becomeAManufacturer(formData)
+    },
+    viewApplication () {
+      this.$router.push(`/vendor/manufacturer-applications/${this.submittedApplication.id}`)
+      this.removeSubmitted()
+      this.$emit('closeModal')
+    }
+  },
+  computed: {
+    // ...mapState("user", ["loading", "submitted", "submittedApplication"])
+    ...mapState('vendor', ['loading', 'submitted', 'submittedApplication'])
+  }
 }
 </script>

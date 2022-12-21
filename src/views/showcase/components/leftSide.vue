@@ -12,7 +12,7 @@
                 <span class="text-capitalize" style="font-size:14px">
                     {{ category.category_name }}
                 </span>
-               
+
             </router-link>
             <i :class= 'more ? "el-icon-arrow-up" : "el-icon-arrow-down" ' @click="doSomething(category)" role="button" v-if="category.sub_categories.length > 0" style="font-size:12px"></i>
            </span>
@@ -22,7 +22,7 @@
                 <li v-for="item in category.sub_categories" :key="item.id"  class="sub-category small text-capitalize"> {{ item.sub_category_name }} </li>
             </ul>
             </transition>
-            
+
           </li>
         </ul>
       </div>
@@ -32,28 +32,28 @@
 
 <script>
 export default {
-    data(){
-        return {
-            more: false
-        }
-    },
-    methods:{
-        doSomething(category){
-      this.more = this.more === category.id ? null : category.id;
-        },
-    },
-  computed: {
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"];
-    },
-    getUser() {
-      return this.$store.getters["auth/getUser"];
-    },
-    loggedIn() {
-      return this.$store.getters["auth/isLoggedIn"];
-    },
+  data () {
+    return {
+      more: false
+    }
   },
-};
+  methods: {
+    doSomething (category) {
+      this.more = this.more === category.id ? null : category.id
+    }
+  },
+  computed: {
+    allCategories () {
+      return this.$store.getters['showcase/getCategories']
+    },
+    getUser () {
+      return this.$store.getters['auth/getUser']
+    },
+    loggedIn () {
+      return this.$store.getters['auth/isLoggedIn']
+    }
+  }
+}
 </script>
 
 <style>

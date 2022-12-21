@@ -33,7 +33,7 @@
           </svg>
         </div>
         <div v-if="viewItem" class="search--results bg-white p-3 mt-1 rounded-lg">
-          <div class="text-center" v-if="loader"> 
+          <div class="text-center" v-if="loader">
             <i
             class="el-icon-loading"
             style="
@@ -81,79 +81,76 @@
 </template>
 
 <script>
-  import config from '@/config/api'
+import config from '@/config/api'
 export default {
-  data() {
+  data () {
     return {
       config,
-      searchValue: "All Categories",
+      searchValue: 'All Categories',
       search: null,
       products: [],
       search_results: false,
       loader: false
-    };
+    }
   },
   methods: {
-    getValue() {
-      console.log(this.searchValue);
+    getValue () {
+      console.log(this.searchValue)
     },
-    viewProduct(item){
+    viewProduct (item) {
       this.$router.push(`/product/${item.slug}`)
       this.search = null
     },
-    searchProduct(){
-      console.log(this.searchValue);
-      if(this.searchValue === "All Categories"){
+    searchProduct () {
+      console.log(this.searchValue)
+      if (this.searchValue === 'All Categories') {
         this.products = this.allProducts.filter((item) => {
           return this.search
             .toLowerCase()
-            .split(" ")
+            .split(' ')
             .every(
               (v) =>
                 item.name.toLowerCase().includes(v)
-            );
-        });
-      }
-      else{
-        this.$store.dispatch("showcase/getCategoryById", this.searchValue)
+            )
+        })
+      } else {
+        this.$store.dispatch('showcase/getCategoryById', this.searchValue)
         this.products = this.category_products.filter((item) => {
           return this.search
             .toLowerCase()
-            .split(" ")
+            .split(' ')
             .every(
               (v) =>
                 item.name.toLowerCase().includes(v)
-            );
-        });
+            )
+        })
       }
-        
     }
   },
-  beforeMount() {
-    this.$store.dispatch("showcase/getCategories");
-    this.$store.dispatch("showcase/getProducts");
+  beforeMount () {
+    this.$store.dispatch('showcase/getCategories')
+    this.$store.dispatch('showcase/getProducts')
   },
   computed: {
-    allProducts() {
-      return this.$store.getters["showcase/getProducts"];
+    allProducts () {
+      return this.$store.getters['showcase/getProducts']
     },
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"];
+    allCategories () {
+      return this.$store.getters['showcase/getCategories']
     },
-    category_products(){
-          return this.$store.getters['showcase/getCategory']
-        },
-    viewItem(){
-      if(this.search === null || this.search === "") {
+    category_products () {
+      return this.$store.getters['showcase/getCategory']
+    },
+    viewItem () {
+      if (this.search === null || this.search === '') {
         return false
-      }
-      else{
+      } else {
         return true
       }
-    },
+    }
     // loader(){
     //   if
     // }
-  },
-};
+  }
+}
 </script>

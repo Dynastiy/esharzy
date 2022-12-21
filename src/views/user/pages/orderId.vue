@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div>
-            <div>
+    <div  v-loading="loading"
+      element-loading-background="rgba(255, 255, 255, 0.7)"
+      style="width: 100%">
                 <div class="d-flex align-items-center" style="gap:30px">
                     <i role="button" @click="goBack" class="el-icon-back" style="font-weight:900; font-size:20px"></i>
                     <h4>Order Details</h4>
@@ -31,33 +31,33 @@
                 </div>
                 </div>
             </div>
-        </div>
-    </div>
 </template>
 
-
 <script>
-    import config from '@/config/api'
-    import { timeStamp, createRef } from '@/plugins/filter'
+import config from '@/config/api'
+import { timeStamp, createRef } from '@/plugins/filter'
 export default {
-    data(){
-        return {
-            config, timeStamp, createRef
-        }
-    },
-    methods:{
-        goBack(){
-            this.$router.go(-1)
-        }
-    },
-    beforeMount(){
-        let id = this.$route.query.orderId
-        this.$store.dispatch("user/getOrderByID", id)
-    },
-    computed:{
-        order(){
-            return this.$store.getters['user/singleOrder']
-        }
+  data () {
+    return {
+      config, timeStamp, createRef
     }
+  },
+  methods: {
+    goBack () {
+      this.$router.go(-1)
+    }
+  },
+  beforeMount () {
+    const id = this.$route.query.orderId
+    this.$store.dispatch('user/getOrderByID', id)
+  },
+  computed: {
+    order () {
+      return this.$store.getters['user/singleOrder']
+    },
+    loading () {
+      return this.$store.getters['user/isLoading']
+    }
+  }
 }
 </script>

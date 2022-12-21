@@ -73,10 +73,13 @@
             </div>
           </form>
         </div>
+
         <hr>
+
         <div class="add-item-content">
-            <h4 class="mb-3">Add Product Discount</h4>
-            <div class="w-100">
+            <h5 class="mb-3">Discount</h5>
+            <div>
+              <div class="w-100">
                 <label for="">Add Discount Price</label>
                 <input type="number" v-model="dataObj.price" />
                 <small
@@ -91,72 +94,94 @@
               <div class="text-right mt-3">
                 <button class="btn-dark btn" @click="addDiscount">Add Discount Price</button>
               </div>
+            </div>
+
+            <div>
+              <div class="">
+                <small class="text-secondary">Current Discount</small>
+
+                <div class="d-flex align-items-start" style="gap:8px">
+                  <h4>{{ product.discount.price + "(" + product.discount.percentage + "%)" }}</h4>
+                <span @click="removeDiscount" role="button"><i class="el-icon-delete text-danger"></i></span>
+              </div>
+              </div>
+
+            </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
 export default {
   components: {
   },
-  data() {
+  data () {
     return {
       payload: {
-        name: "",
-        price: "",
+        name: '',
+        price: '',
         category_ids: [],
-        tag_ids: [],
+        tag_ids: []
       },
       dataObj: {
-        price: ""
+        price: '',
+        percentage: ''
       }
-    };
+    }
   },
   methods: {
-    addDiscount(){
-        console.log(this.$store.getters["showcase/getSingleProduct"].product);
-        let payload = {
-            id: this.$store.getters["showcase/getSingleProduct"].product.id,
-            price: this.dataObj.price,
-            product_id: this.$store.getters["showcase/getSingleProduct"].product.id,
-        }
-        console.log(payload);
-        this.$store.dispatch("vendor/addDiscount", payload);
+    addDiscount () {
+      const payload = {
+        id: this.product.id,
+        price: this.dataObj.price,
+        product_id: this.product.id
+      }
+      console.log(payload)
+      this.$store.dispatch('vendor/addDiscount', payload)
     },
-    async addProduct() {
-      let formData = new FormData();
-      formData.append("name", this.payload.name);
-      formData.append("price", this.payload.price);
-      formData.append("category_ids", this.payload.category_ids);
-      formData.append("tag_ids", this.payload.tag_ids);
-      this.loading = true;
-      this.$store.dispatch("vendor/createProduct", formData);
-      this.payload = null;
+
+    removeDiscount () {
+      const payload = {
+        id: this.product.discount.id,
+        productId: this.product.id
+      }
+      this.$store.dispatch('vendor/removeDiscount', payload)
     },
+
+    async addProduct () {
+      const formData = new FormData()
+      formData.append('name', this.payload.name)
+      formData.append('price', this.payload.price)
+      formData.append('category_ids', this.payload.category_ids)
+      formData.append('tag_ids', this.payload.tag_ids)
+      this.loading = true
+      this.$store.dispatch('vendor/createProduct', formData)
+    }
   },
-  mounted(){
-    this.payload = this.$store.getters["showcase/getSingleProduct"].product
+  mounted () {
+    this.payload = this.product
   },
-  beforeMount() {
-    let slug = this.$route.params.slug
-    this.$store.dispatch('showcase/getProductBySlug', slug);
-    this.$store.dispatch("showcase/getCategories");
-    this.$store.dispatch("showcase/getTags");
-    
+  beforeMount () {
+    const slug = this.$route.params.slug
+    this.$store.dispatch('showcase/getProductBySlug', slug)
+    this.$store.dispatch('showcase/getCategories')
+    this.$store.dispatch('showcase/getTags')
   },
   computed: {
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"].categories;
+    allCategories () {
+      return this.$store.getters['showcase/getCategories'].categories
     },
-    allTags() {
-      return this.$store.getters["showcase/getTags"].tags;
+    allTags () {
+      return this.$store.getters['showcase/getTags'].tags
     },
-    errMessages() {
-      return this.$store.getters["vendor/isErrors"];
+    errMessages () {
+      return this.$store.getters['vendor/isErrors']
     },
-  },
-};
+    product () {
+      return this.$store.getters['showcase/getSingleProduct']
+    }
+  }
+}
 </script>

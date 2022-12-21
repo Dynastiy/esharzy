@@ -65,44 +65,44 @@
 </template>
 
 <script>
-  import config from '@/config/api'
+import config from '@/config/api'
 export default {
-  data(){
+  data () {
     return {
-      config,
+      config
       // loading: true
     }
   },
-  methods:{
-    viewProduct(item) {
+  methods: {
+    viewProduct (item) {
       this.$router.push({
-        name: "product-detail",
-        params: { slug: item.slug },
-      });
-      this.$store.dispatch("showcase/getProductBySlug", item.slug);
-    },
+        name: 'product-detail',
+        params: { slug: item.slug }
+      })
+      this.$store.dispatch('showcase/getProductBySlug', item.slug)
+    }
   },
-  beforeMount(){
-    this.$store.dispatch("showcase/getProducts")
+  beforeMount () {
+    this.$store.dispatch('showcase/getProducts')
   },
-  mounted(){
+  mounted () {
     // this.loading = true
     // this.loading = this.$store.getters["showcase/isLoading"];
   },
-  computed:{
-    productImages(){
-      return this.$store.getters['showcase/getProducts'];
+  computed: {
+    productImages () {
+      return this.$store.getters['showcase/getProducts']
     },
 
-    newImages(){
-      return this.$store.getters["showcase/newProducts"];
+    newImages () {
+      return this.$store.getters['showcase/newProducts']
     },
 
-    topImages(){
-      return  this.$store.getters["showcase/topRatedProducts"];
+    topImages () {
+      return this.$store.getters['showcase/topRatedProducts']
     },
-    loading(){
-      return this.$store.getters["showcase/isLoading"];
+    loading () {
+      return this.$store.getters['showcase/isLoading']
     }
   }
 }

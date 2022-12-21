@@ -42,26 +42,24 @@
   </div>
 </template>
 
-
 <script>
-import config from "@/config/api";
+import config from '@/config/api'
 
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       config
-    };
+    }
   },
   methods: {
-    ...mapActions("showcase", ["getCategories"]),
+    ...mapActions('showcase', ['getCategories'])
   },
-  beforeMount() {
-    this.getCategories();
+  beforeMount () {
+    this.getCategories()
   },
   computed: {
-    ...mapState("showcase", ["categories", "loading"]),
-  },
-};
+    ...mapState('showcase', ['categories', 'loading'])
+  }
+}
 </script>
-

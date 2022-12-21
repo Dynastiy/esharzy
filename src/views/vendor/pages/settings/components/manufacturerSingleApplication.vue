@@ -52,16 +52,16 @@
                                 </div>
                             </td>
                           </tr>
-                          
+
                       </tbody>
                   </table>
               </div>
-  
+
           </div>
 
         </div>
       </div>
-  
+
       <!-- Add Comment  -->
       <div v-if="dialogVisible">
           <div class="modal--mask add-comment">
@@ -70,7 +70,7 @@
                       <i class="el-icon-circle-close" style="font-size:25px" role="button" @click="dialogVisible =  !dialogVisible"></i>
                   </div>
                   <div>
-  
+
                   </div>
                   <form action="" @submit.prevent="updateStatus">
                       <div class="mb-3">
@@ -87,44 +87,45 @@
       <!-- End of Add Comment  -->
     </div>
   </template>
-  
-  <script>
-  import config from '@/config/api'
-  import { mapState, mapActions } from 'vuex'
-  import { timeStamp2 } from '@/plugins/filter'
-  export default {
-    data() {
-      return {
-          id: this.$route.params.id,
-          select: '',
-          timeStamp2, config,
-          dialogVisible: false, 
-          status: "",
-          visible: false, 
-          admin_comment: "",
-          status_update: null
-      };
-    },
-    methods:{
-      ...mapActions("vendor", ["getApplication" ]),
-    
-    },
-    beforeMount(){
-      this.getApplication(this.id)
-    },
-    computed:{
-      ...mapState("vendor", ["loading", "application"]),
-      user(){
-          return this.application.user
-      },
-      file_extension(){
-          return this.application.registration_document.split('.').pop();
-      },
-    
+
+<script>
+import config from '@/config/api'
+import { mapState, mapActions } from 'vuex'
+import { timeStamp2 } from '@/plugins/filter'
+export default {
+  data () {
+    return {
+      id: this.$route.params.id,
+      select: '',
+      timeStamp2,
+      config,
+      dialogVisible: false,
+      status: '',
+      visible: false,
+      admin_comment: '',
+      status_update: null
     }
-  };
-  </script>
-  
+  },
+  methods: {
+    ...mapActions('vendor', ['getApplication'])
+
+  },
+  beforeMount () {
+    this.getApplication(this.id)
+  },
+  computed: {
+    ...mapState('vendor', ['loading', 'application']),
+    user () {
+      return this.application.user
+    },
+    file_extension () {
+      return this.application.registration_document.split('.').pop()
+    }
+
+  }
+}
+</script>
+
   <style>
-   
+
   </style>

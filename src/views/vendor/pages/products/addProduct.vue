@@ -243,151 +243,149 @@
   </div>
 </template>
 
-
 <script>
-import { VueEditor } from "vue2-editor";
+import { VueEditor } from 'vue2-editor'
 export default {
   components: {
-    VueEditor,
+    VueEditor
   },
-  data() {
+  data () {
     return {
       customToolbar: [
         [{ header: [false, 1, 2, 3, 4, 5, 6] }],
-        [{ size: ["small", false, "large", "huge"] }],
-        ["bold", "italic", "underline", "strike"],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
         [
-          { align: "" },
-          { align: "center" },
-          { align: "right" },
-          { align: "justify" },
+          { align: '' },
+          { align: 'center' },
+          { align: 'right' },
+          { align: 'justify' }
         ],
-        ["blockquote", "code-block"],
-        [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-        [{ script: "sub" }, { script: "super" }],
+        ['blockquote', 'code-block'],
+        [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+        [{ script: 'sub' }, { script: 'super' }]
       ],
       payload: {
-        name: "",
-        price: "",
+        name: '',
+        price: '',
         app_icon: null,
         photo_one: null,
         photo_two: null,
         photo_three: null,
         photo_four: null,
         photo_five: null,
-        description: "",
+        description: '',
         category_ids: [],
         subcategory_ids: [],
-        shipping_class_id: "",
+        shipping_class_id: '',
         tag_ids: [],
-        video: null,
+        video: null
       },
       dataObj: {
-        name: "",
-        description: "",
-      },
-    };
+        name: '',
+        description: ''
+      }
+    }
   },
   methods: {
-    photoOneUpload() {
-      var input = event.target;
-      this.payload.photo_one = input.files[0];
-      console.log(this.payload.photo_one);
+    photoOneUpload () {
+      const input = event.target
+      this.payload.photo_one = input.files[0]
+      console.log(this.payload.photo_one)
     },
-    photoTwoUpload() {
-      var input = event.target;
-      this.payload.photo_two = input.files[0];
-      console.log(this.payload.photo_two);
+    photoTwoUpload () {
+      const input = event.target
+      this.payload.photo_two = input.files[0]
+      console.log(this.payload.photo_two)
     },
-    photoThreeUpload() {
-      var input = event.target;
-      this.payload.photo_three = input.files[0];
-      console.log(this.payload.photo_three);
+    photoThreeUpload () {
+      const input = event.target
+      this.payload.photo_three = input.files[0]
+      console.log(this.payload.photo_three)
     },
-    photoFourUpload() {
-      var input = event.target;
-      this.payload.photo_four = input.files[0];
-      console.log(this.payload.photo_four);
+    photoFourUpload () {
+      const input = event.target
+      this.payload.photo_four = input.files[0]
+      console.log(this.payload.photo_four)
     },
-    photoFiveUpload() {
-      var input = event.target;
-      this.payload.photo_five = input.files[0];
-      console.log(this.payload.photo_five);
+    photoFiveUpload () {
+      const input = event.target
+      this.payload.photo_five = input.files[0]
+      console.log(this.payload.photo_five)
     },
-    addVideo() {
-      var input = event.target;
-      this.payload.video = input.files[0];
-      console.log(this.payload.video);
+    addVideo () {
+      const input = event.target
+      this.payload.video = input.files[0]
+      console.log(this.payload.video)
     },
-    appIcon() {
-      var input = event.target;
-      this.payload.app_icon = input.files[0];
-      console.log(this.payload.app_icon);
+    appIcon () {
+      const input = event.target
+      this.payload.app_icon = input.files[0]
+      console.log(this.payload.app_icon)
     },
-    async addProduct() {
-      let formData = new FormData();
-      formData.append('name', this.payload.name);
-      formData.append('app_icon', this.payload.app_icon);
-      formData.append('photo_one', this.payload.photo_one);
-      formData.append('photo_two', this.payload.photo_two);
-      formData.append('photo_three', this.payload.photo_three);
-      formData.append('photo_four', this.payload.photo_four);
-      formData.append('photo_five', this.payload.photo_five);
-      formData.append('description', this.payload.description);
-      formData.append('price', this.payload.price);
+    async addProduct () {
+      const formData = new FormData()
+      formData.append('name', this.payload.name)
+      formData.append('app_icon', this.payload.app_icon)
+      formData.append('photo_one', this.payload.photo_one)
+      formData.append('photo_two', this.payload.photo_two)
+      formData.append('photo_three', this.payload.photo_three)
+      formData.append('photo_four', this.payload.photo_four)
+      formData.append('photo_five', this.payload.photo_five)
+      formData.append('description', this.payload.description)
+      formData.append('price', this.payload.price)
 
       // formData.append('category_ids', this.payload.category_ids);
-      this.payload.category_ids.forEach(function(value) {
-        formData.append("category_ids[]", value) 
+      this.payload.category_ids.forEach(function (value) {
+        formData.append('category_ids[]', value)
       })
 
       // formData.append('subcategory_ids[]', this.payload.subcategory_ids);
-      this.payload.subcategory_ids.forEach(function(value) {
-        formData.append("subcategory_ids[]", value) 
+      this.payload.subcategory_ids.forEach(function (value) {
+        formData.append('subcategory_ids[]', value)
       })
 
-      formData.append('shipping_class_id', this.payload.shipping_class_id);
-      
+      formData.append('shipping_class_id', this.payload.shipping_class_id)
+
       // formData.append('tag_ids[]', this.payload.tag_ids);
-      this.payload.tag_ids.forEach(function(value) {
-        formData.append("tag_ids[]", value) 
+      this.payload.tag_ids.forEach(function (value) {
+        formData.append('tag_ids[]', value)
       })
 
-      formData.append('video', this.payload.video);
-      formData.append('shop_id', this.$store.getters['auth/getUser'].shop.id);
-      formData.append('user_id', this.$store.getters['auth/getUser'].id);
-      this.$store.dispatch("vendor/createProduct", formData);
-
+      formData.append('video', this.payload.video)
+      formData.append('shop_id', this.$store.getters['auth/getUser'].shop.id)
+      formData.append('user_id', this.$store.getters['auth/getUser'].id)
+      this.$store.dispatch('vendor/createProduct', formData)
     },
-    goBack() {
-      this.$router.go(-1);
-    },
+    goBack () {
+      this.$router.go(-1)
+    }
   },
-  beforeMount() {
-    this.$store.dispatch("showcase/getCategories");
-    this.$store.dispatch("showcase/getSubCategories");
-    this.$store.dispatch("showcase/getTags");
-    this.$store.dispatch("vendor/getShippingClasses");
+  beforeMount () {
+    this.$store.dispatch('showcase/getCategories')
+    this.$store.dispatch('showcase/getSubCategories')
+    this.$store.dispatch('showcase/getTags')
+    this.$store.dispatch('vendor/getShippingClasses')
   },
   computed: {
-    allCategories() {
-      return this.$store.getters["showcase/getCategories"].categories;
+    allCategories () {
+      return this.$store.getters['showcase/getCategories'].categories
     },
-    subCategories() {
-      return this.$store.getters["showcase/getSubCategories"];
+    subCategories () {
+      return this.$store.getters['showcase/getSubCategories']
     },
-    shippingClasses() {
-      return this.$store.getters["vendor/shippingClasses"];
+    shippingClasses () {
+      return this.$store.getters['vendor/shippingClasses']
     },
-    allTags() {
-      return this.$store.getters["showcase/getTags"].tags;
+    allTags () {
+      return this.$store.getters['showcase/getTags'].tags
     },
-    errMessages() {
-      return this.$store.getters["vendor/isErrors"];
+    errMessages () {
+      return this.$store.getters['vendor/isErrors']
     },
-    loading() {
-      return this.$store.getters["vendor/isLoading"];
-    },
-  },
-};
+    loading () {
+      return this.$store.getters['vendor/isLoading']
+    }
+  }
+}
 </script>

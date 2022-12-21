@@ -8,7 +8,7 @@
             </div>
             <div>
               <h4 class="font-weight-bold text-center">Continue?</h4>
-              <p class="text-center small text-secondary">Are you sure you want to continue with this operation? 
+              <p class="text-center small text-secondary">Are you sure you want to continue with this operation?
                 </p>
               <div class="mt-4">
                 <button class=" w-100" @click="done">
@@ -29,31 +29,30 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  export default {
-    components: {
-    },
-    data() {
-      return {
-      };
-    },
-    methods: {
-      done(){
-        this.$emit("done")
-      },
-      close() {
-        this.$emit("close");
-      },
-    },
-    computed:{
-      loading(){
-        return this.$store.getters["auth/isLoading"]
-      }
+
+<script>
+export default {
+  components: {
+  },
+  data () {
+    return {
     }
-  };
-  </script>
+  },
+  methods: {
+    done () {
+      this.$emit('done')
+    },
+    close () {
+      this.$emit('close')
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  }
+}
+</script>
   Footer
   © 2022 GitHub, Inc.
   Footer navigation
-  

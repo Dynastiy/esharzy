@@ -23,22 +23,21 @@
   </div>
 </template>
 
-
 <script>
-import UserDetails from '../components/userDetails.vue';
-import UpdatePassword from '../components/updatePassword.vue';
+import UserDetails from '../components/userDetails.vue'
+import UpdatePassword from '../components/updatePassword.vue'
 export default {
-    data() {
-        return {
-            activeName: "first",
-        };
-    },
-    methods: {
-        handleClick(tab, event) {
-            console.log(tab, event);
-        },
-    },
-    
-    components: { UserDetails, UpdatePassword }
-};
+  data () {
+    return {
+      activeName: 'first'
+    }
+  },
+  methods: {
+    handleClick (tab, event) {
+      console.log(tab, event)
+    }
+  },
+
+  components: { UserDetails, UpdatePassword }
+}
 </script>

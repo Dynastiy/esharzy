@@ -64,7 +64,6 @@
           </div>
         </div>
 
-
         <div class="positive-item" >
           <span>
             <svg
@@ -91,7 +90,6 @@
             <p class="small" style="font-size:10px">Money back within 30 days</p>
           </div>
         </div>
-
 
         <div class="positive-item" >
           <span>

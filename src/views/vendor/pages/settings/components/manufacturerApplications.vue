@@ -39,16 +39,16 @@
                         {{ item.business_name  }}
                       </td>
                       <td> {{ item.rc_number || item.registration_number }} </td>
-                      
+
                       <td> {{ item.tax_number }} </td>
                       <td>{{ timeStamp2(item.created_at) }}</td>
                       <td>
                         <span :class="item.status">{{ item.status }}</span>
                       </td>
-                      
-                      <td class="" style="color:var(--primary-color)" > 
+
+                      <td class="" style="color:var(--primary-color)" >
                             <div role="button" @click="goToApplication(item)">
-                                <span>View</span> 
+                                <span>View</span>
                                 <span> &gt; </span>
                             </div>
                         </td>
@@ -64,57 +64,55 @@
       <BecomeManufacturer v-if="become_a_manufacturer" @closeModal="close"/>
     </div>
   </template>
-  
-  
-  <script>
-  import { mapState, mapActions } from 'vuex'
-    import config from "@/config/api"
-  import { timeStamp2 } from "@/plugins/filter";
-import BecomeManufacturer from "./becomeManufacturer.vue";
-  export default {
-    data() {
-        return {
-            config,
-            timeStamp2,
-            delete_confirm: false,
-            status: "",
-            become_a_manufacturer: false
-        };
-    },
-    methods: {
-        becomeAManufacturer(){
-            this.become_a_manufacturer = true
-        },
-        close(){
-            this.become_a_manufacturer = false
 
-        },
-        ...mapActions("vendor", ["getApplications"]),
-        goToKYC(item) {
-            this.$router.push(`vendor/manufacturer-applications/${item.id}`);
-        },
-        filter() {
-            let payload = {
-                q: "status",
-                value: this.status,
-            };
-            this.getApplications(payload);
-        }
+<script>
+import { mapState, mapActions } from 'vuex'
+import config from '@/config/api'
+import { timeStamp2 } from '@/plugins/filter'
+import BecomeManufacturer from './becomeManufacturer.vue'
+export default {
+  data () {
+    return {
+      config,
+      timeStamp2,
+      delete_confirm: false,
+      status: '',
+      become_a_manufacturer: false
+    }
+  },
+  methods: {
+    becomeAManufacturer () {
+      this.become_a_manufacturer = true
     },
-    beforeMount() {
-        let payload = {
-            q: "status",
-            value: this.status,
-        };
-        this.getApplications(payload);
+    close () {
+      this.become_a_manufacturer = false
     },
-    computed: {
-        ...mapState("vendor", ["applications"]),
-        inactive() {
-            let inactive = this.applications.filter(item => item.status == "approved");
-            return inactive;
-        }
+    ...mapActions('vendor', ['getApplications']),
+    goToKYC (item) {
+      this.$router.push(`vendor/manufacturer-applications/${item.id}`)
     },
-    components: { BecomeManufacturer }
-};
-  </script>
+    filter () {
+      const payload = {
+        q: 'status',
+        value: this.status
+      }
+      this.getApplications(payload)
+    }
+  },
+  beforeMount () {
+    const payload = {
+      q: 'status',
+      value: this.status
+    }
+    this.getApplications(payload)
+  },
+  computed: {
+    ...mapState('vendor', ['applications']),
+    inactive () {
+      const inactive = this.applications.filter(item => item.status === 'approved')
+      return inactive
+    }
+  },
+  components: { BecomeManufacturer }
+}
+</script>

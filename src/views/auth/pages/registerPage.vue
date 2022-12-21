@@ -23,7 +23,7 @@
                   class="input--text"
                   placeholder="First Name"
                 />
-                <small class="text-danger" v-show="errMessages.first_name" v-for="err in errMessages.first_name" :key="err"> *{{ err }} </small>
+                <!-- <small class="text-danger" v-show="errMessages.first_name" v-for="err in errMessages.first_name" :key="err"> *{{ err }} </small> -->
               </div>
               <div class="w-100">
                 <!-- <label for="" class="d-block small"
@@ -35,7 +35,7 @@
                   class="input--text"
                   placeholder="Last Name"
                 />
-                <small class="text-danger" v-show="errMessages.last_name" v-for="err in errMessages.last_name" :key="err"> *{{ err }} </small>
+                <!-- <small class="text-danger" v-show="errMessages.last_name" v-for="err in errMessages.last_name" :key="err"> *{{ err }} </small> -->
               </div>
               </div>
             </div>
@@ -49,14 +49,14 @@
                 class="input--text"
                 placeholder="Email"
               />
-              <small
+              <!-- <small
                 class="text-danger"
                 v-show="errMessages.email"
                 v-for="err in errMessages.email"
                 :key="err"
               >
                 *{{ err }}
-              </small>
+              </small> -->
             </div>
             <div class="mb-3">
               <!-- <label for="" class="d-block small"
@@ -68,17 +68,17 @@
                 class="input--text"
                 placeholder="Phone Number"
               />
-              <small
+              <!-- <small
                 class="text-danger"
                 v-show="errMessages.email"
                 v-for="err in errMessages.phone_no"
                 :key="err"
               >
                 *{{ err }}
-              </small>
+              </small> -->
             </div>
             <div class="mb-3">
-              <div class="d-flex" style="gap:20px"> 
+              <div class="d-flex" style="gap:20px">
                 <country-select
                   class="form-control w-100"
                   v-model="credentials.country"
@@ -121,7 +121,7 @@
                 </div>
               </div>
               <span class="text-secondary small">Min. 8 Characters</span>
-              <small
+              <!-- <small
                 class="text-danger"
                 v-show="errMessages.password"
                 v-for="err in errMessages.password"
@@ -129,9 +129,9 @@
                 style="font-size:10px"
               >
                 *{{ err }}
-              </small>
+              </small> -->
             </div>
-            
+
             <div class="text-center mt-3" v-if="loading">
                 <i class="el-icon-loading" style="font-size:30px"></i>
               </div>
@@ -149,55 +149,55 @@
 export default {
   components: {
   },
-  data() {
+  data () {
     return {
-      type: "password",
-      icon: "bi:eye-slash",
-      actions: "show",
+      type: 'password',
+      icon: 'bi:eye-slash',
+      actions: 'show',
       credentials: {
-        email: "",
-        password: "",
-        phone_no: "",
-        first_name: "",
-        last_name:"",
-        country: "",
-        address: "",
-        city: ""
-      },
-      
-    };
+        email: '',
+        password: '',
+        phone_no: '',
+        first_name: '',
+        last_name: '',
+        country: '',
+        address: '',
+        city: ''
+      }
+
+    }
   },
   methods: {
-    showPassword() {
-      if (this.type === "password") {
-        this.type = "text";
-        this.icon = "clarity:eye-line";
-        this.actions = "hide";
+    showPassword () {
+      if (this.type === 'password') {
+        this.type = 'text'
+        this.icon = 'clarity:eye-line'
+        this.actions = 'hide'
       } else {
-        this.type = "password";
-        this.icon = "bi:eye-slash";
-        this.actions = "show";
+        this.type = 'password'
+        this.icon = 'bi:eye-slash'
+        this.actions = 'show'
       }
     },
-    async register() {
-      console.log(this.credentials);
-      this.$store.dispatch("auth/userRegister", this.credentials);
+    async register () {
+      console.log(this.credentials)
+      this.$store.dispatch('auth/userRegister', this.credentials)
       // this.credentials = {}
     },
-    goToLogin() {
-      this.$router.push("/sign-up");
-    },
+    goToLogin () {
+      this.$router.push('/sign-up')
+    }
   },
-  computed:{
-        errMessages(){
-            return this.$store.getters['auth/isError']
-        },
-        loading(){
-            return this.$store.getters['auth/isLoading']
-        }
+  computed: {
+    errMessages () {
+      return this.$store.getters['auth/isError']
     },
-  
-};
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  }
+
+}
 </script>
 
 <style>

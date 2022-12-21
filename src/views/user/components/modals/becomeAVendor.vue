@@ -51,80 +51,78 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-    data(){
-        return {
-            val: "",
-            registration_document: null,
-            business_description:null,
-            company_type: null,
-            registered_business: false,
-            payload: {
-                photo_one: null,
-                photo_two: null,
-                photo_three: null,
-                photo_four: null,
-                registration_document: null
-            }
-        }
-    },
-    methods: {
-        ...mapActions("user", ["becomeAVendor", "removeSubmitted"]),
-        photoOneUpload() {
-        var input = event.target;
-        this.payload.photo_one = input.files[0];
-        console.log(this.payload.photo_one);
-        },
-        photoTwoUpload() {
-        var input = event.target;
-        this.payload.photo_two = input.files[0];
-        console.log(this.payload.photo_two);
-        },
-        photoThreeUpload() {
-        var input = event.target;
-        this.payload.photo_three = input.files[0];
-        console.log(this.payload.photo_three);
-        },
-        photoFourUpload() {
-        var input = event.target;
-        this.payload.photo_four = input.files[0];
-        console.log(this.payload.photo_four);
-        },
-        registrationDocument(){
-            var input = event.target;
-            this.payload.registration_document = input.files[0];
-            console.log(this.payload.registration_document);
-        },
-        getVal(){
-            if(Number(this.val) === 1 )
-            {
-                this.registered_business = true
-            }
-            else {
-                this.registered_business = false
-            }
-            
-            console.log(Number(this.val));
-        },
-        submit(){
-            let formData = new FormData()
-            formData.append("is_registered", Number(this.val));
-            formData.append("company_type", this.company_type)
-            formData.append("business_description", this.business_description)
-            formData.append("registration_document", this.payload.registration_document)
-            formData.append("photo_one", this.payload.photo_one)
-            formData.append("photo_two", this.payload.photo_two)
-            formData.append("photo_three", this.payload.photo_three)
-            formData.append("photo_four", this.payload.photo_four)
-            this.becomeAVendor(formData)
-        },
-        viewApplication(){
-            this.$router.push(`/vendor-application/${this.submittedApplication.id}`)
-            this.removeSubmitted()
-            this.$emit('closeModal')
-        }
-    },
-    computed:{
-        ...mapState("user", ["loading", "submitted", "submittedApplication"])
+  data () {
+    return {
+      val: '',
+      registration_document: null,
+      business_description: null,
+      company_type: null,
+      registered_business: false,
+      payload: {
+        photo_one: null,
+        photo_two: null,
+        photo_three: null,
+        photo_four: null,
+        registration_document: null
+      }
     }
+  },
+  methods: {
+    ...mapActions('user', ['becomeAVendor', 'removeSubmitted']),
+    photoOneUpload () {
+      const input = event.target
+      this.payload.photo_one = input.files[0]
+      console.log(this.payload.photo_one)
+    },
+    photoTwoUpload () {
+      const input = event.target
+      this.payload.photo_two = input.files[0]
+      console.log(this.payload.photo_two)
+    },
+    photoThreeUpload () {
+      const input = event.target
+      this.payload.photo_three = input.files[0]
+      console.log(this.payload.photo_three)
+    },
+    photoFourUpload () {
+      const input = event.target
+      this.payload.photo_four = input.files[0]
+      console.log(this.payload.photo_four)
+    },
+    registrationDocument () {
+      const input = event.target
+      this.payload.registration_document = input.files[0]
+      console.log(this.payload.registration_document)
+    },
+    getVal () {
+      if (Number(this.val) === 1) {
+        this.registered_business = true
+      } else {
+        this.registered_business = false
+      }
+
+      console.log(Number(this.val))
+    },
+    submit () {
+      const formData = new FormData()
+      formData.append('is_registered', Number(this.val))
+      formData.append('company_type', this.company_type)
+      formData.append('business_description', this.business_description)
+      formData.append('registration_document', this.payload.registration_document)
+      formData.append('photo_one', this.payload.photo_one)
+      formData.append('photo_two', this.payload.photo_two)
+      formData.append('photo_three', this.payload.photo_three)
+      formData.append('photo_four', this.payload.photo_four)
+      this.becomeAVendor(formData)
+    },
+    viewApplication () {
+      this.$router.push(`/vendor-application/${this.submittedApplication.id}`)
+      this.removeSubmitted()
+      this.$emit('closeModal')
+    }
+  },
+  computed: {
+    ...mapState('user', ['loading', 'submitted', 'submittedApplication'])
+  }
 }
 </script>

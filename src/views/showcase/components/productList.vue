@@ -60,12 +60,6 @@
                       py-2
                     "
                   >
-                    <!-- <i
-                      role="button"
-                      @click="addToCart(item)"
-                      class="el-icon-shopping-bag-2 text-dark"
-                      style=""
-                    ></i> -->
                     <span role="button"
                       @click=" cart_item(item) ? '' : addToCart(item)">
                        <i-icon
@@ -188,16 +182,26 @@ export default {
       this.$emit('add_to_wishlist', item.id)
     },
     cart_item (item) {
-      const cartItems = this.user.cart
-      const val = cartItems.filter(elem => (item.id === elem.product_id))
-      const result = val.length !== 0
-      return result
+      const token = localStorage.getItem('token')
+      if (token) {
+        const cartItems = this.user.cart
+        const val = cartItems.filter(elem => (item.id === elem.product_id))
+        const result = val.length !== 0
+        return result
+      } else {
+        return false
+      }
     },
     wishlist_item (item) {
-      const wishlistItems = this.user.wish_lists
-      const val = wishlistItems.filter(elem => (item.id === elem.product_id))
-      const result = val.length !== 0
-      return result
+      const token = localStorage.getItem('token')
+      if (token) {
+        const wishlistItems = this.user.wish_lists
+        const val = wishlistItems.filter(elem => (item.id === elem.product_id))
+        const result = val.length !== 0
+        return result
+      } else {
+        return false
+      }
     }
 
   },

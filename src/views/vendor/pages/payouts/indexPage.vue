@@ -60,7 +60,6 @@
           </div>
         </div>
 
-
           <!-- Recent Orders -->
           <section class="mt-4">
             <div class="mt-4 other--tables bg-white rounded-lg p-3">
@@ -101,7 +100,7 @@
                        <td> &#8358;{{ item.charge }} </td>
                       <td> <span :class="item.status"> {{ item.status }} </span> </td>
                     </tr>
-                    
+
                   </tbody>
                 </table>
               </div>
@@ -119,49 +118,49 @@
 </template>
 
 <script>
-import AddPayoutAccount from './modals/addPayoutAccount.vue';
-import ConfirmDelete from '../../modals/confirmDelete.vue';
-import { timeStamp } from '@/plugins/filter';
+import AddPayoutAccount from './modals/addPayoutAccount.vue'
+import ConfirmDelete from '../../modals/confirmDelete.vue'
+import { timeStamp } from '@/plugins/filter'
 export default {
-  data(){
+  data () {
     return {
       timeStamp,
       add_account: false,
       delete_confirm: false,
       request_payout: false,
-      amount: ""
+      amount: ''
     }
   },
-  methods:{
-    deleteAccount(){
+  methods: {
+    deleteAccount () {
       this.delete_confirm = !this.delete_confirm
     },
-    close(){
+    close () {
       this.delete_confirm = !this.delete_confirm
     },
-    enterAmount(){
+    enterAmount () {
       this.request_payout = !this.request_payout
     },
-    requestPayout(){
-      this.$store.dispatch("vendor/requestPayout", this.amount)
+    requestPayout () {
+      this.$store.dispatch('vendor/requestPayout', this.amount)
       this.request_payout = !this.request_payout
     },
-    deletePayoutAccount(){
-      this.$store.dispatch("auth/deleteBankDetails", this.user.bank_details.id)
+    deletePayoutAccount () {
+      this.$store.dispatch('auth/deleteBankDetails', this.user.bank_details.id)
       this.close()
     }
   },
-  beforeMount(){
+  beforeMount () {
     this.$store.dispatch('vendor/getPayouts')
   },
-    components: { AddPayoutAccount, ConfirmDelete },
-    computed:{
-      user(){
-        return this.$store.getters['auth/getUser']
-      },
-      payouts(){
-        return this.$store.getters["vendor/getPayouts"]
-      }
+  components: { AddPayoutAccount, ConfirmDelete },
+  computed: {
+    user () {
+      return this.$store.getters['auth/getUser']
+    },
+    payouts () {
+      return this.$store.getters['vendor/getPayouts']
     }
+  }
 }
 </script>

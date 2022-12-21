@@ -112,9 +112,9 @@
                     :read-only="true"
                     ></star-rating>
                 </div>
-                
+
                 <div v-else>
-                  <star-rating 
+                  <star-rating
                   @rating-selected ="setRating"
                   :increment="0.1"
                   v-model="rating"
@@ -125,7 +125,7 @@
                   :rounded-corners="true"
                 ></star-rating>
                 </div>
-                
+
                 </div>
               <div class="review--textarea">
                 <textarea
@@ -203,177 +203,165 @@
   </div>
 </template>
 
-
 <script>
-import { numberFilter, timeStamp } from "@/plugins/filter";
-import StarRating from "vue-star-rating";
+import { numberFilter, timeStamp } from '@/plugins/filter'
+import StarRating from 'vue-star-rating'
 export default {
   components: {
-    StarRating,
+    StarRating
   },
-  data() {
+  data () {
     return {
       numberFilter,
       timeStamp,
-      rating: Number(""),
+      rating: Number(''),
       user_rate: [],
       comment: ''
-    };
+    }
   },
   methods: {
-    user_rating(item) {
-      let ratings =
-        this.$store.getters["showcase/getSingleProduct"].ratings;
-      let users = ratings.find((user) => user.user.id === item);
-      return users;
+    user_rating (item) {
+      const ratings =
+        this.$store.getters['showcase/getSingleProduct'].ratings
+      const users = ratings.find((user) => user.user.id === item)
+      return users
     },
-    login(){
-        this.$router.push(`/login?return_url=product/${this.product.slug}`)
+    login () {
+      this.$router.push(`/login?return_url=product/${this.product.slug}`)
     },
-    submitReview() {
-      let payload = {
+    submitReview () {
+      const payload = {
         product_id: this.product.id,
         comment: this.comment,
-        slug: this.product.slug,
-      };
-      this.$store.dispatch("showcase/createReview", payload);
-      this.comment = ""
+        slug: this.product.slug
+      }
+      this.$store.dispatch('showcase/createReview', payload)
+      this.comment = ''
     },
-    setRating() {
-        console.log(this.rating);
-      let payload = {
+    setRating () {
+      console.log(this.rating)
+      const payload = {
         product_id: this.product.id,
         scale: this.rating,
-        slug: this.product.slug,
-      };
-      this.$store.dispatch("showcase/createRating", payload);
-    },
-    
+        slug: this.product.slug
+      }
+      this.$store.dispatch('showcase/createRating', payload)
+    }
+
   },
-  mounted() {
+  mounted () {
     // this.user_rating()
   },
   computed: {
-    my_review(){
-        var items = this.$store.getters["showcase/getSingleProduct"].reviews;
-        if(items.length >  0){
-            var val = items.find(item => item.user.id === this.getUser.id)
-            console.log(val);
-            var payload;
-            if (val !== undefined) {
-              payload = {
-              val,
-              review: true,
-            }
-            }
-            else {
-            payload =  {
-              comment: '',
-              review: false
-            }
+    my_review () {
+      const items = this.$store.getters['showcase/getSingleProduct'].reviews
+      if (items.length > 0) {
+        const val = items.find(item => item.user.id === this.getUser.id)
+        console.log(val)
+        let payload
+        if (val !== undefined) {
+          payload = {
+            val,
+            review: true
+          }
+        } else {
+          payload = {
+            comment: '',
+            review: false
+          }
         }
-           return payload 
+        return payload
+      } else {
+        return {
+          review: false
         }
+      }
+    },
+    my_rating () {
+      const items = this.$store.getters['showcase/getSingleProduct'].ratings
 
-        else {
-          return {
-            review: false,
+      if (items.length > 0) {
+        const val = items.find(item => item.user.id === this.getUser.id)
+        console.log(val)
+        let payload
+        if (val !== undefined) {
+          payload = {
+            val,
+            rating: true
+          }
+        } else {
+          payload = {
+            scale: 0,
+            rating: false
           }
         }
-        
-        
-    },
-    my_rating(){
-        var items = this.$store.getters["showcase/getSingleProduct"].ratings;
-        
-        if(items.length > 0){
-            var val = items.find(item => item.user.id === this.getUser.id)
-            console.log(val);
-            var payload;
-            if (val !== undefined) {
-              payload = {
-              val,
-              rating: true,
-            }
-            }
-            else {
-            payload =  {
-                scale: 0,
-                rating: false
-            }
+        return payload
+      } else {
+        return {
+          rating: false
         }
-        return payload 
-        }
-        else {
-          return {
-            rating: false,
-          }
-        }
-        
-        
-        
+      }
     },
-    loading() {
-      return this.$store.getters["showcase/isLoading"];
+    loading () {
+      return this.$store.getters['showcase/isLoading']
     },
-    isLoggedIn() {
-      let token;
-      token = localStorage.getItem("token");
-      return token;
+    isLoggedIn () {
+      const token = localStorage.getItem('token')
+      return token
     },
-    getUser() {
-      return this.$store.getters["auth/getUser"];
+    getUser () {
+      return this.$store.getters['auth/getUser']
     },
-    product() {
-      return this.$store.getters["showcase/getSingleProduct"];
+    product () {
+      return this.$store.getters['showcase/getSingleProduct']
     },
-    reviews() {
-      return this.$store.getters["showcase/getSingleProduct"].reviews;
+    reviews () {
+      return this.$store.getters['showcase/getSingleProduct'].reviews
     },
-    ratings() {
-      return this.$store.getters["showcase/getSingleProduct"].ratings;
+    ratings () {
+      return this.$store.getters['showcase/getSingleProduct'].ratings
     },
-    
-    ratingValues() {
-      let ratings =
-        this.$store.getters["showcase/getSingleProduct"].ratings;
-      let one = ratings.filter((rating) => (rating.scale > 0 && rating.scale <= 1.5)).length;
-      one = (one / ratings.length) * 100;
-      let two = ratings.filter((rating) => (rating.scale > 1.5 && rating.scale <= 2.5)).length;
-      two = (two / ratings.length) * 100;
-      let three = ratings.filter((rating) => (rating.scale > 2.5 && rating.scale <= 3.5)).length;
-      three = (three / ratings.length) * 100;
-      let four = ratings.filter((rating) => (rating.scale > 3.5 && rating.scale <= 4.5)).length;
-      four = (four / ratings.length) * 100;
-      let five = ratings.filter((rating) => (rating.scale > 4.5 && rating.scale <= 5)).length;
-      five = (five / ratings.length) * 100;
-      let values = [
+
+    ratingValues () {
+      const ratings =
+        this.$store.getters['showcase/getSingleProduct'].ratings
+      let one = ratings.filter((rating) => (rating.scale > 0 && rating.scale <= 1.5)).length
+      one = (one / ratings.length) * 100
+      let two = ratings.filter((rating) => (rating.scale > 1.5 && rating.scale <= 2.5)).length
+      two = (two / ratings.length) * 100
+      let three = ratings.filter((rating) => (rating.scale > 2.5 && rating.scale <= 3.5)).length
+      three = (three / ratings.length) * 100
+      let four = ratings.filter((rating) => (rating.scale > 3.5 && rating.scale <= 4.5)).length
+      four = (four / ratings.length) * 100
+      let five = ratings.filter((rating) => (rating.scale > 4.5 && rating.scale <= 5)).length
+      five = (five / ratings.length) * 100
+      const values = [
         {
           rating: 5,
-          percentage: five,
+          percentage: five
         },
         {
           rating: 4,
-          percentage: four,
+          percentage: four
         },
         {
           rating: 3,
-          percentage: three,
+          percentage: three
         },
         {
           rating: 2,
-          percentage: two,
+          percentage: two
         },
         {
           rating: 1,
-          percentage: one,
-        },
-      ];
-      return values;
+          percentage: one
+        }
+      ]
+      return values
     },
-    slugName() {
-      return this.$route.params.slug;
-    },
-  },
-};
+    slugName () {
+      return this.$route.params.slug
+    }
+  }
+}
 </script>

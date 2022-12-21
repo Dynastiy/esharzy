@@ -31,7 +31,7 @@
                   <li><router-link to="/privacy-policy"> About Us</router-link></li>
                   <li><router-link to="/">Careers</router-link></li>
                 </ul>
-               
+
               </div>
 
               <div class="col-md">
@@ -40,7 +40,7 @@
                   <!-- <li> <a target="_blank" href="https://zugacoin.io">Blockmay.com</a> </li> -->
                   <li><router-link to="/cart">View Cart</router-link></li>
                   <li><router-link to="/login">Sign In</router-link></li>
-                  <li><router-link to="/wishlist">My Wishlist</router-link></li>
+                  <li><router-link to="/buyer/wishlist">My Wishlist</router-link></li>
                   <li><router-link to="/refund-policy"> Refund Policy</router-link></li>
                 </ul>
               </div>

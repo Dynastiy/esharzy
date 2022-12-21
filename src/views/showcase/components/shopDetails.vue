@@ -36,36 +36,36 @@
                         </span>
                     </div>
                    </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import config from '@/config/api'
+import config from '@/config/api'
 export default {
-    data(){
-        return{
-            config
-        }
-    },
-    methods:{
-        goToStore() {
-            this.$router.push(`/store-listing/${this.vendor.slug}`)
-            this.$store.dispatch('showcase/getStoreBySlug', this.vendor.slug)
-        }
-    },
-    computed:{
-        product() {
-            return this.$store.getters["showcase/getSingleProduct"];
-        },
-        vendor(){
-            return this.$store.getters["showcase/getStore"]
-        },
-        user(){
-            return this.$store.getters["showcase/getStore"].user
-        }
+  data () {
+    return {
+      config
     }
+  },
+  methods: {
+    goToStore () {
+      this.$router.push(`/store-listing/${this.vendor.slug}`)
+      this.$store.dispatch('showcase/getStoreBySlug', this.vendor.slug)
+    }
+  },
+  computed: {
+    product () {
+      return this.$store.getters['showcase/getSingleProduct']
+    },
+    vendor () {
+      return this.$store.getters['showcase/getStore']
+    },
+    user () {
+      return this.$store.getters['showcase/getStore'].user
+    }
+  }
 }
 </script>

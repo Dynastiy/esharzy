@@ -54,26 +54,23 @@
 <script>
 export default {
 
-    data(){
-        return{
-            createNewShop: true,
-            payload: {
-                name: ""
-            }
-        }
-    },
-    methods:{
-        createShop(){
-            this.$store.dispatch('auth/createShop', this.payload)
-        }
-    },
-  computed: {
-    loading() {
-      return this.$store.getters["auth/isLoading"];
-    },
+  data () {
+    return {
+      createNewShop: true,
+      payload: {
+        name: ''
+      }
+    }
   },
-};
+  methods: {
+    createShop () {
+      this.$store.dispatch('auth/createShop', this.payload)
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters['auth/isLoading']
+    }
+  }
+}
 </script>
-
-
-

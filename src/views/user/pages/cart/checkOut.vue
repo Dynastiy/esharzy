@@ -70,13 +70,11 @@
                             </div>
                             <div class="mt-2">
                               <label for="">Email Adddress</label>
-                              <input type="email" v-model="dataObj.email" required> 
+                              <input type="email" v-model="dataObj.email" required>
                             </div>
                         </div>
                       </div>
                 </div>
-
-                
 
                 <div class="check--out_box p-4 w-50">
                   <h4 class="font-weight-bold">ORDER SUMMARY ({{ cart.length + " Item" }}<span>{{cart.length > 1 ? "s" : ""}}</span>) </h4>
@@ -137,7 +135,7 @@
                   </div>
                   <hr>
                   <div>
-                      <button @click.once="makePayment" class="w-100" style="font-weight:700; font-size: 16px !important;" 
+                      <button @click.once="makePayment" class="w-100" style="font-weight:700; font-size: 16px !important;"
                       :class='getUser.address === null ? "bg-secondary" : "" ' :disabled="getUser.address === null">PLACE ORDER</button>
                   </div>
                 </div>
@@ -148,80 +146,82 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  import { formatAmount } from "@/plugins/filter";
-  import url from "@/config/api";
-  export default {
-    components: {},
-    data() {
-      return {
-        url,
-        formatAmount,
-        item: {
-          quantity: "",
-        },
-        total: "",
-        add: false,
-        payload: {
-          city: "",
-          state: "",
-          country: "",
-          delivery_address: ""
-        },
-        dataObj: {
-          phone: "",
-          email: "",
-          name: ""
-        }
-      };
-    },
-    methods: {
-      removeAddress(){
-          let id = this.getUser.address.id
-          console.log(id);
-        this.$store.dispatch("auth/removeAddress", id)
+
+<script>
+import { formatAmount } from '@/plugins/filter'
+import url from '@/config/api'
+export default {
+  components: {},
+  data () {
+    return {
+      url,
+      formatAmount,
+      item: {
+        quantity: ''
       },
-      addAddress(){
-        this.$store.dispatch("auth/addNewAddress", this.payload)
+      total: '',
+      add: false,
+      payload: {
+        city: '',
+        state: '',
+        country: '',
+        delivery_address: ''
       },
-      addAddressCard(){
-        this.add = !this.add
-      },
-      makePayment(){
-        let payload = {
-          name: this.dataObj.name,
-          email: this.dataObj.email,
-          phone: this.dataObj.phone,
-          description: "Purchase from eSharzy",
-          title: "eSharzy Purchase",
-          amount: this.totalAmount,
-        }
-        console.log(payload);
-        this.$store.dispatch("auth/makePayment", payload)
+      dataObj: {
+        phone: '',
+        email: '',
+        name: ''
       }
+    }
+  },
+  methods: {
+    removeAddress () {
+      const id = this.getUser.address.id
+      console.log(id)
+      this.$store.dispatch('auth/removeAddress', id)
     },
-    mounted() {},
-    async created() {},
-    computed: {
-      getUser(){
-        return this.$store.getters["auth/getUser"];
-      },
-      cart() {
-        return this.$store.getters["auth/getUser"].cart;
-      },
-      totalAmount() {
-        let cartItem = this.$store.getters["auth/getUser"].cart;
-        let totalPrice = cartItem.reduce((accumulator, item) => {
-          if (item.product.discount) {
-            return accumulator + item.quantity * item.product.discount.price;
-          } else {
-            return accumulator + item.quantity * item.product.price;
-          }
-        }, 0);
-        // console.log(totalPrice);
-        return totalPrice;
-      },
+    addAddress () {
+      this.$store.dispatch('auth/addNewAddress', this.payload)
     },
-  };
-  </script>
+    addAddressCard () {
+      this.add = !this.add
+    },
+    makePayment () {
+      const payload = {
+        name: this.dataObj.name,
+        email: this.dataObj.email,
+        phone: this.dataObj.phone,
+        description: 'Purchase from eSharzy',
+        title: 'eSharzy Purchase',
+        amount: this.totalAmount
+      }
+      console.log(payload)
+      this.$store.dispatch('auth/makePayment', payload)
+    }
+  },
+  mounted () {},
+  async created () {},
+  computed: {
+    getUser () {
+      return this.$store.getters['auth/getUser']
+    },
+    cart () {
+      const cart = this.$store.getters['auth/getUser'].cart
+      const val = cart.filter(elem => elem.product !== null)
+      return val
+    },
+    totalAmount () {
+      const cartItem = this.cart
+      const totalPrice = cartItem.reduce((accumulator, item) => {
+        if (item.product.discount) {
+          return accumulator + item.quantity * item.product.discount.price
+        } else {
+          return accumulator + item.quantity * item.product.price
+        }
+      }, 0)
+      // console.log(totalPrice);
+      return totalPrice
+    }
+  }
+}
+</script>

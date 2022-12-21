@@ -17,17 +17,15 @@
   </div>
 </template>
 
-
-
 <script>
-import VendorApplications from "./vendorApplications.vue";
-import ManufacturerApplications from "./manufacturerApplications.vue";
+import VendorApplications from './vendorApplications.vue'
+import ManufacturerApplications from './manufacturerApplications.vue'
 export default {
-    data() {
-        return {
-            activeName: "",
-        };
-    },
-    components: { VendorApplications, ManufacturerApplications }
-};
+  data () {
+    return {
+      activeName: ''
+    }
+  },
+  components: { VendorApplications, ManufacturerApplications }
+}
 </script>

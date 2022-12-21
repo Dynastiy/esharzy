@@ -47,13 +47,13 @@
                       </td>
                       <td> {{ item.company_type }} </td>
                       <td>{{ timeStamp2(item.created_at) }}</td>
-                     
+
                       <td>
                         <span :class="item.status">{{ item.status }}</span>
                       </td>
-                      <td class="" style="color:var(--primary-color)" > 
+                      <td class="" style="color:var(--primary-color)" >
                             <div role="button" @click="goToKYC(item)">
-                                <span>View KYCS</span> 
+                                <span>View KYCS</span>
                                 <span> &gt; </span>
                             </div>
                         </td>
@@ -67,43 +67,42 @@
       </div>
     </div>
   </template>
-  
-  
-  <script>
-  import { mapState, mapActions } from 'vuex'
-    import config from "@/config/api"
-  import { timeStamp2 } from "@/plugins/filter";
-  export default {
-      data() {
-          return {
-                config,
-                timeStamp2,
-                delete_confirm: false,
-                status: ""
-          };
-      },
-      methods: {
-        ...mapActions("user", ["getKYCs"]),
-        goToKYC(item) {
-            this.$router.push(`/vendor-application/${item.id}`)
-          },
-          filter(){
-            let payload = {
-                q: "status",
-                value: this.status,
-            }
-            this.getKYCs(payload)
-          }
-      },
-      beforeMount(){
-        let payload = {
-                q: "status",
-                value: this.status,
-            }
-            this.getKYCs(payload)
-      },
-      computed: {
-          ...mapState("user", [ "kycs"])
-      },
-  };
-  </script>
+
+<script>
+import { mapState, mapActions } from 'vuex'
+import config from '@/config/api'
+import { timeStamp2 } from '@/plugins/filter'
+export default {
+  data () {
+    return {
+      config,
+      timeStamp2,
+      delete_confirm: false,
+      status: ''
+    }
+  },
+  methods: {
+    ...mapActions('user', ['getKYCs']),
+    goToKYC (item) {
+      this.$router.push(`/vendor-application/${item.id}`)
+    },
+    filter () {
+      const payload = {
+        q: 'status',
+        value: this.status
+      }
+      this.getKYCs(payload)
+    }
+  },
+  beforeMount () {
+    const payload = {
+      q: 'status',
+      value: this.status
+    }
+    this.getKYCs(payload)
+  },
+  computed: {
+    ...mapState('user', ['kycs'])
+  }
+}
+</script>

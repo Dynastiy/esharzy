@@ -24,19 +24,19 @@
 </template>
 
 <script>
-    import { createRef, timeStamp } from '@/plugins/filter'
-    import config from "@/config/api"
-    export default {
-    data(){
-        return {
-            createRef, timeStamp, config
-        }
-    },
-  computed: {
-    orders() {
-      return this.$store.getters["user/allOrders"];
-    },
-    
+import { createRef, timeStamp } from '@/plugins/filter'
+import config from '@/config/api'
+export default {
+  data () {
+    return {
+      createRef, timeStamp, config
+    }
   },
-};
+  computed: {
+    orders () {
+      return this.$store.getters['user/allOrders']
+    }
+
+  }
+}
 </script>

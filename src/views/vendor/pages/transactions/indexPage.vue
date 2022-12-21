@@ -47,21 +47,21 @@
       </div>
     </div>
   </template>
-  <script>
-    import { timeStamp } from '@/plugins/filter'
-  export default {
-    data(){
-        return {
-            timeStamp
-        }
-    },
-    beforeMount(){
-        this.$store.dispatch("vendor/getTransactions")
-    },
-    computed:{
-        transactions(){
-            return this.$store.getters['vendor/getTransactions']
-        }
+<script>
+import { timeStamp } from '@/plugins/filter'
+export default {
+  data () {
+    return {
+      timeStamp
+    }
+  },
+  beforeMount () {
+    this.$store.dispatch('vendor/getTransactions')
+  },
+  computed: {
+    transactions () {
+      return this.$store.getters['vendor/getTransactions']
     }
   }
-  </script>
+}
+</script>

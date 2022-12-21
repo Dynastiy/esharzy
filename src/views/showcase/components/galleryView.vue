@@ -18,7 +18,7 @@
         </div>
         <div class="thumbnails">
             <!-- {{ images }} -->
-            <div 
+            <div
                 v-for="(image, index) in  images"
                 :key="image.id"
                 :class="['thumbnail-image', (activeImage === index) ? 'active' : '']"
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-            
+
         </div>
     </div>
 </template>
