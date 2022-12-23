@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <div>
       <div class="">
         <div>
           <h5 class="font-weight-bold">Order History</h5>
@@ -25,8 +23,6 @@
           </el-tabs>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>

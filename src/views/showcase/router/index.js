@@ -22,7 +22,8 @@ export default [{
   component: Home,
   name: 'home-page',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'home'
   }
 },
 {
@@ -30,7 +31,8 @@ export default [{
   component: Shop,
   name: 'all-products',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'shop'
   }
 },
 {
@@ -38,7 +40,8 @@ export default [{
   component: ProductDetails,
   name: 'product-details',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'shop'
   }
 },
 {
@@ -46,7 +49,8 @@ export default [{
   component: Stores,
   name: 'store-listing',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'vendor'
   }
 },
 {
@@ -54,7 +58,8 @@ export default [{
   component: StoreDetails,
   name: 'store-details',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'vendor'
   }
 },
 {
@@ -62,7 +67,8 @@ export default [{
   component: CategoryDetails,
   name: 'category-details',
   meta: {
-    layout: 'homeLayout'
+    layout: 'homeLayout',
+    parent: 'home'
   }
 },
 {

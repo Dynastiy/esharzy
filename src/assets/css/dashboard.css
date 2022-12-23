@@ -9,7 +9,7 @@
 .side--bar li a {
     display: block;
     padding: 1rem 2rem;
-    color: var(--tertiary-color);
+    color: #000
     /* font-size: 0.8rem; */
 }
 

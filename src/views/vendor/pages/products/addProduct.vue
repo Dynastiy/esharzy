@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div>
+      <span role="button"
+      class="d-flex mb-2 align-items-center small"
+      style="gap: 10px; font-size: 12px;"
+      @click="$router.push('/vendor/all-products')"
+    >
+      <i class="el-icon-d-arrow-left"></i>
+      <span>All Products</span>
+    </span>
+    </div>
     <div class="bg-white create-product p-4 rounded-lg">
       <div class="">
         <h4 class="mb-4 text-dark">Add New Product</h4>

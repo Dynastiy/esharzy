@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4"  v-loading="loading"
+    element-loading-background="rgba(255, 255, 255, 0.7)"
+    style="width: 100%;">
         <div class="search--area bg-white my-4 p-3">
           <input type="text" placeholder="Search Vendors" />
           <button>APPLY</button>
         </div>
 
-        <div class="border--area" style="border: 1px dashed var(--gray-400)" v-show="stores.length == 0">
+        <div class="border--area" style="border: 1px dashed var(--gray-400)" v-if="stores.length == 0">
           <h6 style="font-weight: 400">No Stores found</h6>
         </div>
 
@@ -60,6 +62,9 @@ export default {
   computed: {
     stores () {
       return this.$store.getters['showcase/getStores']
+    },
+    loading () {
+      return this.$store.getters['showcase/isLoading']
     }
   }
 }

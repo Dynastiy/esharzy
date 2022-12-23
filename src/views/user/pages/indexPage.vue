@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <div>
       <div class="">
         <div>
           <h5 class="font-weight-bold">Account Information & Password</h5>
@@ -18,8 +16,6 @@
             </el-tab-pane>
           </el-tabs>
         </div>
-      </div>
-    </div>
   </div>
 </template>
 

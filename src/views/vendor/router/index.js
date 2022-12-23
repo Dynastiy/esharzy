@@ -24,7 +24,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/indexPage.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'dashboard'
     },
     beforeEnter: guardMyroute
   },
@@ -94,7 +94,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/orders/indexPage.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'orders'
     },
     beforeEnter: guardMyroute
   },
@@ -107,7 +107,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/payouts/indexPage.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'payouts'
     },
     beforeEnter: guardMyroute
   },
@@ -120,7 +120,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/settings/indexPage.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'settings'
     },
     beforeEnter: guardMyroute
   },
@@ -133,7 +133,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/settings/components/singleApplication.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'settings'
     },
     beforeEnter: guardMyroute
   },
@@ -159,7 +159,7 @@ export default [
       import(/* webpackChunkName: "about" */ '../pages/transactions/indexPage.vue'),
     meta: {
       layout: 'vendorLayout',
-      parent: 'products'
+      parent: 'transactions'
     },
     beforeEnter: guardMyroute
   }

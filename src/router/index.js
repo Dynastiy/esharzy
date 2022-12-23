@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Wholesale from '../views/wholesale/wholesaleLayout'
+// import Wholesale from '../views/wholesale/wholesaleLayout'
 
 import authRoutes from '../views/auth/router'
 import showcaseRoutes from '../views/showcase/router'
@@ -12,21 +12,6 @@ import VendorRoutes from '../views/vendor/router'
 Vue.use(VueRouter)
 
 const routes = [
-
-  // Wholesale page Layout
-  {
-    path: '/wholesale',
-    component: Wholesale,
-    children: [{
-      path: '/wholesale',
-      name: 'wholesale',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ '../views/showcase/pages/indexPage.vue')
-    }]
-  },
 
   {
     path: '/about',

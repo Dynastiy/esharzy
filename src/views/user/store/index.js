@@ -171,6 +171,7 @@ export default {
 
     // Get Orders
     getOrders ({ commit }) {
+      commit('SET_LOADING', true)
       request().get('/user-orders?status=delivered')
         .then((res) => {
           console.log(res.data)
@@ -178,6 +179,8 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+        }).finally(() => {
+          commit('SET_LOADING', false)
         })
     },
 

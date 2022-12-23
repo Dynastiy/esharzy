@@ -1,12 +1,14 @@
 <template>
     <div>
-      <div>
+      <div  >
         <AppHeader />
-        <div class="main--dashboard d-lg-flex container-fluid my-5" style="gap:30px">
+        <div class="main--dashboard d-lg-flex container-fluid my-5" style="gap:30px" >
                  <div class="user--side_drawer" style="width:35%">
                     <side-drawer/>
                  </div>
-                <div class=" dashboard--area w-100">
+                <div class=" dashboard--area w-100" v-loading="loading"
+    element-loading-background="rgba(255, 255, 255, 0.7)"
+    style="width: 100%;">
                     <slot/>
                 </div>
             </div>
@@ -27,6 +29,11 @@ export default {
   },
   created () {
 
+  },
+  computed: {
+    loading () {
+      return this.$store.getters['user/isLoading']
+    }
   }
 }
 </script>

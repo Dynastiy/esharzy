@@ -18,7 +18,7 @@
                 style="gap: 20px"
               >
                 <li><router-link to="/">Contact Us</router-link></li>
-                <li><router-link to="/buyer">My Account</router-link></li>
+                <li v-if="isLoggedIn"><a href="javascript:void(0)" @click="goToAccount">My Account</a></li>
                 <li v-if="!isLoggedIn">
                   <router-link to="/login">Sign In </router-link>
                   <span>/</span>
@@ -186,10 +186,10 @@
                 class="m-0 d-flex app--header_menu align-items-center"
                 style="gap: 30px"
               >
-                <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/wholesale">Wholesale</router-link></li>
-                <li><router-link to="/shop">Shops</router-link></li>
-                <li><router-link to="/store-listing">Vendor</router-link></li>
+                <li><router-link to="/" :class="[{ 'router-link-exact-active': route === 'home' }]">Home</router-link></li>
+                <!-- <li><router-link to="/wholesale">Wholesale</router-link></li> -->
+                <li><router-link to="/shop" :class="[{ 'router-link-exact-active': route === 'shop' }]">Shops</router-link></li>
+                <li><router-link to="/store-listing" :class="[{ 'router-link-exact-active': route === 'vendor' }]">Vendor</router-link></li>
               </ul>
             </div>
           </div>
@@ -212,6 +212,10 @@ export default {
   methods: {
     logout () {
       this.$store.dispatch('auth/logout')
+    },
+    goToAccount () {
+      console.log(this.getUser.role)
+      this.$router.push(this.getUser.role === 'vendor' ? '/vendor' : 'buyer')
     }
   },
   beforeMount () {
@@ -231,6 +235,9 @@ export default {
     },
     loggedIn () {
       return this.$store.getters['auth/isLoggedIn']
+    },
+    route () {
+      return this.$route.meta.parent
     }
   },
   components: { MobileMenu, SearchResults }
