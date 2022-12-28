@@ -4,7 +4,7 @@
     element-loading-background="rgba(255, 255, 255, 0.7)"
     style="width: 100%;">
         <div class="search--area bg-white my-4 p-3">
-          <input type="text" placeholder="Search Vendors" />
+          <input type="text" @keyup="searchShops" v-model="search" placeholder="Search Vendors" />
           <button>APPLY</button>
         </div>
 
@@ -46,18 +46,23 @@ import config from '@/config/api'
 export default {
   data () {
     return {
-      config
+      config,
+      search: null
     }
   },
   methods: {
     goToStore (store) {
       this.$router.push(`/store-listing/${store.slug}`)
       this.$store.dispatch('showcase/getStoreBySlug', store.slug)
+    },
+    searchShops () {
+      this.$store.dispatch('showcase/getStores', this.search)
     }
   },
 
   beforeMount () {
-    this.$store.dispatch('showcase/getStores')
+    const search = ''
+    this.$store.dispatch('showcase/getStores', search)
   },
   computed: {
     stores () {

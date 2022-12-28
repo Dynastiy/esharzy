@@ -205,11 +205,12 @@ export default {
       }
     },
 
-    async getStores ({ commit }) {
+    async getStores ({ commit }, search) {
       commit('SET_LOADING', true)
       try {
-        const res = await Axios().get('all-shops')
-        commit('SET_STORES', res.data.shops.data)
+        const res = await Axios().get('all-shops?name=' + search)
+        commit('SET_STORES', res.data.data)
+        console.log(res.data)
         return res
       } catch (error) {
         return error
