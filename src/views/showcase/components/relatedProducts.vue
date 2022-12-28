@@ -12,11 +12,11 @@
         </div>
 
         <hr>
-  
+
         <div class="border--area" style="border: 1px dashed var(--gray-400)" v-show="related_products.length === 0">
           <h6 style="font-weight: 400">No related Products!</h6>
         </div>
-  
+
         <div>
           <div class="products--list mt-5">
             <div
@@ -90,34 +90,32 @@
       </div>
     </div>
   </template>
-  
-  
-  <script>
-  
-  import StarRating from "vue-star-rating";
-  import config from "@/config/api";
-  export default {
-    components:{
-      StarRating
+
+<script>
+
+import StarRating from 'vue-star-rating'
+import config from '@/config/api'
+export default {
+  components: {
+    StarRating
+  },
+  data () {
+    return {
+      config
+    }
+  },
+  methods: {
+    goToProducts () {
+      this.$router.push('/shop')
+    }
+  },
+  computed: {
+    store () {
+      return this.$store.getters['showcase/getStore']
     },
-    data() {
-      return {
-        config,
-      };
-    },
-    methods: {
-        goToProducts() {
-            this.$router.push(`/shop`)
-            
-        }
-    },
-    computed: {
-      store() {
-        return this.$store.getters["showcase/getStore"];
-      },
-      related_products() {
-        return this.$store.getters["showcase/getSingleProduct"].similar_products;
-      },
-    },
-  };
-  </script>
+    related_products () {
+      return this.$store.getters['showcase/getSingleProduct'].similar_products
+    }
+  }
+}
+</script>

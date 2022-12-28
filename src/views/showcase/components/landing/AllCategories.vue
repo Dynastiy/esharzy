@@ -53,7 +53,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions('showcase', ['getCategories'])
+    ...mapActions('showcase', ['getCategories']),
+    goToCategory (category) {
+      this.$router.push('/category/' + category.slug)
+    }
   },
   beforeMount () {
     this.getCategories()

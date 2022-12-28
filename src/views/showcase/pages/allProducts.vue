@@ -15,8 +15,7 @@
             <button
               class="discover--btn mt-3"
               data-aos="fade-up"
-              style="font-weight: 600;
-                border: 2px solid #000 !important;
+              style="font-weight: 600; border: 2px solid #000 !important;
                 color: var(--accent-color-dark);
               "
             >
@@ -26,31 +25,33 @@
         </div>
 
         <div class="filters d-lg-flex align-items-center" style="gap: 20px">
-          <div class="category mb-4">
-            <el-select
-              v-model="category"
-              class="w-100"
-              placeholder="All Categories"
-            >
-              <el-option
-                class="text-capitalize"
-                v-for="item in allCategories.categories"
-                :key="item.id"
-                :label="item.label"
-                :value="item.category_name"
-              >
-              </el-option>
-            </el-select>
+          <div class="category mb-3">
+            <div class="dropdown">
+              <div class="select--input" type="button"
+                data-toggle="dropdown"
+                aria-expanded="false">
+                <input type="text" class="text-capitalize" v-model="category">
+                <i class="el-icon-arrow-down"></i>
+              </div>
+              <div class="dropdown-menu">
+               <div class="select--items">
+
+                <a class="dropdown-item text-capitalize"  href="javascript:void(0)" @click="categorySorting(item)" v-for="item in allCategories.categories" :key="item.id">
+                {{ item.category_name }}</a>
+               </div>
+              </div>
+            </div>
           </div>
 
-          <div class="default mb-4">
-            <select v-model="sort" class="w-100" placeholder="Default Sorting">
-              <option value="Default Sorting" selected>Default Sorting</option>
+          <div class="default mb-3">
+            <select v-model="sort" class="w-100" @change="dataSorting" id="mySelect" placeholder="Default Sorting">
+              <option value="Default Sorting" id="default" selected>Default Sorting</option>
               <option
                 class="text-capitalize"
                 v-for="item in sorting"
                 :key="item.id"
                 :value="item.value"
+                :id="item.action"
               >
                 {{ item.value }}
               </option>
@@ -85,30 +86,49 @@ export default {
       config,
       rating: 3,
       num: 1,
-      category: '',
+      category: 'All Categories',
       sort: 'Default Sorting',
       sorting: [
         {
           id: 1,
-          value: 'Sort by Average rating'
+          value: 'Sort by Average rating',
+          action: 'average'
         },
         {
           id: 2,
-          value: 'Sort by Latest'
+          value: 'Sort by Latest',
+          action: 'latest'
         },
         {
           id: 3,
-          value: 'Sort by Price: low to high'
+          value: 'Sort by Price: low to high',
+          action: 'cheapest'
         },
 
         {
           id: 4,
-          value: 'Sort by Price: high to low'
+          value: 'Sort by Price: high to low',
+          action: 'expensive'
         }
       ]
     }
   },
   methods: {
+    dataSorting () {
+      const priceOptions = document.getElementById('mySelect')
+      const selOption = priceOptions.options[priceOptions.selectedIndex].id
+      console.log(selOption)
+      this.$store.dispatch('showcase/sortData', selOption)
+    },
+
+    categorySorting (item) {
+      this.$router.replace('/category/' + item.slug)
+      this.category = item.category_name
+    },
+
+    removeCategory () {
+      this.$router.replace('/shop')
+    },
     addToCart (value) {
       const payload = {
         product_id: value,

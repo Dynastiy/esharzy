@@ -34,7 +34,7 @@
                         <button>See Details</button>
                         </router-link>
                         <span role="button" style="width:max-content" @click="removeFromWishlist(item)">
-                            <i-icon icon="ic:baseline-delete" style="font-size:22; color: var(--tertiary-color);" /></span>
+                        <i-icon icon="ic:baseline-delete" style="font-size:22; color: var(--tertiary-color);" /></span>
                     </div>
 
                 </div>

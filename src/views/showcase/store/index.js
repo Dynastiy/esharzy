@@ -20,6 +20,7 @@ export default {
     product: {},
     stores: [],
     store: {},
+    store_products: [],
     vendors: [],
     vendor: {},
     loading: false
@@ -59,7 +60,11 @@ export default {
       state.stores = data
     },
     SET_STORE (state, data) {
-      state.store = data
+      state.store = data.shop
+      state.store_products = data.shop.activated_products
+    },
+    SET_STORE_RESULTS (state, data) {
+      state.store_products = data
     },
     SET_VENDORS (state, data) {
       state.vendors = data
@@ -89,7 +94,7 @@ export default {
       try {
         commit('SET_LOADING', true)
         const res = await Axios().get(`show-category/${slug}`)
-        commit('SET_CATEGORY', res.data.category.activated_products)
+        commit('SET_CATEGORY', res.data.category)
         // console.log(res.data.category);
         return res
       } catch (error) {
@@ -108,6 +113,7 @@ export default {
         return error
       }
     },
+
     async getSubCategories ({ commit }) {
       try {
         const res = await Axios().get('all-subcategories')
@@ -117,6 +123,7 @@ export default {
         return error
       }
     },
+
     async getProducts ({ commit }) {
       try {
         commit('SET_LOADING', true)
@@ -130,6 +137,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async getNewProducts ({ commit }) {
       try {
         commit('SET_LOADING', true)
@@ -142,6 +150,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async trendingProducts ({ commit }) {
       try {
         commit('SET_LOADING', true)
@@ -154,6 +163,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async topRatedProducts ({ commit }) {
       try {
         commit('SET_LOADING', true)
@@ -167,6 +177,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async discountedProducts ({ commit }) {
       commit('SET_LOADING', true)
       try {
@@ -179,6 +190,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async getProductBySlug ({ commit }, slug) {
       commit('SET_LOADING', true)
       try {
@@ -192,6 +204,7 @@ export default {
         commit('SET_LOADING', false)
       }
     },
+
     async getStores ({ commit }) {
       commit('SET_LOADING', true)
       try {
@@ -208,8 +221,22 @@ export default {
     async getStoreBySlug ({ commit }, slug) {
       try {
         const res = await Axios().get(`show-shop/${slug}`)
-        commit('SET_STORE', res.data.shop)
+        commit('SET_STORE', res.data)
         console.log(res.data.shop)
+        return res
+      } catch (error) {
+        return error
+      } finally {
+        commit('SET_LOADING', false)
+      }
+    },
+
+    async searchStoreProducts ({ commit }, payload) {
+      commit('SET_LOADING', true)
+      try {
+        const res = await Axios().get(`shop-products-search/${payload.id}?name=${payload.name}`)
+        commit('SET_STORE_RESULTS', res.data.data)
+        console.log(res)
         return res
       } catch (error) {
         return error
@@ -287,6 +314,44 @@ export default {
       } finally {
         commit('SET_LOADING', false)
       }
+    },
+
+    // Sorters
+    async sortData ({ commit }, sortMode) {
+      commit('SET_LOADING', true)
+      const res = sortMode === 'latest'
+        ? await Axios().get('latest-products')
+        : sortMode === 'average'
+          ? await Axios().get('avg-products')
+          : sortMode === 'expensive' ? await Axios().get('expensive-products') : sortMode === 'cheapest' ? await Axios().get('cheapest-products') : await Axios().get('all-products')
+
+      const payload = sortMode === 'latest'
+        ? res.data.latest_products.data
+        : sortMode === 'average'
+          ? res.data.avg_products.data
+          : sortMode === 'expensive' ? res.data.expensive_products.data : sortMode === 'cheapest' ? res.data.cheapest_products.data : res.data.all_products.data
+      commit('SET_PRODUCTS', payload)
+      commit('SET_LOADING', false)
+    },
+
+    // Categories Sorting
+    // Sorters
+    async sortCategory ({ commit }, sortData) {
+      commit('SET_LOADING', true)
+      const res = sortData.name === 'latest'
+        ? await Axios().get('latest-products-category/' + sortData.id)
+        : sortData.name === 'average'
+          ? await Axios().get('avg-products-category/' + sortData.id)
+          : sortData.name === 'expensive' ? await Axios().get('expensive-products-category/' + sortData.id) : sortData.name === 'cheapest' ? await Axios().get('cheapest-products-category/' + sortData.id) : await Axios().get(`show-category/${sortData.slug}`)
+
+      console.log(res.data)
+      const payload = sortData.name === 'latest'
+        ? res.data.category.data[0]
+        : sortData.name === 'average'
+          ? res.data.category.data[0]
+          : sortData.name === 'expensive' ? res.data.category.data[0] : sortData.name === 'cheapest' ? res.data.category.data[0] : res.data.category
+      commit('SET_CATEGORY', payload)
+      commit('SET_LOADING', false)
     }
 
   },

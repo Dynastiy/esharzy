@@ -457,6 +457,7 @@ export default {
     makePayment ({ dispatch }, payload) {
       request().post('pay/', payload)
         .then((res) => {
+          console.log(res)
           dispatch('setUser')
           return res
         })
