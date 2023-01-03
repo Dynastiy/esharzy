@@ -34,10 +34,10 @@
 
 <script>
 export default {
-    computed: {
-        currentRoute(){
-            return this.$route
-        }
+  computed: {
+    currentRoute () {
+      return this.$route
     }
+  }
 }
 </script>

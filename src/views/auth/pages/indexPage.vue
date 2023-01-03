@@ -7,7 +7,7 @@
           <span>Register</span>
         </div>
         <div>
-          
+
         </div>
       </div>
     </div>
@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      login: true,
-    };
+      login: true
+    }
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>

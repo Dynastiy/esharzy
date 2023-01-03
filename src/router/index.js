@@ -6,6 +6,7 @@ import authRoutes from '../views/auth/router'
 import showcaseRoutes from '../views/showcase/router'
 import buyerRoutes from '../views/user/router'
 import VendorRoutes from '../views/vendor/router'
+import wholesaleRoutes from '../views/wholesale/router'
 
 // import store from '@/store/index'
 
@@ -28,7 +29,7 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: routes.concat(
-    authRoutes, showcaseRoutes, buyerRoutes, VendorRoutes
+    authRoutes, showcaseRoutes, buyerRoutes, VendorRoutes, wholesaleRoutes
   ),
   scrollBehavior () {
     return window.scrollTo({ top: 0, behavior: 'smooth' })

@@ -112,3 +112,15 @@
 label {
     font-size: 0.7rem !important;
 }
+
+
+/* Forgot Password  */
+.forgot--password {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.forgot--password .login--page-wrapper {
+    width: 40%;
+}

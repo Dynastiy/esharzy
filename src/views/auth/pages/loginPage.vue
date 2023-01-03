@@ -44,11 +44,10 @@
               >
 
                 <div class="">
-                  <span
+                  <router-link to="/forgot-password"
                     class="small d-block text-right font-weight-bold"
-                    role="button"
                     style="color: var(--tertiary-color)"
-                    >Forgot Password?</span
+                    >Forgot Password?</router-link
                   >
                 </div>
               </div>

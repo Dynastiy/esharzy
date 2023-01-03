@@ -1,7 +1,8 @@
 <template>
     <div>
       <div>
-        <AppHeader />
+        <WholesaleHeader />
+        <ListCategories/>
         <slot/>
         <AppFooter />
       </div>
@@ -9,11 +10,12 @@
   </template>
 
 <script>
-import AppHeader from '../components/static/appHeader.vue'
+import WholesaleHeader from '../components/static/wholesaleHeader.vue'
 import AppFooter from '../components/static/appFooter.vue'
+import ListCategories from '@/views/wholesale/components/landing/listCategories.vue'
 export default {
   name: 'homeLayout',
-  components: { AppHeader, AppFooter },
+  components: { WholesaleHeader, AppFooter, ListCategories },
   data () {
     return {}
   },

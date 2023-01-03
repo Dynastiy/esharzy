@@ -147,4 +147,7 @@
             display: grid !important;
             grid-template-columns: auto;
         }
+        .forgot--password .login--page-wrapper {
+            width: 80%;
+        }
     }

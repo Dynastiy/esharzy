@@ -15,7 +15,8 @@ const getDefaultState = () => {
     user: {},
     loggedIn: false,
     loading: false,
-    errors: []
+    errors: [],
+    dataSet: ''
   }
 }
 
@@ -59,6 +60,9 @@ export default {
     },
     SET_ERRORS: (state, data) => {
       state.errors = data
+    },
+    SET_DATA: (state, payload) => {
+      state.dataSet = payload
     },
     RESET: state => {
       Object.assign(state, getDefaultState())
@@ -167,6 +171,74 @@ export default {
         .finally(() => {
           commit('END_LOADING')
         })
+    },
+
+    // Forgot Password
+    forgotPassword ({ commit }, payload) {
+      commit('SET_LOADING')
+      request().post('/auth/forgot-password', payload)
+        .then((res) => {
+          console.log(res.data.message)
+          const payload = res.data.message
+          router.push('/forgot-password/reset-link-sent')
+          commit('SET_DATA', payload)
+          return res
+        })
+        .catch((err) => {
+          const payload = err.response.data.message
+          // console.log(err.response.data.message)
+          Toastify({
+            text: payload,
+            className: 'info',
+            style: {
+              background: 'red',
+              fontSize: '12px',
+              borderRadius: '5px'
+            }
+          }).showToast()
+        })
+        .finally(() => [
+          commit('END_LOADING')
+        ])
+    },
+
+    // Forgot Password
+    resetPassword ({ commit }, payload) {
+      commit('SET_LOADING')
+      request().post(`/auth/reset-password?token=${payload.token}&email=${payload.email}`, payload)
+        .then((res) => {
+          console.log(res.data)
+          Toastify({
+            text: 'Password Updated!',
+            className: 'info',
+            style: {
+              background: '#333',
+              fontSize: '12px',
+              borderRadius: '5px'
+            }
+          }).showToast()
+          // const payload = res.data.message
+          router.push('/login')
+
+          // commit('SET_DATA', payload)
+          return res
+        })
+        .catch((err) => {
+          // const payload = err.response.data.message
+          console.log(err.response.data.message)
+          Toastify({
+            text: 'Error!',
+            className: 'info',
+            style: {
+              background: 'red',
+              fontSize: '12px',
+              borderRadius: '5px'
+            }
+          }).showToast()
+        })
+        .finally(() => [
+          commit('END_LOADING')
+        ])
     },
 
     updateUser ({ dispatch, commit }, payload) {
