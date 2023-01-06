@@ -9,6 +9,8 @@ import '@/assets/css/media-query.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import Lingallery from 'lingallery'
+
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -16,6 +18,8 @@ import 'aos/dist/aos.css'
 import vueCountryRegionSelect from 'vue-country-region-select'
 
 import { Icon } from '@iconify/vue2'
+
+Vue.component('LinGallery', Lingallery)
 Vue.use(vueCountryRegionSelect)
 
 Vue.use(ElementUI)

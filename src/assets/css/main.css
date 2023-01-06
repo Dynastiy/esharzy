@@ -97,6 +97,7 @@
     border-radius: 5px;
     outline: none;
     font-size: 0.8rem;
+    background-color: transparent;
 }
 
 .toggle--amount {

@@ -178,11 +178,11 @@
                 <hr />
                 <div>
                   <div class="mb-3">
-                    <span class="small"
-                      >Select a shipping zone to add shipping costs</span
+                    <span class="small text-danger"
+                      >* Shipping fees not included yet</span
                     >
                   </div>
-                  <div>
+                  <!-- <div>
                     <select v-model="price" name="" id="">
                       <option value="-" disabled selected>
                         Select Shipping Zone
@@ -195,7 +195,7 @@
                         {{ item.name }}
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
                 <hr />
                 <div>

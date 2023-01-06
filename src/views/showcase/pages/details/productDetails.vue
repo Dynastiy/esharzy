@@ -24,13 +24,15 @@
       <div class="container-fluid py-4">
         <div class="d-lg-flex" style="gap: 50px">
           <div class="w-100">
-            <GalleryView
+            <!-- <GalleryView
               class="mb-2"
               :starting-image="1"
               :images="images"
               :auto-slide-interval="2000"
-            />
+            /> -->
+            <lingallery :iid.sync="currentId" :width="600" :height="400" :items="images"/>
           </div>
+
           <div
             class="
               main--product_details
@@ -227,14 +229,14 @@ import VendorReviews from '../../components/vendorReviews.vue'
 import ShopDetails from '../../components/shopDetails.vue'
 import VendorProducts from '../../components/vendorProducts.vue'
 // import RelatedProducts from "../components/relatedProducts.vue";
-import GalleryView from '../../components/galleryView.vue'
+// import GalleryView from '../../components/galleryView.vue'
 export default {
   components: {
     StarRating,
     VendorReviews,
     ShopDetails,
-    VendorProducts,
-    GalleryView
+    VendorProducts
+    // GalleryView
   },
   data () {
     return {
@@ -242,7 +244,8 @@ export default {
       rating: 5,
       num: 1,
       activeName: 'first',
-      dialogVisible: false
+      dialogVisible: false,
+      currentId: null
     }
   },
   methods: {
@@ -283,33 +286,33 @@ export default {
       const imagestoArray = [
         {
           id: 1,
-          big: this.product.app_icon,
-          thumb: this.product.app_icon
+          src: config.imgUrl + this.product.app_icon,
+          thumbnail: config.imgUrl + this.product.app_icon
         },
         {
           id: 2,
-          big: this.product.photo_one,
-          thumb: this.product.photo_one
+          src: config.imgUrl + this.product.photo_one,
+          thumbnail: config.imgUrl + this.product.photo_one
         },
         {
           id: 3,
-          big: this.product.photo_two,
-          thumb: this.product.photo_two
+          src: config.imgUrl + this.product.photo_two,
+          thumbnail: config.imgUrl + this.product.photo_two
         },
         {
           id: 4,
-          big: this.product.photo_three,
-          thumb: this.product.photo_three
+          src: config.imgUrl + this.product.photo_three,
+          thumbnail: config.imgUrl + this.product.photo_three
         },
         {
           id: 5,
-          big: this.product.photo_four,
-          thumb: this.product.photo_four
+          src: config.imgUrl + this.product.photo_four,
+          thumbnail: config.imgUrl + this.product.photo_four
         },
         {
           id: 6,
-          big: this.product.photo_five,
-          thumb: this.product.photo_five
+          src: config.imgUrl + this.product.photo_five,
+          thumbnail: config.imgUrl + this.product.photo_five
         }
       ]
       return imagestoArray

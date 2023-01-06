@@ -249,8 +249,8 @@ export default {
     async getStoreById ({ commit }, id) {
       try {
         const res = await Axios().get(`find-shop/${id}`)
-        commit('SET_STORE', res.data.shop)
-        console.log(res.data.shop)
+        commit('SET_STORE', res.data)
+        console.log(res.data)
         return res
       } catch (error) {
         console.log(error)

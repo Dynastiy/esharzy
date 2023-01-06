@@ -526,7 +526,8 @@ export default {
     },
 
     // Make Payment
-    makePayment ({ dispatch }, payload) {
+    makePayment ({ commit, dispatch }, payload) {
+      commit('SET_LOADING')
       request().post('pay/', payload)
         .then((res) => {
           console.log(res)
@@ -536,7 +537,23 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+        .finally(() => {
+          commit('END_LOADING')
+        })
     },
+
+    // Make Order
+    //  makeOrder ({ dispatch }, payload) {
+    //   request().post('pay/', payload)
+    //     .then((res) => {
+    //       console.log(res)
+    //       dispatch('setUser')
+    //       return res
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
 
     async addBankDetails ({ dispatch, commit }, payload) {
       commit('SET_LOADING')
