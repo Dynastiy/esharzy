@@ -530,8 +530,10 @@ export default {
       commit('SET_LOADING')
       request().post('pay/', payload)
         .then((res) => {
-          console.log(res)
+          console.log(res.data.payment)
           dispatch('setUser')
+          // window.location(res.data.payment)
+          window.open(res.data.payment, '_blank', 'toolbar=yes,top=300,left=300,width=1000,height=1000')
           return res
         })
         .catch((err) => {
