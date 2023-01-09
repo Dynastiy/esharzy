@@ -18,6 +18,8 @@ const CheckOut = () =>
   import('../pages/cart/checkOut.vue')
 const VendorApplication = () =>
   import('../pages/applicationID.vue')
+const TransactionCompleted = () =>
+  import('../pages/cart/transactionSuccessful')
 
 export default [{
   path: '/buyer',
@@ -173,6 +175,7 @@ export default [{
       name: 'cart',
       component: CartPage
     }
+
   ],
   meta: {
     layout: 'homeLayout'
@@ -200,6 +203,21 @@ export default [{
       path: '',
       name: 'checkout',
       component: CheckOut
+    }
+  ],
+  meta: {
+    layout: 'homeLayout'
+  }
+},
+
+{
+  path: '/transaction-completed',
+  component: Cart,
+  children: [
+    {
+      path: '',
+      name: 'transaction-completed',
+      component: TransactionCompleted
     }
   ],
   meta: {

@@ -41,7 +41,7 @@
                   <li><router-link to="/cart">View Cart</router-link></li>
                   <li><router-link to="/login">Sign In</router-link></li>
                   <li><router-link to="/buyer/wishlist">My Wishlist</router-link></li>
-                  <li><router-link to="/refund-policy"> Refund Policy</router-link></li>
+                  <li><router-link to="/terms-and-conditions-sale"> Terms and Conditions of Sale</router-link></li>
                 </ul>
               </div>
 

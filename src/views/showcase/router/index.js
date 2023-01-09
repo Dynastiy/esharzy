@@ -15,7 +15,11 @@ const PrivacyPolicy = () =>
 const TermsAndConditions = () =>
   import('../pages/termsAndConditions.vue')
 const RefundPolicy = () =>
-  import('../pages/refundPolicy.vue')
+  import('../pages/saleTermsandConditions.vue')
+const TransactionCancelled = () =>
+  import('../pages/transactionCancelled.vue')
+const TransactionFailed = () =>
+  import('../pages/transactionFailed.vue')
 
 export default [{
   path: '/',
@@ -35,10 +39,29 @@ export default [{
     parent: 'shop'
   }
 },
+
 {
   path: '/product/:slug',
   component: ProductDetails,
   name: 'product-details',
+  meta: {
+    layout: 'homeLayout',
+    parent: 'shop'
+  }
+},
+{
+  path: '/transaction-cancelled',
+  component: TransactionCancelled,
+  name: 'transaction-cancelled',
+  meta: {
+    layout: 'homeLayout',
+    parent: 'shop'
+  }
+},
+{
+  path: '/transaction-failed',
+  component: TransactionFailed,
+  name: 'transaction-failed',
   meta: {
     layout: 'homeLayout',
     parent: 'shop'
@@ -88,9 +111,9 @@ export default [{
   }
 },
 {
-  path: '/refund-policy',
+  path: '/terms-and-conditions-sale',
   component: RefundPolicy,
-  name: 'refund-policy',
+  name: 'terms-and-conditions-sale',
   meta: {
     layout: 'homeLayout'
   }
