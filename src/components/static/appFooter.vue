@@ -28,8 +28,8 @@
               <div class="col-md">
                 <h4 class="footer--header">COMPANY</h4>
                 <ul class="list-unstlyed">
-                  <li><router-link to="/privacy-policy"> About Us</router-link></li>
-                  <li><router-link to="/">Careers</router-link></li>
+                  <!-- <li><router-link to="/privacy-policy"> About Us</router-link></li> -->
+                  <li><router-link to="/careers">Careers</router-link></li>
                 </ul>
 
               </div>

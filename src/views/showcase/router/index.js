@@ -20,6 +20,8 @@ const TransactionCancelled = () =>
   import('../pages/transactionCancelled.vue')
 const TransactionFailed = () =>
   import('../pages/transactionFailed.vue')
+const Careers = () =>
+  import('../pages/ourCareers.vue')
 
 export default [{
   path: '/',
@@ -114,6 +116,14 @@ export default [{
   path: '/terms-and-conditions-sale',
   component: RefundPolicy,
   name: 'terms-and-conditions-sale',
+  meta: {
+    layout: 'homeLayout'
+  }
+},
+{
+  path: '/careers',
+  component: Careers,
+  name: 'careers',
   meta: {
     layout: 'homeLayout'
   }
