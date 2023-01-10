@@ -147,7 +147,7 @@
                   </div>
                   <hr>
                   <div>
-                      <button @click.once="makePayment" class="w-100" style="font-weight:700; font-size: 16px !important;"
+                      <button @click="makePayment" class="w-100" style="font-weight:700; font-size: 16px !important;"
                       :class='getUser.address === null || loading ? "bg-secondary" : "" ' :disabled="getUser.address === null || loading">
                       <span v-if="loading"> <i class="el-icon-loading font-weight-bold" style="font-size:20px"></i> </span>
                       <span v-else>PLACE ORDER</span>
@@ -203,16 +203,22 @@ export default {
       this.add = !this.add
     },
     makePayment () {
-      const payload = {
+      const dataObj = {
         name: this.dataObj.name,
         email: this.dataObj.email,
         phone: this.dataObj.phone,
         description: 'Purchase from eSharzy',
         title: 'eSharzy Purchase',
-        amount: this.overallAmount
+        amount: this.overallAmount,
+        total_amount: this.overallAmount,
+        total_quantity: this.cart.length,
+        delivery_address: this.getUser.address.delivery_address,
+        city: this.getUser.address.city,
+        state: this.getUser.address.state,
+        country: this.getUser.address.country
       }
-      console.log(payload)
-      this.$store.dispatch('auth/makePayment', payload)
+      console.log(dataObj)
+      this.$store.dispatch('auth/makePayment', dataObj)
     }
 
   },

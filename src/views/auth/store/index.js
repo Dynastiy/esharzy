@@ -526,6 +526,25 @@ export default {
     },
 
     // Make Payment
+    createOrder ({ commit }, payload) {
+      commit('SET_LOADING')
+      request().post('make-order/', payload)
+        .then((res) => {
+          console.log(res.data)
+          // dispatch('setUser')
+          // window.location(res.data.payment)
+          // window.open(res.data.payment, '_blank', 'toolbar=yes,top=300,left=300,width=1000,height=1000')
+          return res
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          commit('END_LOADING')
+        })
+    },
+
+    // Make Payment
     makePayment ({ commit, dispatch }, payload) {
       commit('SET_LOADING')
       request().post('pay/', payload)
@@ -540,6 +559,7 @@ export default {
           console.log(err)
         })
         .finally(() => {
+          dispatch('createOrder', payload)
           commit('END_LOADING')
         })
     },
