@@ -21,6 +21,9 @@
           <!-- All Products -->
           <all-products/>
 
+          <!-- New Products  -->
+          <new-products/>
+
         </div>
       </section>
     </div>
@@ -36,6 +39,7 @@ import AllProducts from '../components/landing/AllProducts.vue'
 import AllCategories from '../components/landing/AllCategories.vue'
 import OurPositives from '../components/landing/ourPositives.vue'
 import VendorCards from '../components/landing/vendorCards.vue'
+import NewProducts from '../components/landing/newProducts.vue'
 export default {
   data () {
     return {
@@ -47,6 +51,6 @@ export default {
   },
   computed: {
   },
-  components: { HeroSection, DealsOfTheDay, AllProducts, AllCategories, OurPositives, VendorCards }
+  components: { HeroSection, DealsOfTheDay, AllProducts, AllCategories, OurPositives, VendorCards, NewProducts }
 }
 </script>

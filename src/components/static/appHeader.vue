@@ -187,7 +187,7 @@
                 style="gap: 30px"
               >
                 <li><router-link to="/" :class="[{ 'router-link-exact-active': route === 'home' }]">Home</router-link></li>
-                <!-- <li><router-link to="/wholesale" :class="[{ 'router-link-exact-active': route === 'wholesale' }]">Wholesale</router-link></li> -->
+                <li><router-link to="/wholesale" :class="[{ 'router-link-exact-active': route === 'wholesale' }]">Wholesale</router-link></li>
                 <li><router-link to="/shop" :class="[{ 'router-link-exact-active': route === 'shop' }]">Shops</router-link></li>
                 <li><router-link to="/store-listing" :class="[{ 'router-link-exact-active': route === 'vendor' }]">Vendor</router-link></li>
               </ul>

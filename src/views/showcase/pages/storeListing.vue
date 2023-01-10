@@ -16,10 +16,10 @@
           <div class="store" v-for="store in stores" :key="store.id">
             <div class="cover--area p-3" style="height: 200px" :style=" {'background-image': store.user.cover_photo == null ? `@/assets/img/no-cover.png` : `url(${config.imgUrl}${store.user.cover_photo})`}">
                 <!-- {{ store }} -->
-              <h5 class="text-capitalize mb-3 text-white" style="font-weight:600" role="button" @click="goToStore(store)"> {{ store.name }} </h5>
-              <h6 style="font-weight:400; color:var(--gray-400)" class=" my-2" >
+              <h5 class="text-capitalize mb-3 text-white" style="font-weight:600" role="button" @click="goToStore(store)"> {{ store.name === null ? "Null" : store.name }} </h5>
+              <!-- <h6 style="font-weight:400; color:var(--gray-400)" class=" my-2" >
                 <i class="el-icon-phone-outline"></i> {{ store.user.phone_no }}
-              </h6>
+              </h6> -->
               <h6 class="text-white" style="font-weight:400">{{ store.user.country }}</h6>
               <div class="vendor--img">
                 <img class="rounded-circle" height="70px" width="70px" style="object-position: top; object-fit:cover" :src='store.user.photo !== null ? config.imgUrl + store.user.photo : "/no-user.png"' alt="Vendor Image Here">

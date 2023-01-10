@@ -7,7 +7,7 @@
         "
         style="width:100%; overflow-x: auto;"
       >
-        <div class="positive-item" >
+        <!-- <div class="positive-item" >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@
             <h6 class="font-weight-bold text-dark">Free Shipping & returns</h6>
             <p class="small" style="font-size:10px">For all orders over $99</p>
           </div>
-        </div>
+        </div> -->
 
         <div class="positive-item">
           <span>

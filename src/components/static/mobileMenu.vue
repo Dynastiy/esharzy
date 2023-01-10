@@ -9,7 +9,7 @@
                 style="color: var(--primary-accent); font-size: 9px"
                 class="text-uppercase"
               >
-                Hello, Welcome to E-Shazy
+                Hello, Welcome to E-Sharzy
               </h6>
             </div>
             <div>

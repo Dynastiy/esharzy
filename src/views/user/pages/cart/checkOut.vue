@@ -135,7 +135,6 @@
                       }}
                     </h4>
                     <!-- <small class="text-danger" v-if="nonExistent === null">*Product cannot be shipped to your region </small> -->
-
                   </div>
                   <hr>
                   <div class="d-flex align-items-center justify-content-between">

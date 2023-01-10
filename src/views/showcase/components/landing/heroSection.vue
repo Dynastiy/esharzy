@@ -30,9 +30,9 @@
               </template>
               <template>
               <el-carousel :interval="10000" indicator-position="none">
-                <el-carousel-item  v-for="item in topImages" :key="item.id" :style=" {'background-image': `url(${config.imgUrl}${item.photo_three})`}">
+                <el-carousel-item  v-for="item in productImages" :key="item.id" :style=" {'background-image': `url(${config.imgUrl}${item.photo_three})`}">
                   <div class="p-4">
-                    <h6 class="text-white" style="font-family:cursive">Top Products</h6>
+                    <h6 class="text-white" style="font-family:cursive">Products</h6>
                     <h5 class="text-capitalize text-white mt-2 mb-3 " style="text-transform:uppercase !important; font-weight: 700; font-size: 15px;">{{ item.name }}</h5>
                     <span role="button" class="text-white small" @click="viewProduct(item)" style="font-weight:500">SHOP NOW <i class="el-icon-right"></i> </span>
                   </div>
@@ -47,7 +47,7 @@
               </template>
               <template >
               <el-carousel :interval="10000" indicator-position="none">
-                <el-carousel-item  v-for="item in newImages" :key="item.id" :style=" {'background-image': `url(${config.imgUrl}${item.photo_three})`}">
+                <el-carousel-item  v-for="item in productImages" :key="item.id" :style=" {'background-image': `url(${config.imgUrl}${item.photo_three})`}">
                   <div class="p-4">
                     <h6 class="text-white" style="font-family:cursive">New Products</h6>
                     <h5 class="text-capitalize text-white mt-2 mb-3 " style="text-transform:uppercase !important; font-weight: 700; font-size: 15px;">{{ item.name }}</h5>
